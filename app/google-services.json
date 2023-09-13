@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "707740533962",
+    "project_id": "music-chaser",
+    "storage_bucket": "music-chaser.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:707740533962:android:c6ba97f0e569179c2e2033",
+        "android_client_info": {
+          "package_name": "com.example.musicchaser"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOPDFHCE2K86UTl9Xa9WcSlYoyq3N1pto"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
