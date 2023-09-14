@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="letter_spacing">0.15</dimen>
+    <dimen name="main_subject_font_size">30sp</dimen>
+    <dimen name="sub_title_font_size">20sp</dimen>
+    <dimen name="content_font_size">12sp</dimen>
+    <dimen name="shadow_elevation">5dp</dimen>
+    <dimen name="card_content_elevation">6dp</dimen>
+
+
+
+
+
+    //profile
+    <dimen name="log_out_font_size">10sp</dimen>
+
+
+</resources>

@@ -1,6 +1,9 @@
 package com.example.musicchaser.data.source
 
-class DefaultMusicChaserRepository() : MusicChaserRepository {
+import javax.inject.Inject
+
+
+class DefaultMusicChaserRepository @Inject constructor() : MusicChaserRepository {
 
 
     // just doing the data-getting stuff here

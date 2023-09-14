@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.musicchaser.home.HomeFragment"
+        android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/eventFragment"
+        android:name="com.example.musicchaser.event.EventFragment"
+        android:label="EventFragment" />
+    <fragment
+        android:id="@+id/artistFragment"
+        android:name="com.example.musicchaser.artist.ArtistFragment"
+        android:label="ArtistFragment" />
+    <fragment
+        android:id="@+id/societyFragment"
+        android:name="com.example.musicchaser.society.SocietyFragment"
+        android:label="SocietyFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.musicchaser.profile.ProfileFragment"
+        android:label="ProfileFragment" />
+
+    <action
+        android:id="@+id/navigate_to_home_fragment"
+        app:destination="@id/homeFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
+    <action
+        android:id="@+id/navigate_to_event_fragment"
+        app:destination="@id/eventFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
+    <action
+        android:id="@+id/navigate_to_artist_fragment"
+        app:destination="@id/artistFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
+    <action
+        android:id="@+id/navigate_to_society_fragment"
+        app:destination="@id/societyFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
+    <action
+        android:id="@+id/navigate_to_profile_fragment"
+        app:destination="@id/profileFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+</navigation>
