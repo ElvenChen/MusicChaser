@@ -25,6 +25,21 @@
         android:name="com.example.musicchaser.profile.ProfileFragment"
         android:label="ProfileFragment" />
 
+    <dialog
+        android:id="@+id/basicInfoEditDialog"
+        android:name="com.example.musicchaser.profile.basicinfoedit.BasicInfoEditDialog"
+        android:label="BasicInfoEditDialog" />
+
+    <dialog
+        android:id="@+id/favoriteEventEditDialog"
+        android:name="com.example.musicchaser.profile.eventedit.FavoriteEventEditDialog"
+        android:label="FavoriteEventEditDialog" />
+
+    <dialog
+        android:id="@+id/favoriteArtistEditDialog"
+        android:name="com.example.musicchaser.profile.artistedit.FavoriteArtistEditDialog"
+        android:label="FavoriteArtistEditDialog" />
+
     <action
         android:id="@+id/navigate_to_home_fragment"
         app:destination="@id/homeFragment"
@@ -54,4 +69,23 @@
         app:destination="@id/profileFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
+
+    <action
+        android:id="@+id/navigate_to_basic_info_dialog"
+        app:destination="@id/basicInfoEditDialog"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
+    <action
+        android:id="@+id/navigate_to_favorite_event_edit_dialog"
+        app:destination="@id/favoriteEventEditDialog"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
+    <action
+        android:id="@+id/navigate_to_favorite_artist_edit_dialog"
+        app:destination="@id/favoriteArtistEditDialog"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
 </navigation>

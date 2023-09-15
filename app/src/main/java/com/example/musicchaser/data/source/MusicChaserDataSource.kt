@@ -2,7 +2,8 @@ package com.example.musicchaser.data.source
 
 import com.example.musicchaser.data.User
 
-interface MusicChaserRepository {
+
+interface MusicChaserDataSource {
 
     fun getUserBasicInfo(userId : String)
 

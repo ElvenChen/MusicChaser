@@ -5,13 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
-import com.example.musicchaser.MainViewModel
-import com.example.musicchaser.R
-import com.example.musicchaser.databinding.ActivityMainBinding
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.example.musicchaser.databinding.FragmentProfileBinding
-import com.example.musicchaser.databinding.FragmentSocietyBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -30,6 +27,19 @@ class ProfileFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+
+        // setting navigation
+        binding.profileBasicInfoEditButton.setOnClickListener {
+            findNavController().navigate(ProfileFragmentDirections.navigateToBasicInfoDialog())
+        }
+
+        binding.profileFavoriteEventEditButton.setOnClickListener {
+            findNavController().navigate(ProfileFragmentDirections.navigateToFavoriteEventEditDialog())
+        }
+
+        binding.profileFavoriteArtistEditButton.setOnClickListener {
+            findNavController().navigate(ProfileFragmentDirections.navigateToFavoriteArtistEditDialog())
+        }
 
 
         return binding.root
