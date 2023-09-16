@@ -22,6 +22,21 @@
     <string name="basic_info_save_button">完成</string>
 
 
+    // event page
+    <string name="event_title">活動</string>
+    <string name="event_search_bar_edit_placeholder">輸入感興趣的活動名稱</string>
+    <string name="event_filter_default">選擇地區</string>
+
+
+
+
+
+
+
+
+
+
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
