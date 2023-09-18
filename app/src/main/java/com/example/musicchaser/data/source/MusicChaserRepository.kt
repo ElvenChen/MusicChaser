@@ -67,4 +67,19 @@ interface MusicChaserRepository {
         handleSettingDataList: () -> Unit
     )
 
+    fun addFavoriteArtist(userId: String, artistId: String, handleSettingArtistIsFavorite: () -> Unit)
+
+    fun deleteFavoriteArtist(
+        userId: String,
+        artistId: String,
+        handleSettingArtistNotFavorite: () -> Unit
+    )
+
+    fun getIfArtistIsFavorite(
+        userId: String,
+        artist: String,
+        handleSettingArtistIsFavorite: () -> Unit,
+        handleSettingArtistNotFavorite: () -> Unit
+    )
+
 }

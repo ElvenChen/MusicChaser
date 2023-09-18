@@ -1,12 +1,14 @@
 package com.example.musicchaser.artistdetail
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.example.musicchaser.R
 import com.example.musicchaser.databinding.DialogArtistDetailBinding
 import com.example.musicchaser.databinding.FragmentEventDetailBinding
@@ -37,10 +39,31 @@ class ArtistDetailDialog : AppCompatDialogFragment() {
         val artist = ArtistDetailDialogArgs.fromBundle(requireArguments()).selectedArtist
         viewModel.artist = artist
 
+        // check this artist isFavorite = ture or false, to adjust favorite button show/hide
+        viewModel.getIfArtistIsFavorite()
 
+        // setting add to favorite artist function
+        binding.artistDetailAddFavoriteButton.setOnClickListener {
+            viewModel.addFavoriteArtist()
+        }
 
+        // setting delete favorite artist function
+        binding.artistDetailAddFavoriteButtonDone.setOnClickListener {
+            viewModel.deleteFavoriteArtist()
+        }
 
-
+        // observing artist isFavorite
+        viewModel.isFavorite.observe(viewLifecycleOwner, Observer {
+            if(it == true){
+                Log.i("ArtistTest", " isFavorite = $it ")
+                binding.artistDetailAddFavoriteButton.visibility = View.GONE
+                binding.artistDetailAddFavoriteButtonDone.visibility = View.VISIBLE
+            } else {
+                Log.i("ArtistTest", " isFavorite = $it ")
+                binding.artistDetailAddFavoriteButton.visibility = View.VISIBLE
+                binding.artistDetailAddFavoriteButtonDone.visibility = View.GONE
+            }
+        })
 
         // setting navigation
         binding.outerConstraint.setOnClickListener {

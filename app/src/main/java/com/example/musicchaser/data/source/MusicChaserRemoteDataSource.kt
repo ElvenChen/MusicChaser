@@ -13,6 +13,7 @@ import com.google.firebase.firestore.Query
 
 private const val COLLECTION_USERS = "users"
 private const val COLLECTION_USERS_SUB_COLLECTION_FAVORITE_EVENTS = "favorite_events"
+private const val COLLECTION_USERS_SUB_COLLECTION_FAVORITE_ARTISTS = "favorite_artists"
 
 private const val FIELD_USER_ID = "user_id"
 
@@ -191,11 +192,11 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
                     handleSettingEventIsFavorite()
                     Log.i("EventTest", "Check isFavorite = YES!!   data = $data ")
                 } else {
+                    handleSettingEventNotFavorite()
                     Log.i("EventTest", "Check isFavorite = NONONO!! ")
                 }
             } else {
                 val exception = task.exception
-                handleSettingEventNotFavorite()
                 Log.i("EventTest", "Something goes wrong")
             }
         }
@@ -354,6 +355,69 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
                 Log.i("ArtistTest", "Something goes wrong")
                 callback(null, exception)
             }
+    }
+
+    override fun addFavoriteArtist(
+        userId: String,
+        artistId: String,
+        handleSettingArtistIsFavorite: () -> Unit
+    ) {
+        val docRef = db.collection(COLLECTION_USERS).document(userId)
+            .collection(COLLECTION_USERS_SUB_COLLECTION_FAVORITE_ARTISTS).document(artistId)
+
+        val data = hashMapOf(
+            "artist_id" to artistId
+        )
+
+        docRef.set(data).addOnSuccessListener {
+            handleSettingArtistIsFavorite()
+            Log.i("ArtistTest", "add artist successfully!! ")
+        }.addOnFailureListener { e ->
+            Log.i("ArtistTest", "add artist fail!! ")
+        }
+    }
+
+    override fun deleteFavoriteArtist(
+        userId: String,
+        artistId: String,
+        handleSettingArtistNotFavorite: () -> Unit
+    ) {
+        val docRef = db.collection(COLLECTION_USERS).document(userId)
+            .collection(COLLECTION_USERS_SUB_COLLECTION_FAVORITE_ARTISTS).document(artistId)
+
+        docRef.delete().addOnSuccessListener {
+            handleSettingArtistNotFavorite()
+            Log.i("ArtistTest", "delete artist successfully!! ")
+        }.addOnFailureListener { e ->
+            Log.i("ArtistTest", "delete artist fail!! ")
+        }
+    }
+
+    override fun getIfArtistIsFavorite(
+        userId: String,
+        artistId: String,
+        handleSettingArtistIsFavorite: () -> Unit,
+        handleSettingArtistNotFavorite: () -> Unit
+    ) {
+        val docRef = db.collection(COLLECTION_USERS).document(userId)
+            .collection(COLLECTION_USERS_SUB_COLLECTION_FAVORITE_ARTISTS).document(artistId)
+
+        docRef.get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val documentSnapshot = task.result
+                if (documentSnapshot.exists()) {
+                    val data = documentSnapshot.data
+                    handleSettingArtistIsFavorite()
+                    Log.i("ArtistTest", "Check isFavorite = YES!!   data = $data ")
+                } else {
+                    handleSettingArtistNotFavorite()
+                    Log.i("ArtistTest", "Check isFavorite = NONONO!! ")
+                }
+            } else {
+                val exception = task.exception
+                Log.i("ArtistTest", "Something goes wrong")
+            }
+        }
     }
 
 }

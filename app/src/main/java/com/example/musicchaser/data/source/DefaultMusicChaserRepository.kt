@@ -114,4 +114,42 @@ class DefaultMusicChaserRepository @Inject constructor(private val musicChaserRe
     ) {
         musicChaserRemoteDataSource.getSearchedArtistList(keyword, callback, handleSettingDataList)
     }
+
+    override fun addFavoriteArtist(
+        userId: String,
+        artistId: String,
+        handleSettingArtistIsFavorite: () -> Unit
+    ) {
+        musicChaserRemoteDataSource.addFavoriteArtist(
+            userId,
+            artistId,
+            handleSettingArtistIsFavorite
+        )
+    }
+
+    override fun deleteFavoriteArtist(
+        userId: String,
+        artistId: String,
+        handleSettingArtistNotFavorite: () -> Unit
+    ) {
+        musicChaserRemoteDataSource.deleteFavoriteArtist(
+            userId,
+            artistId,
+            handleSettingArtistNotFavorite
+        )
+    }
+
+    override fun getIfArtistIsFavorite(
+        userId: String,
+        artist: String,
+        handleSettingArtistIsFavorite: () -> Unit,
+        handleSettingArtistNotFavorite: () -> Unit
+    ) {
+        musicChaserRemoteDataSource.getIfArtistIsFavorite(
+            userId,
+            artist,
+            handleSettingArtistIsFavorite,
+            handleSettingArtistNotFavorite
+        )
+    }
 }

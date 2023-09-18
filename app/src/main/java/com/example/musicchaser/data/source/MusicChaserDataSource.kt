@@ -67,4 +67,19 @@ interface MusicChaserDataSource {
         callback: (DocumentSnapshot?, Exception?) -> Unit,
         handleSettingDataList: () -> Unit
     )
+
+    fun addFavoriteArtist(userId: String, artistId: String, handleSettingArtistIsFavorite: () -> Unit)
+
+    fun deleteFavoriteArtist(
+        userId: String,
+        artistId: String,
+        handleSettingArtistNotFavorite: () -> Unit
+    )
+
+    fun getIfArtistIsFavorite(
+        userId: String,
+        artistId: String,
+        handleSettingArtistIsFavorite: () -> Unit,
+        handleSettingArtistNotFavorite: () -> Unit
+    )
 }
