@@ -37,7 +37,7 @@ class ArtistFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         // setting recyclerView adapter
-        binding.artistRecyclerView.layoutManager = GridLayoutManager(this.context,2)
+        binding.artistRecyclerView.layoutManager = GridLayoutManager(this.context, 2)
         val adapter = ArtistListAdapter(viewModel.displayArtistDetails)
         binding.artistRecyclerView.adapter = adapter
 
@@ -69,14 +69,15 @@ class ArtistFragment : Fragment() {
         // setting navigation
         viewModel.navigateToSelectedArtist.observe(viewLifecycleOwner, Observer {
             Log.i("ArtistTest", "Artist Data : $it")
-            it?.let{
-                findNavController().navigate(ArtistFragmentDirections.navigateToArtistdetailDialog(it))
+            it?.let {
+                findNavController().navigate(
+                    ArtistFragmentDirections.navigateToArtistdetailDialog(
+                        it
+                    )
+                )
                 viewModel.displayArtistDetailsCompleted()
             }
         })
-
-
-
 
 
         return binding.root

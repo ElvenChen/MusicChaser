@@ -49,6 +49,11 @@
     <string name="artist_title">表演者</string>
     <string name="artist_search_bar_edit_placeholder">輸入感興趣的表演者</string>
 
+    // artist detail page
+    <string name="artist_detail_artist_recent_event_title">近期參與活動</string>
+    <string name="artist_detail_add_favorite">收藏</string>
+
+
     // society page
     <string name="society_title">社群</string>
 

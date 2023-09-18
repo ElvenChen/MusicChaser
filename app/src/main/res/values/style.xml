@@ -7,6 +7,13 @@
         <item name="android:animation">@null</item>
     </style>
 
+    <style name="popUpDialogForArtistDetailDialog">
+        <item name="android:windowEnterAnimation">@null</item>
+        <item name="android:windowExitAnimation">@null</item>
+        <item name="android:windowBackground">@color/transparent_standard_dark</item>
+        <item name="android:animation">@null</item>
+    </style>
+
     <style name="SearchView" parent="Widget.AppCompat.SearchView" >
         <item name="android:textSize">16sp</item>
         <item name="android:textColorHint">@color/black</item>

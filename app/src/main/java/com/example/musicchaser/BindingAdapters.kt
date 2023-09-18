@@ -65,3 +65,6 @@ fun getCommentDate(textView: TextView, eventDate: Long) {
 
     textView.text = eventDate.toCommentFormattedTime()
 }
+
+
+////////// Artist Detail Page //////////

@@ -9,6 +9,9 @@
     <color name="dark_golden_yellow">#655223</color>
     <color name="blue_grey">#9CB3BE</color>
     <color name="transparent_standard">#66000000</color>
+    <color name="transparent_standard_dark">#CC000000</color>
+    <color name="transparent_standard_white">#BEFFFFFF</color>
+
 
 
 </resources>

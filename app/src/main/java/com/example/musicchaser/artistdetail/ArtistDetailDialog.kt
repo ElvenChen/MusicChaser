@@ -20,7 +20,7 @@ class ArtistDetailDialog : AppCompatDialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(DialogFragment.STYLE_NO_FRAME, R.style.popUpDialog)
+        setStyle(DialogFragment.STYLE_NO_FRAME, R.style.popUpDialogForArtistDetailDialog)
     }
 
     override fun onCreateView(
