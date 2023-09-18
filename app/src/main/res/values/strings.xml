@@ -9,6 +9,9 @@
     <string name="bottom_nav_profile">個人</string>
 
 
+    // home page
+    <string name="home_title">熱門</string>
+
     // profile page
     <string name="profile_title">個人</string>
     <string name="profile_logout">登出</string>
@@ -27,17 +30,27 @@
     <string name="event_search_bar_edit_placeholder">輸入感興趣的活動名稱</string>
     <string name="event_filter_default">選擇地區</string>
 
+    // event detail page
+    <string name="event_detail_title">活動內容</string>
+    <string name="event_detail_website_title">活動網址：</string>
+    <string name="event_detail_address_button">活動地點</string>
+    <string name="event_detail_add_calendar">加入日曆</string>
+    <string name="event_detail_add_favorite">加入收藏</string>
+    <string name="event_detail_intro_title">活動簡介</string>
+    <string name="event_detail_attendant_title">參與表演者</string>
+    <string name="event_detail_comments_title">留言</string>
+
+    // event detail comment page
+    <string name="event_detail_comment_post">傳送</string>
+    <string name="event_detail_comment_edit_placeholder">請留下您的評論</string>
 
 
+    // artist page
+    <string name="artist_title">表演者</string>
 
-
-
-
-
-
+    // society page
+    <string name="society_title">社群</string>
 
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
-
 </resources>

@@ -1,15 +1,19 @@
 package com.example.musicchaser.event
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.SearchView
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.musicchaser.R
 import com.example.musicchaser.databinding.FragmentEventBinding
@@ -30,11 +34,10 @@ class EventFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
 
-
         // setting recyclerView adapter
         binding.eventRecyclerView.layoutManager =
             LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
-        val adapter = EventListAdapter()
+        val adapter = EventListAdapter(viewModel.displayEventDetails)
         binding.eventRecyclerView.adapter = adapter
 
         //observing list for adapter
@@ -44,20 +47,23 @@ class EventFragment : Fragment() {
         })
 
 
-
         // setting search bar logic
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                if (query != null){
+                if (query != null) {
                     viewModel.getSearchedEventListResult(query)
+
+                    val inputMethodManager =
+                        context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
                 }
                 return true
             }
+
             override fun onQueryTextChange(newText: String?): Boolean {
                 return true
             }
         })
-
 
 
         // setting filter drop down menu
@@ -65,6 +71,15 @@ class EventFragment : Fragment() {
 //        val adapter =  ArrayAdapter(requireContext(),R.layout.event_filter_item,items)
 //
 //        binding.eventFilter.setAdapter(adapter)
+
+        // setting navigation
+        viewModel.navigateToSelectedEvent.observe(viewLifecycleOwner, Observer {
+            Log.i("EventTest", "Event Data : $it")
+            it?.let{
+                findNavController().navigate(EventFragmentDirections.navigateToEventdetailFragment(it))
+                viewModel.displayEventDetailsCompleted()
+            }
+        })
 
 
         return binding.root

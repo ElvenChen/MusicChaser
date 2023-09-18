@@ -14,4 +14,5 @@ class MusicChaserApplication : Application()  {
     companion object {
         var instance: MusicChaserApplication by Delegates.notNull()
     }
+
 }

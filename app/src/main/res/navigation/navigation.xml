@@ -12,6 +12,18 @@
         android:id="@+id/eventFragment"
         android:name="com.example.musicchaser.event.EventFragment"
         android:label="EventFragment" />
+
+    <fragment
+        android:id="@+id/eventDetailFragment"
+        android:name="com.example.musicchaser.eventdetail.EventDetailFragment"
+        android:label="EventDetailFragment">
+        <argument
+            android:name="selectedEvent"
+            app:argType="com.example.musicchaser.data.EventData"
+            app:nullable="false">
+        </argument>
+    </fragment>
+
     <fragment
         android:id="@+id/artistFragment"
         android:name="com.example.musicchaser.artist.ArtistFragment"
@@ -39,6 +51,17 @@
         android:id="@+id/favoriteArtistEditDialog"
         android:name="com.example.musicchaser.profile.artistedit.FavoriteArtistEditDialog"
         android:label="FavoriteArtistEditDialog" />
+
+    <dialog
+        android:id="@+id/eventDetailCommentDialog"
+        android:name="com.example.musicchaser.eventdetail.comment.EventDetailCommentDialog"
+        android:label="EventDetailCommentDialog">
+        <argument
+            android:name="selectedEvent"
+            app:argType="com.example.musicchaser.data.EventData"
+            app:nullable="false">
+        </argument>
+    </dialog>
 
     <action
         android:id="@+id/navigate_to_home_fragment"
@@ -72,20 +95,22 @@
 
     <action
         android:id="@+id/navigate_to_basic_info_dialog"
-        app:destination="@id/basicInfoEditDialog"
-        app:popUpTo="@id/navigation"
-        app:popUpToInclusive="true" />
+        app:destination="@id/basicInfoEditDialog"/>
 
     <action
         android:id="@+id/navigate_to_favorite_event_edit_dialog"
-        app:destination="@id/favoriteEventEditDialog"
-        app:popUpTo="@id/navigation"
-        app:popUpToInclusive="true" />
+        app:destination="@id/favoriteEventEditDialog"/>
 
     <action
         android:id="@+id/navigate_to_favorite_artist_edit_dialog"
-        app:destination="@id/favoriteArtistEditDialog"
-        app:popUpTo="@id/navigation"
-        app:popUpToInclusive="true" />
+        app:destination="@id/favoriteArtistEditDialog"/>
+
+    <action
+        android:id="@+id/navigate_to_eventdetail_fragment"
+        app:destination="@id/eventDetailFragment"/>
+
+    <action
+        android:id="@+id/navigate_to_eventdetail_comment_dialog"
+        app:destination="@id/eventDetailCommentDialog"/>
 
 </navigation>

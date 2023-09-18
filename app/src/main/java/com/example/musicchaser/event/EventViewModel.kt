@@ -25,7 +25,23 @@ class EventViewModel @Inject constructor(val repository: DefaultMusicChaserRepos
     val dataListForAdapter: LiveData<List<EventData>>
         get() = _dataListForAdapter
 
+    private val _navigateToSelectedEvent = MutableLiveData<EventData?>()
+    val navigateToSelectedEvent: LiveData<EventData?>
+        get() = _navigateToSelectedEvent
 
+
+    // handle event clicking navigation
+    val displayEventDetails = fun(event: EventData) {
+        _navigateToSelectedEvent.value = event
+    }
+
+    // handle event clicking navigation completed
+    fun displayEventDetailsCompleted() {
+        _navigateToSelectedEvent.value = null
+    }
+
+
+    // handle event list from fireStore
     private val handleGetEventListResult = fun(document: DocumentSnapshot?, exception: Exception?) {
 
         if (document != null) {
@@ -39,15 +55,12 @@ class EventViewModel @Inject constructor(val repository: DefaultMusicChaserRepos
                 eventLatitude = (data["event_latitude"]).toString().toFloat(),
                 eventAddress = (data["event_address"]).toString(),
                 eventDate = (data["event_date"]).toString().toLong(),
-                eventMonth = (data["event_month"]).toString(),
-                eventDay = (data["event_day"]).toString(),
                 eventWeather = (data["event_weather"]).toString(),
                 eventArea = (data["event_area"]).toString(),
                 eventAttendant = (data["event_attendant"]).toString().toInt(),
                 eventUrl = (data["event_url"]).toString(),
                 eventMainPic = (data["event_main_pic"]).toString(),
                 eventDesc = (data["event_desc"]).toString(),
-                eventPerformers = (data["event_performers"]) as List<String>,
                 eventComments = (data["event_comments"]).toString().toInt()
             )
 
@@ -59,19 +72,22 @@ class EventViewModel @Inject constructor(val repository: DefaultMusicChaserRepos
         }
     }
 
+    // setting event list liveData for adapter after event list result is handled
     private val handleSettingDataList = fun() {
         _dataListForAdapter.value = dataList
         Log.i("EventTest", "Event Data List = ${_dataListForAdapter.value}")
     }
 
+    // get event list result
     private fun getEventListResult() {
         dataList.clear()
         repository.getEventList(handleGetEventListResult, handleSettingDataList)
     }
 
+    // get event list result of keyword-searching
     fun getSearchedEventListResult(keyword: String) {
         dataList.clear()
-        repository.getSearchedEventList(keyword,handleGetEventListResult, handleSettingDataList)
+        repository.getSearchedEventList(keyword, handleGetEventListResult, handleSettingDataList)
     }
 
     init {

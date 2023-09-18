@@ -7,8 +7,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.musicchaser.data.EventData
 import com.example.musicchaser.databinding.ViewholderEventListBinding
+import io.grpc.okhttp.internal.framed.Variant
 
-class EventListAdapter () :
+class EventListAdapter(private val displayEventDetails: (EventData) -> Unit) :
     ListAdapter<EventData, RecyclerView.ViewHolder>(EventListDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -20,6 +21,9 @@ class EventListAdapter () :
             is EventViewHolder -> {
                 val eventData = getItem(position) as EventData
                 holder.bind(eventData)
+                holder.itemView.setOnClickListener {
+                    displayEventDetails(eventData)
+                }
             }
         }
     }

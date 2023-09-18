@@ -1,10 +1,8 @@
 package com.example.musicchaser
 
-import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.musicchaser.data.source.DefaultMusicChaserRepository
 import com.example.musicchaser.data.source.MusicChaserRepository
-import com.google.firebase.firestore.auth.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

@@ -16,7 +16,6 @@
         android:background="@color/white"
         android:paddingBottom="16dp">
 
-
         <ImageView
             android:id="@+id/event_main_pic_area"
             android:layout_width="match_parent"
@@ -26,7 +25,7 @@
             app:bindImage="@{property.eventMainPic}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/event_attendant_area"
@@ -87,9 +86,9 @@
             android:elevation="@dimen/card_content_elevation"
             android:fontFamily="@font/noto_sans"
             android:letterSpacing="@dimen/letter_spacing"
-            android:text="@{property.eventMonth}"
             android:textColor="@color/white"
             android:textSize="@dimen/content_font_size"
+            app:getEventMonth="@{property.eventDate}"
             app:layout_constraintBottom_toBottomOf="@id/event_month"
             app:layout_constraintEnd_toEndOf="@id/event_month"
             app:layout_constraintStart_toStartOf="@id/event_month"
@@ -113,10 +112,10 @@
             android:layout_height="wrap_content"
             android:elevation="@dimen/card_content_elevation"
             android:fontFamily="@font/noto_sans"
-            android:text="@{property.eventDay}"
             android:textColor="@color/black"
             android:textSize="@dimen/content_font_size"
             android:textStyle="bold"
+            app:getEventDay="@{property.eventDate}"
             app:layout_constraintBottom_toBottomOf="@id/event_day"
             app:layout_constraintEnd_toEndOf="@id/event_day"
             app:layout_constraintStart_toStartOf="@id/event_day"
