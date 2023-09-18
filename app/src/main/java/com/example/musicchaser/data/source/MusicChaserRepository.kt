@@ -55,4 +55,16 @@ interface MusicChaserRepository {
         handleSettingDataList: () -> Unit
     )
 
+    ////////// Artist API //////////
+    fun getArtistList(
+        callback: (DocumentSnapshot?, Exception?) -> Unit,
+        handleSettingDataList: () -> Unit
+    )
+
+    fun getSearchedArtistList(
+        keyword: String,
+        callback: (DocumentSnapshot?, Exception?) -> Unit,
+        handleSettingDataList: () -> Unit
+    )
+
 }

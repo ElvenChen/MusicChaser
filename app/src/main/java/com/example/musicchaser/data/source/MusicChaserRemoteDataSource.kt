@@ -20,11 +20,16 @@ private const val FIELD_USER_ID = "user_id"
 private const val COLLECTION_EVENTS = "events"
 private const val COLLECTION_EVENTS_SUB_COLLECTION_EVENT_COMMENTS = "event_comments"
 
-
 private const val FIELD_EVENT_NAME = "event_name"
 private const val FIELD_EVENT_DATE = "event_date"
 private const val FIELD_EVENT_COMMENTS = "event_comments"
 private const val FIELD_EVENT_COMMENT_TIME = "comment_time"
+
+
+private const val COLLECTION_ARTISTS = "artists"
+
+private const val FIELD_ARTIST_NAME = "artist_name"
+
 
 
 @SuppressLint("StaticFieldLeak")
@@ -298,6 +303,57 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
                     Log.i("EventTest", "Something goes wrong")
                 }
         }
+    }
+
+    ////////// Artist API //////////
+    override fun getArtistList(
+        callback: (DocumentSnapshot?, Exception?) -> Unit,
+        handleSettingDataList: () -> Unit
+    ) {
+        val collectionRef = db.collection(COLLECTION_ARTISTS)
+
+        collectionRef.get().addOnSuccessListener { querySnapshot ->
+
+                for (document in querySnapshot.documents) {
+                    val data = document.data
+
+                    Log.i("ArtistTest", "New Artist is here : $data")
+                    callback(document, null)
+                }
+
+                handleSettingDataList()
+            }
+            .addOnFailureListener { exception ->
+                Log.i("ArtistTest", "Something goes wrong")
+                callback(null, exception)
+            }
+    }
+
+    override fun getSearchedArtistList(
+        keyword: String,
+        callback: (DocumentSnapshot?, Exception?) -> Unit,
+        handleSettingDataList: () -> Unit
+    ) {
+        val collectionRef = db.collection(COLLECTION_ARTISTS)
+        val searchField = FIELD_ARTIST_NAME
+        Log.i("ArtistTest", "keyword : $keyword")
+
+        collectionRef.whereLessThanOrEqualTo(searchField, keyword)
+            .orderBy(searchField, Query.Direction.DESCENDING)
+            .get().addOnSuccessListener { querySnapshot ->
+
+                for (document in querySnapshot.documents) {
+                    val data = document.data
+
+                    Log.i("ArtistTest", "New Artist is here : $data")
+                    callback(document, null)
+                }
+                handleSettingDataList()
+            }
+            .addOnFailureListener { exception ->
+                Log.i("ArtistTest", "Something goes wrong")
+                callback(null, exception)
+            }
     }
 
 }

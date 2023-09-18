@@ -28,6 +28,18 @@
         android:id="@+id/artistFragment"
         android:name="com.example.musicchaser.artist.ArtistFragment"
         android:label="ArtistFragment" />
+
+    <dialog
+        android:id="@+id/artistDetailDialog"
+        android:name="com.example.musicchaser.artistdetail.ArtistDetailDialog"
+        android:label="ArtistDetailDialog">
+        <argument
+            android:name="selectedArtist"
+            app:argType="com.example.musicchaser.data.ArtistData"
+            app:nullable="false">
+        </argument>
+    </dialog>
+
     <fragment
         android:id="@+id/societyFragment"
         android:name="com.example.musicchaser.society.SocietyFragment"
@@ -112,5 +124,9 @@
     <action
         android:id="@+id/navigate_to_eventdetail_comment_dialog"
         app:destination="@id/eventDetailCommentDialog"/>
+
+    <action
+        android:id="@+id/navigate_to_artistdetail_dialog"
+        app:destination="@id/artistDetailDialog"/>
 
 </navigation>

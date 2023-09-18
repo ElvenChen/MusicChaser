@@ -98,4 +98,20 @@ class DefaultMusicChaserRepository @Inject constructor(private val musicChaserRe
             handleSettingDataList
         )
     }
+
+    ////////// Artist API //////////
+    override fun getArtistList(
+        callback: (DocumentSnapshot?, Exception?) -> Unit,
+        handleSettingDataList: () -> Unit
+    ) {
+        musicChaserRemoteDataSource.getArtistList(callback, handleSettingDataList)
+    }
+
+    override fun getSearchedArtistList(
+        keyword: String,
+        callback: (DocumentSnapshot?, Exception?) -> Unit,
+        handleSettingDataList: () -> Unit
+    ) {
+        musicChaserRemoteDataSource.getSearchedArtistList(keyword, callback, handleSettingDataList)
+    }
 }
