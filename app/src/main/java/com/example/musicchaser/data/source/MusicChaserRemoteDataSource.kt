@@ -214,15 +214,15 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
         val searchField = FIELD_EVENT_NAME
         Log.i("EventTest", "keyword : $keyword")
 
-        collectionRef.whereLessThanOrEqualTo(searchField, keyword)
-            .orderBy(searchField, Query.Direction.DESCENDING)
-            .get().addOnSuccessListener { querySnapshot ->
+        collectionRef.get().addOnSuccessListener { querySnapshot ->
 
                 for (document in querySnapshot.documents) {
                     val data = document.data
 
-                    Log.i("EventTest", "New Event is here : $data")
-                    callback(document, null)
+                    if (((data!!["event_name"]).toString()).contains(keyword)){
+                        Log.i("EventTest", "New Event is here : $data")
+                        callback(document, null)
+                    }
                 }
                 handleSettingDataList()
             }
@@ -483,15 +483,15 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
         val searchField = FIELD_ARTIST_NAME
         Log.i("ArtistTest", "keyword : $keyword")
 
-        collectionRef.whereLessThanOrEqualTo(searchField, keyword)
-            .orderBy(searchField, Query.Direction.DESCENDING)
-            .get().addOnSuccessListener { querySnapshot ->
+        collectionRef.get().addOnSuccessListener { querySnapshot ->
 
                 for (document in querySnapshot.documents) {
                     val data = document.data
 
-                    Log.i("ArtistTest", "New Artist is here : $data")
-                    callback(document, null)
+                    if (((data!!["artist_name"]).toString()).contains(keyword)){
+                        Log.i("ArtistTest", "New Artist is here : $data")
+                        callback(document, null)
+                    }
                 }
                 handleSettingDataList()
             }
