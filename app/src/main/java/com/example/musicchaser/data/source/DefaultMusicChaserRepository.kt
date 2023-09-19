@@ -177,4 +177,28 @@ class DefaultMusicChaserRepository @Inject constructor(private val musicChaserRe
             handleSettingArtistNotFavorite
         )
     }
+
+    override fun getArtistRecentEventList(
+        artistId: String,
+        callback: (DocumentSnapshot?, Exception?) -> Unit,
+        handleSettingRecentEventList: () -> Unit
+    ) {
+        musicChaserRemoteDataSource.getArtistRecentEventList(
+            artistId,
+            callback,
+            handleSettingRecentEventList
+        )
+    }
+
+    override fun getRecentEventName(
+        dataListWithOnlyEventId: List<String>,
+        handleCompletedRecentEventListResult: (EventData) -> Unit,
+        handleSettingRecentEventData: () -> Unit
+    ) {
+        musicChaserRemoteDataSource.getRecentEventName(
+            dataListWithOnlyEventId,
+            handleCompletedRecentEventListResult,
+            handleSettingRecentEventData
+        )
+    }
 }

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.util.Log
 import com.example.musicchaser.data.ArtistData
 import com.example.musicchaser.data.EventCommentData
+import com.example.musicchaser.data.EventData
 import com.example.musicchaser.login.UserManager
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentSnapshot
@@ -23,7 +24,7 @@ private const val COLLECTION_EVENTS = "events"
 private const val COLLECTION_EVENTS_SUB_COLLECTION_EVENT_COMMENTS = "event_comments"
 private const val COLLECTION_EVENTS_SUB_COLLECTION_EVENT_PERFORMERS = "event_performers"
 
-
+private const val FIELD_EVENT_ID = "event_id"
 private const val FIELD_EVENT_NAME = "event_name"
 private const val FIELD_EVENT_DATE = "event_date"
 private const val FIELD_EVENT_COMMENTS = "event_comments"
@@ -31,6 +32,7 @@ private const val FIELD_EVENT_COMMENT_TIME = "comment_time"
 
 
 private const val COLLECTION_ARTISTS = "artists"
+private const val COLLECTION_ARTISTS_SUB_COLLECTION_ATTEND_EVENTS = "attend_events"
 
 private const val FIELD_ARTIST_ID = "artist_id"
 private const val FIELD_ARTIST_NAME = "artist_name"
@@ -471,6 +473,72 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
                 val exception = task.exception
                 Log.i("ArtistTest", "Something goes wrong")
             }
+        }
+    }
+
+    override fun getArtistRecentEventList(
+        artistId: String,
+        callback: (DocumentSnapshot?, Exception?) -> Unit,
+        handleSettingRecentEventList: () -> Unit
+    ) {
+        val collectionRef = db.collection(COLLECTION_ARTISTS).document(artistId)
+            .collection(COLLECTION_ARTISTS_SUB_COLLECTION_ATTEND_EVENTS)
+
+        collectionRef.get().addOnSuccessListener { querySnapshot ->
+
+            for (document in querySnapshot.documents) {
+                val data = document.data
+
+                Log.i("ArtistRecentEventTest", "Recent event is here : $data")
+                callback(document, null)
+            }
+            handleSettingRecentEventList()
+        }.addOnFailureListener { exception ->
+            Log.i("ArtistRecentEventTest", "Something goes wrong")
+            callback(null, exception)
+        }
+    }
+
+    override fun getRecentEventName(
+        dataListWithOnlyEventId: List<String>,
+        handleCompletedRecentEventListResult: (EventData) -> Unit,
+        handleSettingRecentEventData: () -> Unit
+    ) {
+        dataListWithOnlyEventId.forEach {
+            val collectionRef = db.collection(COLLECTION_EVENTS)
+            val searchField = FIELD_EVENT_ID
+
+            collectionRef.whereEqualTo(searchField, it)
+                .get().addOnSuccessListener { querySnapshot ->
+
+                    for (document in querySnapshot.documents) {
+                        val data = document.data
+                        Log.i("ArtistRecentEventTest", "Recent event Content =  $data")
+
+                        val dataTobeAddToList = EventData(
+                            eventId = (data!!["event_id"]).toString(),
+                            eventName = (data["event_name"]).toString(),
+                            eventPlace = (data["event_place"]).toString(),
+                            eventLongitude = (data["event_longitude"]).toString().toFloat(),
+                            eventLatitude = (data["event_latitude"]).toString().toFloat(),
+                            eventAddress = (data["event_address"]).toString(),
+                            eventDate = (data["event_date"]).toString().toLong(),
+                            eventWeather = (data["event_weather"]).toString(),
+                            eventArea = (data["event_area"]).toString(),
+                            eventAttendant = (data["event_attendant"]).toString().toInt(),
+                            eventUrl = (data["event_url"]).toString(),
+                            eventMainPic = (data["event_main_pic"]).toString(),
+                            eventDesc = (data["event_desc"]).toString(),
+                            eventComments = (data["event_comments"]).toString().toInt()
+                        )
+
+                        handleCompletedRecentEventListResult(dataTobeAddToList)
+                    }
+                    handleSettingRecentEventData()
+                }
+                .addOnFailureListener { exception ->
+                    Log.i("ArtistRecentEventTest", "Something goes wrong")
+                }
         }
     }
 

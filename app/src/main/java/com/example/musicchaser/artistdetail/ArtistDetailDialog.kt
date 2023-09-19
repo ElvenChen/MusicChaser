@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.example.musicchaser.R
 import com.example.musicchaser.databinding.DialogArtistDetailBinding
 import com.example.musicchaser.databinding.FragmentEventDetailBinding
@@ -42,6 +43,25 @@ class ArtistDetailDialog : AppCompatDialogFragment() {
         // check this artist isFavorite = ture or false, to adjust favorite button show/hide
         viewModel.getIfArtistIsFavorite()
 
+        // getting artist recent events
+        viewModel.getArtistRecentEventList()
+
+
+
+
+
+        //observing dataListWithOnlyEventId for making next function call to transfer event ID into event full-detail
+        viewModel.dataListForGetEventDetailCall.observe(viewLifecycleOwner, Observer {
+            Log.i("ArtistRecentEventTest", "Observe dataListWithOnlyEventId from Fragment = $it")
+            viewModel.getCompletedArtistRecentEventList(it)
+            Log.i("ArtistRecentEventTest", "----------------------------------------------------")
+        })
+
+
+
+
+
+
         // setting add to favorite artist function
         binding.artistDetailAddFavoriteButton.setOnClickListener {
             viewModel.addFavoriteArtist()
@@ -68,6 +88,12 @@ class ArtistDetailDialog : AppCompatDialogFragment() {
         // setting navigation
         binding.outerConstraint.setOnClickListener {
             dismiss()
+        }
+
+        binding.recentEventButtonLayer.setOnClickListener {
+            if (viewModel.recentEventDataForView.value != null){
+                findNavController().navigate(ArtistDetailDialogDirections.navigateToEventdetailFragment(viewModel.recentEventDataForView.value!!))
+            }
         }
 
         return binding.root

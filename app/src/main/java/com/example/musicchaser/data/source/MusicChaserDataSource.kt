@@ -99,4 +99,16 @@ interface MusicChaserDataSource {
         handleSettingArtistIsFavorite: () -> Unit,
         handleSettingArtistNotFavorite: () -> Unit
     )
+
+    fun getArtistRecentEventList(
+        artistId: String,
+        callback: (DocumentSnapshot?, Exception?) -> Unit,
+        handleSettingRecentEventList: () -> Unit
+    )
+
+    fun getRecentEventName(
+        dataListWithOnlyEventId: List<String>,
+        handleCompletedRecentEventListResult: (EventData) -> Unit,
+        handleSettingRecentEventData: () -> Unit
+    )
 }
