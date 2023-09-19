@@ -58,5 +58,14 @@
     <string name="society_title">社群</string>
 
 
+    // management home page
+    <string name="management_title">管理</string>
+    <string name="management_home_event_title">活動管理</string>
+    <string name="management_home_artist_title">表演者管理</string>
+    <string name="management_home_user_title">使用者管理</string>
+
+
+
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

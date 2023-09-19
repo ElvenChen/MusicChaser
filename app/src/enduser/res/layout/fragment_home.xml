@@ -9,9 +9,17 @@
         android:layout_height="match_parent"
         tools:context=".home.HomeFragment">
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="hello_home_fragment" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="一般使用者看到的首頁"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textSize="@dimen/main_subject_font_size"
+            android:letterSpacing="@dimen/letter_spacing"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
