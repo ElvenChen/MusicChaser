@@ -71,9 +71,7 @@ class ArtistFragment : Fragment() {
             Log.i("ArtistTest", "Artist Data : $it")
             it?.let {
                 findNavController().navigate(
-                    ArtistFragmentDirections.navigateToArtistdetailDialog(
-                        it
-                    )
+                    ArtistFragmentDirections.navigateToArtistdetailDialog(it)
                 )
                 viewModel.displayArtistDetailsCompleted()
             }

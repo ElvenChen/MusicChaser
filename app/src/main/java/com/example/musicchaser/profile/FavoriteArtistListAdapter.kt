@@ -7,30 +7,31 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.musicchaser.data.ArtistData
 import com.example.musicchaser.data.EventData
+import com.example.musicchaser.databinding.ViewholderProfileFavoriteArtistListBinding
 import com.example.musicchaser.databinding.ViewholderProfileFavoriteEventListBinding
 
-class FavoriteEventListAdapter(private val displayEventDetails: (EventData) -> Unit) :
-    ListAdapter<EventData, RecyclerView.ViewHolder>(EventListDiffCallback()) {
+class FavoriteArtistListAdapter(private val displayArtistDetails: (ArtistData) -> Unit) :
+    ListAdapter<ArtistData, RecyclerView.ViewHolder>(ArtistListDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return FavoriteEventViewHolder.from(parent)
+        return FavoriteArtistViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is FavoriteEventViewHolder -> {
-                val evenData = getItem(position) as EventData
-                holder.bind(evenData)
+            is FavoriteArtistViewHolder -> {
+                val artistData = getItem(position) as ArtistData
+                holder.bind(artistData)
                 holder.itemView.setOnClickListener {
-                    displayEventDetails(evenData)
+                    displayArtistDetails(artistData)
                 }
             }
         }
     }
 
-    class FavoriteEventViewHolder(private val binding: ViewholderProfileFavoriteEventListBinding) :
+    class FavoriteArtistViewHolder(private val binding: ViewholderProfileFavoriteArtistListBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: EventData) {
+        fun bind(item: ArtistData) {
 
             // data binding
             binding.property = item
@@ -38,23 +39,27 @@ class FavoriteEventListAdapter(private val displayEventDetails: (EventData) -> U
         }
 
         companion object {
-            fun from(parent: ViewGroup): FavoriteEventViewHolder {
+            fun from(parent: ViewGroup): FavoriteArtistViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ViewholderProfileFavoriteEventListBinding.inflate(layoutInflater, parent, false)
-                return FavoriteEventViewHolder(binding)
+                val binding = ViewholderProfileFavoriteArtistListBinding.inflate(
+                    layoutInflater,
+                    parent,
+                    false
+                )
+                return FavoriteArtistViewHolder(binding)
             }
         }
     }
 
-    class EventListDiffCallback :
-        DiffUtil.ItemCallback<EventData>() {
-        override fun areItemsTheSame(oldItem: EventData, newItem: EventData): Boolean {
+    class ArtistListDiffCallback :
+        DiffUtil.ItemCallback<ArtistData>() {
+        override fun areItemsTheSame(oldItem: ArtistData, newItem: ArtistData): Boolean {
             return oldItem == newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: EventData,
-            newItem: EventData
+            oldItem: ArtistData,
+            newItem: ArtistData
         ): Boolean {
             return oldItem == newItem
         }

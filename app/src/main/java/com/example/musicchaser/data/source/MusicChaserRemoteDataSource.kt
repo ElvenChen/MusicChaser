@@ -140,6 +140,45 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
         }
     }
 
+    override fun getUserFavoriteArtist(userId: String): CollectionReference {
+        return db.collection(COLLECTION_USERS).document(userId)
+            .collection(COLLECTION_USERS_SUB_COLLECTION_FAVORITE_ARTISTS)
+    }
+
+    override fun getCompletedArtistList(
+        artistIdList: List<String>,
+        handleCompletedArtistListResult: (ArtistData) -> Unit,
+        handleSettingArtistData: () -> Unit
+    ) {
+        artistIdList.forEach {
+            val collectionRef = db.collection(COLLECTION_ARTISTS)
+            val searchField = FIELD_ARTIST_ID
+
+            collectionRef.whereEqualTo(searchField, it)
+                .get().addOnSuccessListener { querySnapshot ->
+
+                    for (document in querySnapshot.documents) {
+                        val data = document.data
+                        Log.i("UserFavoriteArtist", "Artist Content =  $data")
+
+                        val dataTobeAddToList = ArtistData(
+                            artistId = (data!!["artist_id"]).toString(),
+                            artistName = (data["artist_name"]).toString(),
+                            artistDesc = (data["artist_desc"]).toString(),
+                            artistType = (data["artist_type"]).toString(),
+                            artistMainPic = (data["artist_main_pic"]).toString()
+                        )
+
+                        handleCompletedArtistListResult(dataTobeAddToList)
+                    }
+                    handleSettingArtistData()
+                }
+                .addOnFailureListener { exception ->
+                    Log.i("UserFavoriteArtist", "Something goes wrong")
+                }
+        }
+    }
+
 
     ////////// Event API //////////
     override fun getEventList(

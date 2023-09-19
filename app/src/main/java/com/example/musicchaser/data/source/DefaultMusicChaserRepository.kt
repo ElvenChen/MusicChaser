@@ -38,6 +38,21 @@ class DefaultMusicChaserRepository @Inject constructor(private val musicChaserRe
         )
     }
 
+    override fun getUserFavoriteArtist(userId: String): CollectionReference {
+        return musicChaserRemoteDataSource.getUserFavoriteArtist(userId)
+    }
+
+    override fun getCompletedArtistList(
+        artistIdList: List<String>,
+        handleCompletedArtistListResult: (ArtistData) -> Unit,
+        handleSettingArtistData: () -> Unit
+    ) {
+        musicChaserRemoteDataSource.getCompletedArtistList(
+            artistIdList,
+            handleCompletedArtistListResult,
+            handleSettingArtistData
+        )
+    }
 
     ////////// Event API //////////
     override fun getEventList(

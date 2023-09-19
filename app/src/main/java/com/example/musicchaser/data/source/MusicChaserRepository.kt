@@ -22,6 +22,14 @@ interface MusicChaserRepository {
         handleSettingEventData: () -> Unit
     )
 
+    fun getUserFavoriteArtist(userId: String): CollectionReference
+
+    fun getCompletedArtistList(
+        artistIdList: List<String>,
+        handleCompletedArtistListResult: (ArtistData) -> Unit,
+        handleSettingArtistData: () -> Unit
+    )
+
     ////////// Event API //////////
     fun getEventList(
         callback: (DocumentSnapshot?, Exception?) -> Unit,
