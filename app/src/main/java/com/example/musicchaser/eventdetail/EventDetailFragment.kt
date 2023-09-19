@@ -12,20 +12,29 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.musicchaser.R
 import com.example.musicchaser.databinding.FragmentEventBinding
 import com.example.musicchaser.databinding.FragmentEventDetailBinding
 import com.example.musicchaser.event.EventListAdapter
 import com.example.musicchaser.event.EventViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class EventDetailFragment : Fragment() {
 
     private val viewModel: EventDetailViewModel by viewModels()
 
+    //    private var job: Job? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,6 +54,27 @@ class EventDetailFragment : Fragment() {
 
         // getting event comments
         viewModel.getEventCommentListWithNoAuthorName()
+//        job = viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+//            while (true) {
+//                viewModel.getEventCommentListWithNoAuthorName()
+//                delay(10000L)
+//            }
+//        }
+
+        // getting event performers
+        viewModel.getEventPerformerListWithNoArtistName()
+
+
+        // setting drop down refresh all comments
+        val listener = SwipeRefreshLayout.OnRefreshListener {
+            Log.i("Fire store", "Call drop down refresh API")
+            viewModel.getEventCommentListWithNoAuthorName()
+            binding.layoutSwipeRefreshArticles.isRefreshing = true
+            Log.i("Fire store", "drop down refresh API Call Done")
+        }
+        binding.layoutSwipeRefreshArticles.setOnRefreshListener(listener)
+
+
 
         // getting setting comment recyclerView adapter
         binding.eventDetailCommentsRecyclerView.layoutManager =
@@ -54,19 +84,29 @@ class EventDetailFragment : Fragment() {
 
 
 
-
         //observing dataListWithNoAuthorName for making next function call to transfer author ID into author's nickname
         viewModel.dataListForGetAuthorNameCall.observe(viewLifecycleOwner, Observer {
             Log.i("EventTest", "Observe dataListForGetAuthorNameCall from Fragment = $it")
             viewModel.getCompletedEventCommentList(it)
         })
 
-        //observing list for adapter
+        //observing comments list for adapter
         viewModel.dataListForAdapter.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
             adapter.notifyDataSetChanged()
+            binding.layoutSwipeRefreshArticles.isRefreshing = false
         })
 
+        //observing dataListWithNoArtistName for making next function call to transfer artist ID into artist's name
+        viewModel.dataListForGetArtistNameCall.observe(viewLifecycleOwner, Observer {
+            Log.i("EventPerformerTest", "Observe dataListWithNoArtistName from Fragment = $it")
+            viewModel.getCompletedEventPerformerList(it)
+        })
+
+        //observing performers list for View
+        viewModel.performerDataListForView.observe(viewLifecycleOwner, Observer {
+            binding.eventDetailAttendantContent.text = it
+        })
 
 
 
@@ -82,7 +122,7 @@ class EventDetailFragment : Fragment() {
 
         // observing event isFavorite
         viewModel.isFavorite.observe(viewLifecycleOwner, Observer {
-            if(it == true){
+            if (it == true) {
                 Log.i("EventTest", " isFavorite = $it ")
                 binding.eventDetailAddFavoriteButton.visibility = View.GONE
                 binding.eventDetailAddFavoriteButtonDone.visibility = View.VISIBLE
@@ -95,15 +135,17 @@ class EventDetailFragment : Fragment() {
 
 
 
-
-
         // setting navigation
         binding.eventDetailBackButton.setOnClickListener {
             findNavController().navigateUp()
         }
 
         binding.eventDetailEditButton.setOnClickListener {
-            findNavController().navigate(EventDetailFragmentDirections.navigateToEventdetailCommentDialog(event))
+            findNavController().navigate(
+                EventDetailFragmentDirections.navigateToEventdetailCommentDialog(
+                    event
+                )
+            )
         }
 
 
@@ -125,4 +167,10 @@ class EventDetailFragment : Fragment() {
         super.onDestroy()
         (activity as AppCompatActivity).supportActionBar?.show()
     }
+
+//    override fun onDestroyView() {
+//        super.onDestroyView()
+//        job?.cancel()
+//        Log.i("EventTest", "Job cancel")
+//    }
 }

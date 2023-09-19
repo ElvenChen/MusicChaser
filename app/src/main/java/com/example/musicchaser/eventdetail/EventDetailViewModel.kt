@@ -29,11 +29,26 @@ class EventDetailViewModel @Inject constructor(val repository: DefaultMusicChase
     val dataListForGetAuthorNameCall: LiveData<List<EventCommentData>>
         get() = _dataListForGetAuthorNameCall
 
-    var dataList = mutableListOf<EventCommentData>()
+    private var dataList = mutableListOf<EventCommentData>()
 
     private val _dataListForAdapter = MutableLiveData<List<EventCommentData>>()
     val dataListForAdapter: LiveData<List<EventCommentData>>
         get() = _dataListForAdapter
+
+    var dataListWithNoArtistName = mutableListOf<String>()
+
+    private val _dataListForGetArtistNameCall = MutableLiveData<List<String>>()
+    val dataListForGetArtistNameCall: LiveData<List<String>>
+        get() = _dataListForGetArtistNameCall
+
+    private var performersDataList = mutableListOf<String>()
+
+    private val _performerDataListForView = MutableLiveData<String>()
+    val performerDataListForView: LiveData<String>
+        get() = _performerDataListForView
+
+
+
 
 
     private val handleSettingEventIsFavorite = fun() {
@@ -85,6 +100,48 @@ class EventDetailViewModel @Inject constructor(val repository: DefaultMusicChase
         Log.i("EventTest", "Event Comment Completed Data List = ${_dataListForAdapter.value}")
     }
 
+    // handle event performers list from fireStore
+    private val handleGetEventPerformerListResult =
+        fun(document: DocumentSnapshot?, exception: Exception?) {
+
+            if (document != null) {
+                val data = document.data
+
+
+                val dataTobeAddToList = (data!!["attend_artist_id"]).toString()
+
+                Log.i("EventPerformerTest", "Performer ID = $dataTobeAddToList")
+
+                dataListWithNoArtistName.add(dataTobeAddToList)
+            } else {
+                if (exception != null) {
+                    Log.i("EventPerformerTest", "In EventViewModel something goes wrong : $exception")
+                }
+            }
+        }
+
+    // setting event performers list liveData for making next function call to transfer artist ID into artist's name
+    private val handleSettingDataListWithNoArtistName = fun() {
+        _dataListForGetArtistNameCall.value = dataListWithNoArtistName
+    }
+
+
+    // handle after-artist-name-transfer event performers list
+    private val handleCompletedEventPerformerListResult = fun(artistName: String) {
+        performersDataList.add(artistName)
+    }
+
+    // setting completed event performer list liveData for view after all done
+    private val handleSettingPerformerDataList = fun() {
+        val forPerformerDataListForView = performersDataList.joinToString("、")
+
+        _performerDataListForView.value = forPerformerDataListForView
+        Log.i("EventTest", "Event Comment Completed Data List = ${_dataListForAdapter.value}")
+    }
+
+
+
+
 
     fun addFavoriteEvent() {
         repository.addFavoriteEvent(
@@ -126,6 +183,24 @@ class EventDetailViewModel @Inject constructor(val repository: DefaultMusicChase
             eventCommentListWithNoAuthorName,
             handleCompletedEventCommentListResult,
             handleSettingDataList
+        )
+    }
+
+    fun getEventPerformerListWithNoArtistName(){
+        dataListWithNoArtistName.clear()
+        repository.getEventPerformerList(
+            event!!.eventId,
+            handleGetEventPerformerListResult,
+            handleSettingDataListWithNoArtistName
+        )
+    }
+
+    fun getCompletedEventPerformerList(eventPerformerListWithNoArtistName: List<String>) {
+        dataList.clear()
+        repository.getEventPerformerName(
+            eventPerformerListWithNoArtistName,
+            handleCompletedEventPerformerListResult,
+            handleSettingPerformerDataList
         )
     }
 }

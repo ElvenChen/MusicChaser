@@ -1,5 +1,6 @@
 package com.example.musicchaser.data.source
 
+import com.example.musicchaser.data.ArtistData
 import com.example.musicchaser.data.EventCommentData
 import com.example.musicchaser.data.EventData
 import com.example.musicchaser.data.User
@@ -96,6 +97,30 @@ class DefaultMusicChaserRepository @Inject constructor(private val musicChaserRe
             eventCommentListWithNoAuthorName,
             handleCompletedEventCommentListResult,
             handleSettingDataList
+        )
+    }
+
+    override fun getEventPerformerList(
+        eventId: String,
+        callback: (DocumentSnapshot?, Exception?) -> Unit,
+        handleSettingPerformerList: () -> Unit
+    ) {
+        musicChaserRemoteDataSource.getEventPerformerList(
+            eventId,
+            callback,
+            handleSettingPerformerList
+        )
+    }
+
+    override fun getEventPerformerName(
+        eventPerformerListWithNoArtistName: List<String>,
+        handleCompletedEventPerformerListResult: (String) -> Unit,
+        handleSettingPerformerDataList: () -> Unit
+    ) {
+        musicChaserRemoteDataSource.getEventPerformerName(
+            eventPerformerListWithNoArtistName,
+            handleCompletedEventPerformerListResult,
+            handleSettingPerformerDataList
         )
     }
 

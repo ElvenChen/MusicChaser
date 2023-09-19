@@ -2,6 +2,7 @@ package com.example.musicchaser.data.source
 
 import android.annotation.SuppressLint
 import android.util.Log
+import com.example.musicchaser.data.ArtistData
 import com.example.musicchaser.data.EventCommentData
 import com.example.musicchaser.login.UserManager
 import com.google.android.gms.tasks.Task
@@ -20,6 +21,8 @@ private const val FIELD_USER_ID = "user_id"
 
 private const val COLLECTION_EVENTS = "events"
 private const val COLLECTION_EVENTS_SUB_COLLECTION_EVENT_COMMENTS = "event_comments"
+private const val COLLECTION_EVENTS_SUB_COLLECTION_EVENT_PERFORMERS = "event_performers"
+
 
 private const val FIELD_EVENT_NAME = "event_name"
 private const val FIELD_EVENT_DATE = "event_date"
@@ -29,8 +32,8 @@ private const val FIELD_EVENT_COMMENT_TIME = "comment_time"
 
 private const val COLLECTION_ARTISTS = "artists"
 
+private const val FIELD_ARTIST_ID = "artist_id"
 private const val FIELD_ARTIST_NAME = "artist_name"
-
 
 
 @SuppressLint("StaticFieldLeak")
@@ -306,6 +309,57 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
         }
     }
 
+    override fun getEventPerformerList(
+        eventId: String,
+        callback: (DocumentSnapshot?, Exception?) -> Unit,
+        handleSettingPerformerList: () -> Unit
+    ) {
+        val collectionRef = db.collection(COLLECTION_EVENTS).document(eventId)
+            .collection(COLLECTION_EVENTS_SUB_COLLECTION_EVENT_PERFORMERS)
+
+        collectionRef.get().addOnSuccessListener { querySnapshot ->
+
+            for (document in querySnapshot.documents) {
+                val data = document.data
+
+                Log.i("EventPerformerTest", "New Performer is here : $data")
+                callback(document, null)
+            }
+            handleSettingPerformerList()
+        }.addOnFailureListener { exception ->
+            Log.i("EventPerformerTest", "Something goes wrong")
+            callback(null, exception)
+        }
+    }
+
+    override fun getEventPerformerName(
+        eventPerformerListWithNoArtistName: List<String>,
+        handleCompletedEventPerformerListResult: (String) -> Unit,
+        handleSettingPerformerDataList: () -> Unit
+    ) {
+        eventPerformerListWithNoArtistName.forEach {
+            val collectionRef = db.collection(COLLECTION_ARTISTS)
+            val searchField = FIELD_ARTIST_ID
+
+            collectionRef.whereEqualTo(searchField, it)
+                .get().addOnSuccessListener { querySnapshot ->
+
+                    for (document in querySnapshot.documents) {
+                        val data = document.data
+                        Log.i("EventPerformerTest", "Artist Content =  $data")
+
+                        val dataTobeAddToList = (data!!["artist_name"]).toString()
+
+                        handleCompletedEventPerformerListResult(dataTobeAddToList)
+                    }
+                    handleSettingPerformerDataList()
+                }
+                .addOnFailureListener { exception ->
+                    Log.i("EventPerformerTest", "Something goes wrong")
+                }
+        }
+    }
+
     ////////// Artist API //////////
     override fun getArtistList(
         callback: (DocumentSnapshot?, Exception?) -> Unit,
@@ -315,15 +369,15 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
 
         collectionRef.get().addOnSuccessListener { querySnapshot ->
 
-                for (document in querySnapshot.documents) {
-                    val data = document.data
+            for (document in querySnapshot.documents) {
+                val data = document.data
 
-                    Log.i("ArtistTest", "New Artist is here : $data")
-                    callback(document, null)
-                }
-
-                handleSettingDataList()
+                Log.i("ArtistTest", "New Artist is here : $data")
+                callback(document, null)
             }
+
+            handleSettingDataList()
+        }
             .addOnFailureListener { exception ->
                 Log.i("ArtistTest", "Something goes wrong")
                 callback(null, exception)

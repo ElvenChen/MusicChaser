@@ -1,5 +1,6 @@
 package com.example.musicchaser.eventdetail.comment
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,7 @@ import com.example.musicchaser.eventdetail.EventDetailFragmentArgs
 import com.example.musicchaser.profile.basicinfoedit.BasicInfoEditViewModel
 import com.facebook.appevents.codeless.internal.ViewHierarchy.setOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.qualifiers.ActivityContext
 
 @AndroidEntryPoint
 class EventDetailCommentDialog : AppCompatDialogFragment() {
@@ -54,7 +56,7 @@ class EventDetailCommentDialog : AppCompatDialogFragment() {
                 viewModel.addCommentAmounts()
                 dismiss()
             } else {
-                Toast.makeText(context,"Please fill in your nickname :D", Toast.LENGTH_LONG).show()
+                Toast.makeText(context,"Please fill in your comment :D", Toast.LENGTH_LONG).show()
             }
         }
 

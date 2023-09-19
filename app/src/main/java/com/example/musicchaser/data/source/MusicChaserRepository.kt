@@ -1,5 +1,6 @@
 package com.example.musicchaser.data.source
 
+import com.example.musicchaser.data.ArtistData
 import com.example.musicchaser.data.EventCommentData
 import com.example.musicchaser.data.EventData
 import com.example.musicchaser.data.User
@@ -55,6 +56,18 @@ interface MusicChaserRepository {
         handleSettingDataList: () -> Unit
     )
 
+    fun getEventPerformerList(
+        eventId: String,
+        callback: (DocumentSnapshot?, Exception?) -> Unit,
+        handleSettingPerformerList: () -> Unit
+    )
+
+    fun getEventPerformerName(
+        eventPerformerListWithNoArtistName: List<String>,
+        handleCompletedEventPerformerListResult: (String) -> Unit,
+        handleSettingPerformerDataList: () -> Unit
+    )
+
     ////////// Artist API //////////
     fun getArtistList(
         callback: (DocumentSnapshot?, Exception?) -> Unit,
@@ -67,7 +80,11 @@ interface MusicChaserRepository {
         handleSettingDataList: () -> Unit
     )
 
-    fun addFavoriteArtist(userId: String, artistId: String, handleSettingArtistIsFavorite: () -> Unit)
+    fun addFavoriteArtist(
+        userId: String,
+        artistId: String,
+        handleSettingArtistIsFavorite: () -> Unit
+    )
 
     fun deleteFavoriteArtist(
         userId: String,
@@ -81,5 +98,6 @@ interface MusicChaserRepository {
         handleSettingArtistIsFavorite: () -> Unit,
         handleSettingArtistNotFavorite: () -> Unit
     )
+
 
 }
