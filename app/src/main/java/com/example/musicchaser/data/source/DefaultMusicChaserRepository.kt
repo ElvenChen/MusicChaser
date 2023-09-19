@@ -4,6 +4,7 @@ import com.example.musicchaser.data.ArtistData
 import com.example.musicchaser.data.EventCommentData
 import com.example.musicchaser.data.EventData
 import com.example.musicchaser.data.User
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -19,6 +20,22 @@ class DefaultMusicChaserRepository @Inject constructor(private val musicChaserRe
 
     override fun editUserBasicInfo(userId: String, userNickname: String) {
         musicChaserRemoteDataSource.editUserBasicInfo(userId, userNickname)
+    }
+
+    override fun getUserFavoriteEvent(userId: String): CollectionReference {
+        return musicChaserRemoteDataSource.getUserFavoriteEvent(userId)
+    }
+
+    override fun getCompletedEventList(
+        eventIdList: List<String>,
+        handleCompletedEventListResult: (EventData) -> Unit,
+        handleSettingEventData: () -> Unit
+    ) {
+        musicChaserRemoteDataSource.getCompletedEventList(
+            eventIdList,
+            handleCompletedEventListResult,
+            handleSettingEventData
+        )
     }
 
 

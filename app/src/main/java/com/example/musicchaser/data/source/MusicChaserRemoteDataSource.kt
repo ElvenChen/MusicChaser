@@ -7,6 +7,7 @@ import com.example.musicchaser.data.EventCommentData
 import com.example.musicchaser.data.EventData
 import com.example.musicchaser.login.UserManager
 import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -89,6 +90,54 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
 
         UserManager.userNickname = userNickname
         Log.i("UserTest", "UserManager = $UserManager")
+    }
+
+    override fun getUserFavoriteEvent(userId: String): CollectionReference {
+        return db.collection(COLLECTION_USERS).document(userId)
+            .collection(COLLECTION_USERS_SUB_COLLECTION_FAVORITE_EVENTS)
+    }
+
+    override fun getCompletedEventList(
+        eventIdList: List<String>,
+        handleCompletedEventListResult: (EventData) -> Unit,
+        handleSettingEventData: () -> Unit
+    ) {
+        eventIdList.forEach {
+            val collectionRef = db.collection(COLLECTION_EVENTS)
+            val searchField = FIELD_EVENT_ID
+
+            collectionRef.whereEqualTo(searchField, it)
+                .get().addOnSuccessListener { querySnapshot ->
+
+                    for (document in querySnapshot.documents) {
+                        val data = document.data
+                        Log.i("UserFavoriteEvent", "Event Content =  $data")
+
+                        val dataTobeAddToList = EventData(
+                            eventId = (data!!["event_id"]).toString(),
+                            eventName = (data["event_name"]).toString(),
+                            eventPlace = (data["event_place"]).toString(),
+                            eventLongitude = (data["event_longitude"]).toString().toFloat(),
+                            eventLatitude = (data["event_latitude"]).toString().toFloat(),
+                            eventAddress = (data["event_address"]).toString(),
+                            eventDate = (data["event_date"]).toString().toLong(),
+                            eventWeather = (data["event_weather"]).toString(),
+                            eventArea = (data["event_area"]).toString(),
+                            eventAttendant = (data["event_attendant"]).toString().toInt(),
+                            eventUrl = (data["event_url"]).toString(),
+                            eventMainPic = (data["event_main_pic"]).toString(),
+                            eventDesc = (data["event_desc"]).toString(),
+                            eventComments = (data["event_comments"]).toString().toInt()
+                        )
+
+                        handleCompletedEventListResult(dataTobeAddToList)
+                    }
+                    handleSettingEventData()
+                }
+                .addOnFailureListener { exception ->
+                    Log.i("UserFavoriteEvent", "Something goes wrong")
+                }
+        }
     }
 
 

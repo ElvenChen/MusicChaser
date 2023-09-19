@@ -16,36 +16,46 @@
         android:layout_height="match_parent"
         tools:context=".artistdetail.ArtistDetailDialog">
 
-        <ImageView
-            android:id="@+id/artist_detail_main_pic"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/artist_detail_main_pic_card_view"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_marginTop="60dp"
-            android:scaleType="centerCrop"
-            android:onClick="@{() -> viewModel.nothing()}"
-            app:bindImage="@{viewModel.artist.artistMainPic}"
-            app:layout_constraintTop_toTopOf="parent"
+            app:cardCornerRadius="60dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/artist_detail_main_pic"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:onClick="@{() -> viewModel.nothing()}"
+                android:scaleType="centerCrop"
+                app:bindImage="@{viewModel.artist.artistMainPic}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/artist_detail_artist_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/noto_sans"
             android:letterSpacing="@dimen/letter_spacing"
+            android:onClick="@{() -> viewModel.nothing()}"
             android:text="@{viewModel.artist.artistName}"
             android:textAlignment="center"
+            android:textColor="@color/white"
             android:textSize="@dimen/sub_title_font_size"
             android:textStyle="bold"
-            android:textColor="@color/white"
-            android:onClick="@{() -> viewModel.nothing()}"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/artist_detail_main_pic" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/artist_detail_main_pic_card_view" />
 
         <Button
             android:id="@+id/artist_detail_add_favorite_button"
@@ -54,7 +64,6 @@
             android:layout_height="40dp"
             android:background="@drawable/background_shape_radius_16dp"
             android:elevation="@dimen/shadow_elevation"
-            android:layout_marginStart="8dp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:text="@string/artist_detail_add_favorite"
@@ -62,8 +71,8 @@
             android:textSize="@dimen/content_font_size"
             android:textStyle="bold"
             app:backgroundTint="@color/golden_yellow"
-            app:layout_constraintStart_toEndOf="@+id/artist_detail_main_pic"
-            app:layout_constraintBottom_toBottomOf="@+id/artist_detail_main_pic" />
+            app:layout_constraintBottom_toBottomOf="@+id/artist_detail_main_pic_card_view"
+            app:layout_constraintStart_toEndOf="@+id/artist_detail_main_pic_card_view" />
 
         <Button
             android:id="@+id/artist_detail_add_favorite_button_done"
@@ -72,7 +81,6 @@
             android:layout_height="40dp"
             android:background="@drawable/background_shape_radius_16dp"
             android:elevation="@dimen/shadow_elevation"
-            android:layout_marginStart="8dp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:text="@string/artist_detail_add_favorite"
@@ -81,17 +89,16 @@
             android:textStyle="bold"
             android:visibility="gone"
             app:backgroundTint="@color/dark_golden_yellow"
-            app:layout_constraintStart_toEndOf="@+id/artist_detail_main_pic"
-            app:layout_constraintBottom_toBottomOf="@+id/artist_detail_main_pic" />
-
+            app:layout_constraintBottom_toBottomOf="@+id/artist_detail_main_pic_card_view"
+            app:layout_constraintStart_toEndOf="@+id/artist_detail_main_pic_card_view" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/background_shape_radius_16dp"
             android:backgroundTint="@color/white"
             android:elevation="@dimen/shadow_elevation"
@@ -130,129 +137,133 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/artist_detail_description" />
 
-            <ImageView
-                android:id="@+id/recent_event_background"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/artist_detail_recent_event_card_view"
                 android:layout_width="0dp"
-                android:layout_height="72dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:scaleType="centerCrop"
-                app:bindImage="@{viewModel.recentEventDataForView.eventMainPic}"
+                app:cardCornerRadius="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/artist_detail_recent_event_title"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent">
 
-            <ImageView
-                android:id="@+id/recent_event_background_front_layer"
-                android:layout_width="0dp"
-                android:layout_height="72dp"
-                android:layout_margin="16dp"
-                android:background="@color/transparent_standard_white"
-                android:elevation="1dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/artist_detail_recent_event_title" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/recent_event_button_layer"
-                android:layout_width="0dp"
-                android:layout_height="72dp"
-                android:layout_margin="16dp"
-                android:background="@android:color/transparent"
-                android:elevation="3dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/artist_detail_recent_event_title" />
+                    <ImageView
+                        android:id="@+id/recent_event_background"
+                        android:layout_width="0dp"
+                        android:layout_height="72dp"
+                        android:foreground="@color/transparent_standard_white"
+                        android:scaleType="centerCrop"
+                        app:bindImage="@{viewModel.recentEventDataForView.eventMainPic}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/recent_event_month"
-                android:layout_width="40dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="16dp"
-                android:background="@drawable/background_shape_top_radius_8dp"
-                android:backgroundTint="@color/dark_golden_yellow"
-                android:elevation="@dimen/shadow_elevation"
-                app:layout_constraintBottom_toTopOf="@+id/recent_event_day"
-                app:layout_constraintStart_toStartOf="@+id/recent_event_background_front_layer" />
+                    <ImageView
+                        android:id="@+id/recent_event_button_layer"
+                        android:layout_width="0dp"
+                        android:layout_height="72dp"
+                        android:background="@android:color/transparent"
+                        android:elevation="3dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/recent_event_month_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:elevation="@dimen/card_content_elevation"
-                android:fontFamily="@font/noto_sans"
-                android:letterSpacing="@dimen/letter_spacing"
-                android:textColor="@color/white"
-                android:textSize="@dimen/content_font_size"
-                app:getEventMonth="@{viewModel.recentEventDataForView.eventDate}"
-                app:layout_constraintBottom_toBottomOf="@id/recent_event_month"
-                app:layout_constraintEnd_toEndOf="@id/recent_event_month"
-                app:layout_constraintStart_toStartOf="@id/recent_event_month"
-                app:layout_constraintTop_toTopOf="@id/recent_event_month"
-                tools:text="9月" />
+                    <ImageView
+                        android:id="@+id/recent_event_month"
+                        android:layout_width="40dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="16dp"
+                        android:background="@drawable/background_shape_top_radius_8dp"
+                        android:backgroundTint="@color/dark_golden_yellow"
+                        android:elevation="@dimen/shadow_elevation"
+                        app:layout_constraintBottom_toTopOf="@+id/recent_event_day"
+                        app:layout_constraintStart_toStartOf="@+id/recent_event_background" />
 
-            <ImageView
-                android:id="@+id/recent_event_day"
-                android:layout_width="40dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/background_shape_bottom_radius_8dp"
-                android:elevation="@dimen/shadow_elevation"
-                app:layout_constraintBottom_toBottomOf="@+id/recent_event_background_front_layer"
-                app:layout_constraintStart_toStartOf="@+id/recent_event_background_front_layer"/>
+                    <TextView
+                        android:id="@+id/recent_event_month_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:elevation="@dimen/card_content_elevation"
+                        android:fontFamily="@font/noto_sans"
+                        android:letterSpacing="@dimen/letter_spacing"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/content_font_size"
+                        app:getEventMonth="@{viewModel.recentEventDataForView.eventDate}"
+                        app:layout_constraintBottom_toBottomOf="@id/recent_event_month"
+                        app:layout_constraintEnd_toEndOf="@id/recent_event_month"
+                        app:layout_constraintStart_toStartOf="@id/recent_event_month"
+                        app:layout_constraintTop_toTopOf="@id/recent_event_month"
+                        tools:text="9月" />
 
-            <TextView
-                android:id="@+id/recent_event_day_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:elevation="@dimen/card_content_elevation"
-                android:fontFamily="@font/noto_sans"
-                android:text="16"
-                android:textColor="@color/black"
-                android:textSize="@dimen/content_font_size"
-                android:textStyle="bold"
-                app:getEventDay="@{viewModel.recentEventDataForView.eventDate}"
-                app:layout_constraintBottom_toBottomOf="@id/recent_event_day"
-                app:layout_constraintEnd_toEndOf="@id/recent_event_day"
-                app:layout_constraintStart_toStartOf="@id/recent_event_day"
-                app:layout_constraintTop_toTopOf="@id/recent_event_day"
-                tools:text="16" />
-            <TextView
-                android:id="@+id/recent_event_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:elevation="@dimen/card_content_elevation"
-                android:fontFamily="@font/noto_sans"
-                android:letterSpacing="@dimen/letter_spacing"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:text="@{viewModel.recentEventDataForView.eventName}"
-                android:textSize="@dimen/content_font_size"
-                app:layout_constraintStart_toEndOf="@id/recent_event_day"
-                app:layout_constraintTop_toTopOf="@+id/recent_event_month"
-                tools:text="新北貢寮國際海洋音樂祭" />
+                    <ImageView
+                        android:id="@+id/recent_event_day"
+                        android:layout_width="40dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/background_shape_bottom_radius_8dp"
+                        android:elevation="@dimen/shadow_elevation"
+                        app:layout_constraintBottom_toBottomOf="@+id/recent_event_background"
+                        app:layout_constraintStart_toStartOf="@+id/recent_event_background" />
 
-            <TextView
-                android:id="@+id/recent_event_place"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:elevation="@dimen/card_content_elevation"
-                android:fontFamily="@font/noto_sans"
-                android:letterSpacing="@dimen/letter_spacing"
-                android:text="@{viewModel.recentEventDataForView.eventPlace}"
-                android:textColor="@color/black"
-                android:textSize="@dimen/content_font_size"
-                app:layout_constraintStart_toEndOf="@id/recent_event_day"
-                app:layout_constraintBottom_toBottomOf="@+id/recent_event_day"
-                tools:text="新北市福隆海水浴場" />
+                    <TextView
+                        android:id="@+id/recent_event_day_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:elevation="@dimen/card_content_elevation"
+                        android:fontFamily="@font/noto_sans"
+                        android:text="16"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size"
+                        android:textStyle="bold"
+                        app:getEventDay="@{viewModel.recentEventDataForView.eventDate}"
+                        app:layout_constraintBottom_toBottomOf="@id/recent_event_day"
+                        app:layout_constraintEnd_toEndOf="@id/recent_event_day"
+                        app:layout_constraintStart_toStartOf="@id/recent_event_day"
+                        app:layout_constraintTop_toTopOf="@id/recent_event_day"
+                        tools:text="16" />
 
+                    <TextView
+                        android:id="@+id/recent_event_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:elevation="@dimen/card_content_elevation"
+                        android:fontFamily="@font/noto_sans"
+                        android:letterSpacing="@dimen/letter_spacing"
+                        android:text="@{viewModel.recentEventDataForView.eventName}"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@id/recent_event_day"
+                        app:layout_constraintTop_toTopOf="@+id/recent_event_month"
+                        tools:text="新北貢寮國際海洋音樂祭" />
 
+                    <TextView
+                        android:id="@+id/recent_event_place"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:elevation="@dimen/card_content_elevation"
+                        android:fontFamily="@font/noto_sans"
+                        android:letterSpacing="@dimen/letter_spacing"
+                        android:text="@{viewModel.recentEventDataForView.eventPlace}"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size"
+                        app:layout_constraintBottom_toBottomOf="@+id/recent_event_day"
+                        app:layout_constraintStart_toEndOf="@id/recent_event_day"
+                        tools:text="新北市福隆海水浴場" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

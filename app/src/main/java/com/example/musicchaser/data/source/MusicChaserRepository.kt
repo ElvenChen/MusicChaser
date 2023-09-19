@@ -4,6 +4,7 @@ import com.example.musicchaser.data.ArtistData
 import com.example.musicchaser.data.EventCommentData
 import com.example.musicchaser.data.EventData
 import com.example.musicchaser.data.User
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
 
 interface MusicChaserRepository {
@@ -12,6 +13,14 @@ interface MusicChaserRepository {
     fun getUserBasicInfo(userId: String)
 
     fun editUserBasicInfo(userId: String, userNickname: String)
+
+    fun getUserFavoriteEvent(userId: String): CollectionReference
+
+    fun getCompletedEventList(
+        eventIdList: List<String>,
+        handleCompletedEventListResult: (EventData) -> Unit,
+        handleSettingEventData: () -> Unit
+    )
 
     ////////// Event API //////////
     fun getEventList(
