@@ -3,15 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.musicchaser.managementuser.ManagementUserViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".home.HomeFragment">
+        tools:context=".managementuser.ManagementUserFragment">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="hello_home_fragment" />
+            android:text="Management User List" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

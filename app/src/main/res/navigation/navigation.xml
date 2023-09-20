@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
     app:startDestination="@id/homeFragment">
 
@@ -128,5 +129,40 @@
     <action
         android:id="@+id/navigate_to_artistdetail_dialog"
         app:destination="@id/artistDetailDialog"/>
+
+
+
+    <!--Administration Flavor -->
+
+
+
+    <fragment
+        android:id="@+id/managementEventFragment"
+        android:name="com.example.musicchaser.managementevent.ManagementEventFragment"
+        android:label="fragment_management_event"
+        tools:layout="@layout/fragment_management_event" />
+
+    <fragment
+        android:id="@+id/managementArtistFragment"
+        android:name="com.example.musicchaser.managementartist.ManagementArtistFragment"
+        android:label="ManagementArtistFragment" />
+
+    <fragment
+        android:id="@+id/managementUserFragment"
+        android:name="com.example.musicchaser.managementuser.ManagementUserFragment"
+        android:label="ManagementUserFragment" />
+
+    <action
+        android:id="@+id/navigate_to_management_event_fragment"
+        app:destination="@id/managementEventFragment"/>
+
+    <action
+        android:id="@+id/navigate_to_management_artist_fragment"
+        app:destination="@id/managementArtistFragment"/>
+
+    <action
+        android:id="@+id/navigate_to_management_user_fragment"
+        app:destination="@id/managementUserFragment"/>
+
 
 </navigation>

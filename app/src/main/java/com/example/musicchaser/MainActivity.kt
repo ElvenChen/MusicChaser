@@ -27,10 +27,14 @@ class MainActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
+
+
         // handle navigation
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.NavHostFragment) as NavHostFragment
         val navController = navHostFragment.navController
+
+
 
         // handle bottomNavBar visibility
         navController.addOnDestinationChangedListener { _, destination, _ ->
