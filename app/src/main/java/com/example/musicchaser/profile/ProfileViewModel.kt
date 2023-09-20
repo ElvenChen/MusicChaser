@@ -11,6 +11,7 @@ import com.example.musicchaser.data.EventData
 import com.example.musicchaser.data.source.DefaultMusicChaserRepository
 import com.example.musicchaser.login.UserManager
 import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.auth.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -21,6 +22,16 @@ class ProfileViewModel @Inject constructor(private val repository: DefaultMusicC
 
     // set user favorite event snapShotListener
     private var collectionRef : CollectionReference? = null
+
+    private var favoriteEventListenerRegistration: ListenerRegistration? = null
+    private fun stopEventListening() {
+        favoriteEventListenerRegistration?.remove()
+    }
+
+    private var favoriteArtistListenerRegistration: ListenerRegistration? = null
+    private fun stopArtistListening() {
+        favoriteArtistListenerRegistration?.remove()
+    }
 
 
 
@@ -121,7 +132,7 @@ class ProfileViewModel @Inject constructor(private val repository: DefaultMusicC
     private fun getUserFavoriteEvent(){
         collectionRef = repository.getUserFavoriteEvent(UserManager.userId)
 
-        collectionRef?.addSnapshotListener { querySnapshot, e ->
+        favoriteEventListenerRegistration = collectionRef?.addSnapshotListener { querySnapshot, e ->
             if (e != null) {
                 Log.i("UserFavoriteEvent", "Listen failed", e)
                 return@addSnapshotListener
@@ -146,7 +157,7 @@ class ProfileViewModel @Inject constructor(private val repository: DefaultMusicC
     private fun getUserFavoriteArtist(){
         collectionRef = repository.getUserFavoriteArtist(UserManager.userId)
 
-        collectionRef?.addSnapshotListener { querySnapshot, e ->
+        favoriteArtistListenerRegistration = collectionRef?.addSnapshotListener { querySnapshot, e ->
             if (e != null) {
                 Log.i("UserFavoriteArtist", "Listen failed", e)
                 return@addSnapshotListener
@@ -187,6 +198,7 @@ class ProfileViewModel @Inject constructor(private val repository: DefaultMusicC
     }
 
     init {
+        Log.i("UserFavoriteEvent", "init block triggered")
         Log.i("UserTest","UserManager.userNickname = ${UserManager.userNickname}")
         Log.i("UserTest","UserManager.userEmail = ${UserManager.userEmail}")
         _userNickname.value = UserManager.userNickname
@@ -194,5 +206,11 @@ class ProfileViewModel @Inject constructor(private val repository: DefaultMusicC
 
         getUserFavoriteEvent()
         getUserFavoriteArtist()
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        stopEventListening()
+        stopArtistListening()
     }
 }
