@@ -31,6 +31,16 @@ interface MusicChaserDataSource {
         handleSettingArtistData: () -> Unit
     )
 
+    fun deleteUserFavoriteEvent(
+        userId: String,
+        eventId: String,
+    )
+
+    fun deleteUserFavoriteArtist(
+        userId: String,
+        artistId: String,
+    )
+
 
     ////////// Event API //////////
     fun getEventList(

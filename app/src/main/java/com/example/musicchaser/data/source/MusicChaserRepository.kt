@@ -30,6 +30,16 @@ interface MusicChaserRepository {
         handleSettingArtistData: () -> Unit
     )
 
+    fun deleteUserFavoriteEvent(
+        userId: String,
+        eventId: String,
+    )
+
+    fun deleteUserFavoriteArtist(
+        userId: String,
+        artistId: String,
+    )
+
     ////////// Event API //////////
     fun getEventList(
         callback: (DocumentSnapshot?, Exception?) -> Unit,

@@ -102,41 +102,45 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
         handleCompletedEventListResult: (EventData) -> Unit,
         handleSettingEventData: () -> Unit
     ) {
-        eventIdList.forEach {
-            val collectionRef = db.collection(COLLECTION_EVENTS)
-            val searchField = FIELD_EVENT_ID
+        if (eventIdList.isEmpty()) {
+            handleSettingEventData()
+        } else {
+            eventIdList.forEach {
+                val collectionRef = db.collection(COLLECTION_EVENTS)
+                val searchField = FIELD_EVENT_ID
 
-            collectionRef.whereEqualTo(searchField, it)
-                .get().addOnSuccessListener { querySnapshot ->
+                collectionRef.whereEqualTo(searchField, it)
+                    .get().addOnSuccessListener { querySnapshot ->
 
-                    for (document in querySnapshot.documents) {
-                        val data = document.data
-                        Log.i("UserFavoriteEvent", "Event Content =  $data")
+                        for (document in querySnapshot.documents) {
+                            val data = document.data
+                            Log.i("UserFavoriteEvent", "Event Content =  $data")
 
-                        val dataTobeAddToList = EventData(
-                            eventId = (data!!["event_id"]).toString(),
-                            eventName = (data["event_name"]).toString(),
-                            eventPlace = (data["event_place"]).toString(),
-                            eventLongitude = (data["event_longitude"]).toString().toFloat(),
-                            eventLatitude = (data["event_latitude"]).toString().toFloat(),
-                            eventAddress = (data["event_address"]).toString(),
-                            eventDate = (data["event_date"]).toString().toLong(),
-                            eventWeather = (data["event_weather"]).toString(),
-                            eventArea = (data["event_area"]).toString(),
-                            eventAttendant = (data["event_attendant"]).toString().toInt(),
-                            eventUrl = (data["event_url"]).toString(),
-                            eventMainPic = (data["event_main_pic"]).toString(),
-                            eventDesc = (data["event_desc"]).toString(),
-                            eventComments = (data["event_comments"]).toString().toInt()
-                        )
+                            val dataTobeAddToList = EventData(
+                                eventId = (data!!["event_id"]).toString(),
+                                eventName = (data["event_name"]).toString(),
+                                eventPlace = (data["event_place"]).toString(),
+                                eventLongitude = (data["event_longitude"]).toString().toFloat(),
+                                eventLatitude = (data["event_latitude"]).toString().toFloat(),
+                                eventAddress = (data["event_address"]).toString(),
+                                eventDate = (data["event_date"]).toString().toLong(),
+                                eventWeather = (data["event_weather"]).toString(),
+                                eventArea = (data["event_area"]).toString(),
+                                eventAttendant = (data["event_attendant"]).toString().toInt(),
+                                eventUrl = (data["event_url"]).toString(),
+                                eventMainPic = (data["event_main_pic"]).toString(),
+                                eventDesc = (data["event_desc"]).toString(),
+                                eventComments = (data["event_comments"]).toString().toInt()
+                            )
 
-                        handleCompletedEventListResult(dataTobeAddToList)
+                            handleCompletedEventListResult(dataTobeAddToList)
+                        }
+                        handleSettingEventData()
                     }
-                    handleSettingEventData()
-                }
-                .addOnFailureListener { exception ->
-                    Log.i("UserFavoriteEvent", "Something goes wrong")
-                }
+                    .addOnFailureListener { exception ->
+                        Log.i("UserFavoriteEvent", "Something goes wrong")
+                    }
+            }
         }
     }
 
@@ -150,32 +154,58 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
         handleCompletedArtistListResult: (ArtistData) -> Unit,
         handleSettingArtistData: () -> Unit
     ) {
-        artistIdList.forEach {
-            val collectionRef = db.collection(COLLECTION_ARTISTS)
-            val searchField = FIELD_ARTIST_ID
+        if (artistIdList.isEmpty()) {
+            handleSettingArtistData()
+        } else {
+            artistIdList.forEach {
+                val collectionRef = db.collection(COLLECTION_ARTISTS)
+                val searchField = FIELD_ARTIST_ID
 
-            collectionRef.whereEqualTo(searchField, it)
-                .get().addOnSuccessListener { querySnapshot ->
+                collectionRef.whereEqualTo(searchField, it)
+                    .get().addOnSuccessListener { querySnapshot ->
 
-                    for (document in querySnapshot.documents) {
-                        val data = document.data
-                        Log.i("UserFavoriteArtist", "Artist Content =  $data")
+                        for (document in querySnapshot.documents) {
+                            val data = document.data
+                            Log.i("UserFavoriteArtist", "Artist Content =  $data")
 
-                        val dataTobeAddToList = ArtistData(
-                            artistId = (data!!["artist_id"]).toString(),
-                            artistName = (data["artist_name"]).toString(),
-                            artistDesc = (data["artist_desc"]).toString(),
-                            artistType = (data["artist_type"]).toString(),
-                            artistMainPic = (data["artist_main_pic"]).toString()
-                        )
+                            val dataTobeAddToList = ArtistData(
+                                artistId = (data!!["artist_id"]).toString(),
+                                artistName = (data["artist_name"]).toString(),
+                                artistDesc = (data["artist_desc"]).toString(),
+                                artistType = (data["artist_type"]).toString(),
+                                artistMainPic = (data["artist_main_pic"]).toString()
+                            )
 
-                        handleCompletedArtistListResult(dataTobeAddToList)
+                            handleCompletedArtistListResult(dataTobeAddToList)
+                        }
+                        handleSettingArtistData()
                     }
-                    handleSettingArtistData()
-                }
-                .addOnFailureListener { exception ->
-                    Log.i("UserFavoriteArtist", "Something goes wrong")
-                }
+                    .addOnFailureListener { exception ->
+                        Log.i("UserFavoriteArtist", "Something goes wrong")
+                    }
+            }
+        }
+    }
+
+    override fun deleteUserFavoriteEvent(userId: String, eventId: String) {
+        val docRef = db.collection(COLLECTION_USERS).document(userId)
+            .collection(COLLECTION_USERS_SUB_COLLECTION_FAVORITE_EVENTS).document(eventId)
+
+        docRef.delete().addOnSuccessListener {
+            Log.i("UserFavoriteEventEdit", "delete favorite Event successfully!! ")
+        }.addOnFailureListener { e ->
+            Log.i("UserFavoriteEventEdit", "delete favorite Event fail!! ")
+        }
+    }
+
+    override fun deleteUserFavoriteArtist(userId: String, artistId: String) {
+        val docRef = db.collection(COLLECTION_USERS).document(userId)
+            .collection(COLLECTION_USERS_SUB_COLLECTION_FAVORITE_ARTISTS).document(artistId)
+
+        docRef.delete().addOnSuccessListener {
+            Log.i("UserFavoriteArtistEdit", "delete favorite Artistsuccessfully!! ")
+        }.addOnFailureListener { e ->
+            Log.i("UserFavoriteArtistEdit", "delete favorite Artistfail!! ")
         }
     }
 
@@ -216,16 +246,16 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
 
         collectionRef.get().addOnSuccessListener { querySnapshot ->
 
-                for (document in querySnapshot.documents) {
-                    val data = document.data
+            for (document in querySnapshot.documents) {
+                val data = document.data
 
-                    if (((data!!["event_name"]).toString()).contains(keyword)){
-                        Log.i("EventTest", "New Event is here : $data")
-                        callback(document, null)
-                    }
+                if (((data!!["event_name"]).toString()).contains(keyword)) {
+                    Log.i("EventTest", "New Event is here : $data")
+                    callback(document, null)
                 }
-                handleSettingDataList()
             }
+            handleSettingDataList()
+        }
             .addOnFailureListener { exception ->
                 Log.i("EventTest", "Something goes wrong")
                 callback(null, exception)
@@ -485,16 +515,16 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
 
         collectionRef.get().addOnSuccessListener { querySnapshot ->
 
-                for (document in querySnapshot.documents) {
-                    val data = document.data
+            for (document in querySnapshot.documents) {
+                val data = document.data
 
-                    if (((data!!["artist_name"]).toString()).contains(keyword)){
-                        Log.i("ArtistTest", "New Artist is here : $data")
-                        callback(document, null)
-                    }
+                if (((data!!["artist_name"]).toString()).contains(keyword)) {
+                    Log.i("ArtistTest", "New Artist is here : $data")
+                    callback(document, null)
                 }
-                handleSettingDataList()
             }
+            handleSettingDataList()
+        }
             .addOnFailureListener { exception ->
                 Log.i("ArtistTest", "Something goes wrong")
                 callback(null, exception)

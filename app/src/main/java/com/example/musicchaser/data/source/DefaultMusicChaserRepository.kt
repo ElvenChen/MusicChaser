@@ -54,6 +54,14 @@ class DefaultMusicChaserRepository @Inject constructor(private val musicChaserRe
         )
     }
 
+    override fun deleteUserFavoriteEvent(userId: String, eventId: String) {
+        musicChaserRemoteDataSource.deleteUserFavoriteEvent(userId, eventId)
+    }
+
+    override fun deleteUserFavoriteArtist(userId: String, artistId: String) {
+        musicChaserRemoteDataSource.deleteUserFavoriteArtist(userId, artistId)
+    }
+
     ////////// Event API //////////
     override fun getEventList(
         callback: (DocumentSnapshot?, Exception?) -> Unit,

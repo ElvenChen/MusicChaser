@@ -20,14 +20,17 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileViewModel @Inject constructor(private val repository: DefaultMusicChaserRepository):ViewModel() {
 
-    // set user favorite event snapShotListener
-    private var collectionRef : CollectionReference? = null
+    private var eventCollectionRef : CollectionReference? = null
 
+    private var artistCollectionRef : CollectionReference? = null
+
+    // set user favorite event snapShotListener
     private var favoriteEventListenerRegistration: ListenerRegistration? = null
     private fun stopEventListening() {
         favoriteEventListenerRegistration?.remove()
     }
 
+    // set user favorite artist snapShotListener
     private var favoriteArtistListenerRegistration: ListenerRegistration? = null
     private fun stopArtistListening() {
         favoriteArtistListenerRegistration?.remove()
@@ -43,6 +46,8 @@ class ProfileViewModel @Inject constructor(private val repository: DefaultMusicC
     val userAccount: LiveData<String>
         get() = _userAccount
 
+
+
     private var eventIdList = mutableListOf<String>()
 
     private val _userFavoriteEventIdList = MutableLiveData<List<String>>()
@@ -56,6 +61,7 @@ class ProfileViewModel @Inject constructor(private val repository: DefaultMusicC
         get() = _eventDataListForAdapter
 
 
+
     private var artistIdList = mutableListOf<String>()
 
     private val _userFavoriteArtistIdList = MutableLiveData<List<String>>()
@@ -67,6 +73,7 @@ class ProfileViewModel @Inject constructor(private val repository: DefaultMusicC
     private val _artistDataListForAdapter = MutableLiveData<List<ArtistData>>()
     val artistDataListForAdapter: LiveData<List<ArtistData>>
         get() = _artistDataListForAdapter
+
 
 
 
@@ -130,9 +137,9 @@ class ProfileViewModel @Inject constructor(private val repository: DefaultMusicC
 
 
     private fun getUserFavoriteEvent(){
-        collectionRef = repository.getUserFavoriteEvent(UserManager.userId)
+        eventCollectionRef = repository.getUserFavoriteEvent(UserManager.userId)
 
-        favoriteEventListenerRegistration = collectionRef?.addSnapshotListener { querySnapshot, e ->
+        favoriteEventListenerRegistration = eventCollectionRef?.addSnapshotListener { querySnapshot, e ->
             if (e != null) {
                 Log.i("UserFavoriteEvent", "Listen failed", e)
                 return@addSnapshotListener
@@ -155,9 +162,9 @@ class ProfileViewModel @Inject constructor(private val repository: DefaultMusicC
     }
 
     private fun getUserFavoriteArtist(){
-        collectionRef = repository.getUserFavoriteArtist(UserManager.userId)
+        artistCollectionRef = repository.getUserFavoriteArtist(UserManager.userId)
 
-        favoriteArtistListenerRegistration = collectionRef?.addSnapshotListener { querySnapshot, e ->
+        favoriteArtistListenerRegistration = artistCollectionRef?.addSnapshotListener { querySnapshot, e ->
             if (e != null) {
                 Log.i("UserFavoriteArtist", "Listen failed", e)
                 return@addSnapshotListener
