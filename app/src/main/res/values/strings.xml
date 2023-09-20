@@ -64,6 +64,19 @@
     <string name="management_home_artist_title">表演者管理</string>
     <string name="management_home_user_title">使用者管理</string>
 
+    // management event page
+    <string name="management_event_search_bar_edit_placeholder">搜尋活動名稱</string>
+
+
+
+    // management artist page
+    <string name="management_artist_search_bar_edit_placeholder">搜尋表演者名稱</string>
+
+
+
+    // management user page
+    <string name="management_user_search_bar_edit_placeholder">搜尋使用者名稱</string>
+
 
 
 
