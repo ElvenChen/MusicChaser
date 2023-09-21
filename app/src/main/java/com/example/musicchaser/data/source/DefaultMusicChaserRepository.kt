@@ -220,13 +220,13 @@ class DefaultMusicChaserRepository @Inject constructor(private val musicChaserRe
 
     override fun getIfArtistIsFavorite(
         userId: String,
-        artist: String,
+        artistId: String,
         handleSettingArtistIsFavorite: () -> Unit,
         handleSettingArtistNotFavorite: () -> Unit
     ) {
         musicChaserRemoteDataSource.getIfArtistIsFavorite(
             userId,
-            artist,
+            artistId,
             handleSettingArtistIsFavorite,
             handleSettingArtistNotFavorite
         )
@@ -254,5 +254,14 @@ class DefaultMusicChaserRepository @Inject constructor(private val musicChaserRe
             handleCompletedRecentEventListResult,
             handleSettingRecentEventData
         )
+    }
+
+    ////////// Management API //////////
+    ////////// Management API //////////
+    ////////// Management API //////////
+
+    ////////// Management Artist API //////////
+    override fun editSelectedArtist(artist: ArtistData) {
+        musicChaserRemoteDataSource.editSelectedArtist(artist)
     }
 }

@@ -149,4 +149,12 @@ interface MusicChaserDataSource {
         handleCompletedRecentEventListResult: (EventData) -> Unit,
         handleSettingRecentEventData: () -> Unit
     )
+
+    ////////// Management API //////////
+    ////////// Management API //////////
+    ////////// Management API //////////
+
+    ////////// Management Artist API //////////
+
+    fun editSelectedArtist(artist: ArtistData)
 }

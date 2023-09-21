@@ -2,10 +2,12 @@ package com.example.musicchaser.data.source
 
 import android.annotation.SuppressLint
 import android.util.Log
+import android.widget.Toast
 import com.example.musicchaser.data.ArtistData
 import com.example.musicchaser.data.EventCommentData
 import com.example.musicchaser.data.EventData
 import com.example.musicchaser.login.UserManager
+import com.example.musicchaser.login.UserManager.userId
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
@@ -47,7 +49,6 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
 
 
     ////////// Profile API //////////
-    // get user basic info
     override fun getUserBasicInfo(userId: String) {
         val docRef = db.collection(COLLECTION_USERS).document(userId)
         docRef.get().addOnCompleteListener { task: Task<DocumentSnapshot> ->
@@ -708,6 +709,30 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
                 .addOnFailureListener { exception ->
                     Log.i("ArtistRecentEventTest", "Something goes wrong")
                 }
+        }
+    }
+
+    ////////// Management API //////////
+    ////////// Management API //////////
+    ////////// Management API //////////
+
+    ////////// Management Artist API //////////
+
+    override fun editSelectedArtist(artist: ArtistData) {
+        val docRef = db.collection(COLLECTION_ARTISTS).document(artist.artistId)
+
+        val data = hashMapOf(
+            "artist_id" to artist.artistId,
+            "artist_name" to artist.artistName,
+            "artist_desc" to artist.artistDesc,
+            "artist_type" to artist.artistType,
+            "artist_main_pic" to artist.artistMainPic
+        )
+
+        docRef.set(data).addOnSuccessListener {
+            Log.i("ArtistEdit","Edit Successfully")
+        }.addOnFailureListener {
+            Log.i("ArtistEdit","Edit fail")
         }
     }
 

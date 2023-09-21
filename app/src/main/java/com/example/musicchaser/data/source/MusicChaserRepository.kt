@@ -131,7 +131,7 @@ interface MusicChaserRepository {
 
     fun getIfArtistIsFavorite(
         userId: String,
-        artist: String,
+        artistId: String,
         handleSettingArtistIsFavorite: () -> Unit,
         handleSettingArtistNotFavorite: () -> Unit
     )
@@ -147,4 +147,11 @@ interface MusicChaserRepository {
         handleCompletedRecentEventListResult: (EventData) -> Unit,
         handleSettingRecentEventData: () -> Unit
     )
+
+    ////////// Management API //////////
+    ////////// Management API //////////
+    ////////// Management API //////////
+
+    ////////// Management Artist API //////////
+    fun editSelectedArtist(artist: ArtistData)
 }

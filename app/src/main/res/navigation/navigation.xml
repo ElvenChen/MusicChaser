@@ -196,6 +196,12 @@
             app:argType="com.example.musicchaser.data.ArtistData"
             app:nullable="false">
         </argument>
+        <action
+            android:id="@+id/action_managementArtistDetailEditFragment_to_managementArtistFragment"
+            app:destination="@id/managementArtistFragment"
+            app:popUpTo="@id/managementArtistFragment"
+            app:popUpToInclusive="true">
+        </action>
     </fragment>
 
     <dialog
