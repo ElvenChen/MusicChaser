@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="property"
+            type="com.example.musicchaser.data.UserData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/management_list_title_background"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/background_shape_radius_8dp"
+            android:backgroundTint="@color/light_grey"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/management_list_user_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/noto_sans"
+            android:maxLines="1"
+            android:text="@{property.userName}"
+            android:textSize="@dimen/content_font_size"
+            app:layout_constraintEnd_toStartOf="@id/management_list_user_edit_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/management_list_title_background"
+            tools:text="陳璵竹" />
+
+        <TextView
+            android:id="@+id/management_list_user_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/noto_sans"
+            android:maxLines="1"
+            android:text="@{property.userEmail}"
+            android:textSize="@dimen/content_font_size"
+            app:layout_constraintBottom_toBottomOf="@+id/management_list_title_background"
+            app:layout_constraintEnd_toStartOf="@id/management_list_user_edit_button"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="elven@email.com" />
+
+        <Button
+            android:id="@+id/management_list_user_edit_button"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/background_shape_radius_8dp"
+            android:elevation="@dimen/shadow_elevation"
+            android:paddingStart="10dp"
+            app:backgroundTint="@color/dark_golden_yellow"
+            app:icon="@drawable/edit_button_24dp"
+            app:iconTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/management_list_title_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/management_list_title_background" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

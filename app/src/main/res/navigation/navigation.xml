@@ -222,6 +222,17 @@
         android:name="com.example.musicchaser.managementuser.ManagementUserFragment"
         android:label="ManagementUserFragment" />
 
+    <fragment
+        android:id="@+id/managementUserDetailEditFragment"
+        android:name="com.example.musicchaser.managementuserdetail.edit.ManagementUserDetailEditFragment"
+        android:label="ManagementUserDetailEditFragment">
+        <argument
+            android:name="selectedEditUser"
+            app:argType="com.example.musicchaser.data.UserData"
+            app:nullable="false">
+        </argument>
+    </fragment>
+
 
 
     <action
@@ -267,6 +278,10 @@
     <action
         android:id="@+id/navigate_to_management_user_fragment"
         app:destination="@id/managementUserFragment"/>
+
+    <action
+        android:id="@+id/navigate_to_management_user_detail_edit_fragment"
+        app:destination="@id/managementUserDetailEditFragment"/>
 
 
 </navigation>

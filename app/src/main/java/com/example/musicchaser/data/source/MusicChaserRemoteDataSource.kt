@@ -19,6 +19,7 @@ private const val COLLECTION_USERS_SUB_COLLECTION_FAVORITE_EVENTS = "favorite_ev
 private const val COLLECTION_USERS_SUB_COLLECTION_FAVORITE_ARTISTS = "favorite_artists"
 
 private const val FIELD_USER_ID = "user_id"
+private const val FIELD_USER_NAME = "user_name"
 
 
 private const val COLLECTION_EVENTS = "events"
@@ -90,6 +91,56 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
 
         UserManager.userNickname = userNickname
         Log.i("UserTest", "UserManager = $UserManager")
+    }
+
+    override fun getUserList(
+        callback: (DocumentSnapshot?, Exception?) -> Unit,
+        handleSettingDataList: () -> Unit
+    ) {
+        val collectionRef = db.collection(COLLECTION_USERS)
+
+        collectionRef.get().addOnSuccessListener { querySnapshot ->
+
+                for (document in querySnapshot.documents) {
+                    val data = document.data
+
+                    Log.i("UserTest", "New User is here : $data")
+                    callback(document, null)
+                }
+
+                handleSettingDataList()
+            }
+            .addOnFailureListener { exception ->
+                Log.i("UserTest", "Something goes wrong")
+                callback(null, exception)
+            }
+    }
+
+    override fun getSearchedUserList(
+        keyword: String,
+        callback: (DocumentSnapshot?, Exception?) -> Unit,
+        handleSettingDataList: () -> Unit
+    ) {
+        val collectionRef = db.collection(COLLECTION_USERS)
+        val searchField = FIELD_USER_NAME
+        Log.i("UserTest", "keyword : $keyword")
+
+        collectionRef.get().addOnSuccessListener { querySnapshot ->
+
+            for (document in querySnapshot.documents) {
+                val data = document.data
+
+                if (((data!!["user_name"]).toString()).contains(keyword)) {
+                    Log.i("UserTest", "New User is here : $data")
+                    callback(document, null)
+                }
+            }
+            handleSettingDataList()
+        }
+            .addOnFailureListener { exception ->
+                Log.i("UserTest", "Something goes wrong")
+                callback(null, exception)
+            }
     }
 
     override fun getUserFavoriteEvent(userId: String): CollectionReference {
