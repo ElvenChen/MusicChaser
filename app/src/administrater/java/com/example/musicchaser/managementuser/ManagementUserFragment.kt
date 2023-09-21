@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.musicchaser.R
 import com.example.musicchaser.databinding.FragmentManagementEventBinding
 import com.example.musicchaser.databinding.FragmentManagementUserBinding
@@ -26,6 +27,12 @@ class ManagementUserFragment : Fragment() {
         val binding = FragmentManagementUserBinding.inflate(inflater)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+
+
+        // setting navigation
+        binding.managementUserBackButton.setOnClickListener {
+            findNavController().navigateUp()
+        }
 
         return binding.root
     }
