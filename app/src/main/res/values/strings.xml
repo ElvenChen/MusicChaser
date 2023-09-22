@@ -64,8 +64,11 @@
     <string name="management_home_artist_title">表演者管理</string>
     <string name="management_home_user_title">使用者管理</string>
     <string name="management_submit_edit">完成送出</string>
+    <string name="management_submit_delete">刪除</string>
     <string name="management_submit_confirm">確認</string>
     <string name="management_submit_reminder_text">確認編輯資料無誤後，送出即無法返回喔！</string>
+    <string name="management_delete_reminder_text">確認刪除資料後，送出即無法返回喔！</string>
+
 
 
     // management event page
@@ -75,10 +78,13 @@
 
     // management artist page
     <string name="management_artist_search_bar_edit_placeholder">搜尋表演者名稱</string>
+    <string name="management_artist_tool_bar_post_new_artist">新增表演者</string>
     <string name="management_artist_detail_edit_artist_name">表演者名稱</string>
     <string name="management_artist_detail_edit_artist_desc">表演者簡介描述</string>
     <string name="management_artist_detail_edit_artist_type">表演者類別(請輸入：個人、團體)</string>
     <string name="management_artist_detail_edit_artist_main_pic">表演者主要圖片(圖片網址)</string>
+    <string name="management_artist_detail_delete_title">確認是否刪除下列表演者?</string>
+
 
 
 

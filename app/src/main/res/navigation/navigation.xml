@@ -108,32 +108,30 @@
 
     <action
         android:id="@+id/navigate_to_basic_info_dialog"
-        app:destination="@id/basicInfoEditDialog"/>
+        app:destination="@id/basicInfoEditDialog" />
 
     <action
         android:id="@+id/navigate_to_favorite_event_edit_dialog"
-        app:destination="@id/favoriteEventEditDialog"/>
+        app:destination="@id/favoriteEventEditDialog" />
 
     <action
         android:id="@+id/navigate_to_favorite_artist_edit_dialog"
-        app:destination="@id/favoriteArtistEditDialog"/>
+        app:destination="@id/favoriteArtistEditDialog" />
 
     <action
         android:id="@+id/navigate_to_eventdetail_fragment"
-        app:destination="@id/eventDetailFragment"/>
+        app:destination="@id/eventDetailFragment" />
 
     <action
         android:id="@+id/navigate_to_eventdetail_comment_dialog"
-        app:destination="@id/eventDetailCommentDialog"/>
+        app:destination="@id/eventDetailCommentDialog" />
 
     <action
         android:id="@+id/navigate_to_artistdetail_dialog"
-        app:destination="@id/artistDetailDialog"/>
-
+        app:destination="@id/artistDetailDialog" />
 
 
     <!--Administration Flavor -->
-
 
 
     <fragment
@@ -182,6 +180,8 @@
 
 
 
+
+
     <fragment
         android:id="@+id/managementArtistFragment"
         android:name="com.example.musicchaser.managementartist.ManagementArtistFragment"
@@ -213,13 +213,26 @@
             app:argType="com.example.musicchaser.data.ArtistData"
             app:nullable="false">
         </argument>
+        <action
+            android:id="@+id/action_managementArtistDetailDeleteDialog_to_managementArtistFragment"
+            app:destination="@id/managementArtistFragment"
+            app:popUpTo="@id/managementArtistFragment"
+            app:popUpToInclusive="true">
+        </action>
     </dialog>
 
     <fragment
         android:id="@+id/managementArtistDetailPostFragment"
         android:name="com.example.musicchaser.managementartistdetail.post.ManagementArtistDetailPostFragment"
         android:label="ManagementArtistDetailPostFragment">
+        <action
+            android:id="@+id/action_managementArtistDetailPostFragment_to_managementArtistFragment"
+            app:destination="@id/managementArtistFragment"
+            app:popUpTo="@id/managementArtistFragment"
+            app:popUpToInclusive="true" />
     </fragment>
+
+
 
 
 
@@ -240,54 +253,51 @@
     </fragment>
 
 
-
     <action
         android:id="@+id/navigate_to_management_event_fragment"
-        app:destination="@id/managementEventFragment"/>
+        app:destination="@id/managementEventFragment" />
 
     <action
         android:id="@+id/navigate_to_management_event_detail_edit_fragment"
-        app:destination="@id/managementEventDetailEditFragment"/>
+        app:destination="@id/managementEventDetailEditFragment" />
 
     <action
         android:id="@+id/navigate_to_management_event_detail_delete_dialog"
-        app:destination="@id/managementEventDetailDeleteDialog"/>
+        app:destination="@id/managementEventDetailDeleteDialog" />
 
     <action
         android:id="@+id/navigate_to_management_event_detail_post_fragment"
-        app:destination="@id/managementEventDetailPostFragment"/>
+        app:destination="@id/managementEventDetailPostFragment" />
 
     <action
         android:id="@+id/navigate_to_management_event_detail_add_performer_fragment"
-        app:destination="@id/managementEventDetailAddPerformerFragment"/>
-
+        app:destination="@id/managementEventDetailAddPerformerFragment" />
 
 
     <action
         android:id="@+id/navigate_to_management_artist_fragment"
-        app:destination="@id/managementArtistFragment"/>
+        app:destination="@id/managementArtistFragment" />
 
     <action
         android:id="@+id/navigate_to_management_artist_detail_edit_fragment"
-        app:destination="@id/managementArtistDetailEditFragment"/>
+        app:destination="@id/managementArtistDetailEditFragment" />
 
     <action
         android:id="@+id/navigate_to_management_artist_detail_delete_dialog"
-        app:destination="@id/managementArtistDetailDeleteDialog"/>
+        app:destination="@id/managementArtistDetailDeleteDialog" />
 
     <action
         android:id="@+id/navigate_to_management_artist_detail_post_fragment"
-        app:destination="@id/managementArtistDetailPostFragment"/>
-
+        app:destination="@id/managementArtistDetailPostFragment" />
 
 
     <action
         android:id="@+id/navigate_to_management_user_fragment"
-        app:destination="@id/managementUserFragment"/>
+        app:destination="@id/managementUserFragment" />
 
     <action
         android:id="@+id/navigate_to_management_user_detail_edit_fragment"
-        app:destination="@id/managementUserDetailEditFragment"/>
+        app:destination="@id/managementUserDetailEditFragment" />
 
 
 </navigation>

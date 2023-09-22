@@ -154,4 +154,8 @@ interface MusicChaserRepository {
 
     ////////// Management Artist API //////////
     fun editSelectedArtist(artist: ArtistData)
+
+    fun postNewArtist(artist: ArtistData)
+
+    fun deleteSelectedArtist(artistId: String)
 }

@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.musicchaser.R
 import com.example.musicchaser.databinding.DialogManagementArtistDetailDeleteBinding
+import com.example.musicchaser.managementartistdetail.edit.ManagementArtistDetailEditFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,9 +34,22 @@ class ManagementArtistDetailDeleteDialog : AppCompatDialogFragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         // throwing nav-arg to viewModel
-        val artist = ManagementArtistDetailDeleteDialogArgs.fromBundle(requireArguments()).selectedEditArtist
+        val artist =
+            ManagementArtistDetailDeleteDialogArgs.fromBundle(requireArguments()).selectedEditArtist
         viewModel.artist = artist
 
+
+        // setting first submitting button to pop up reminder dialog to check again
+        binding.managementArtistDeleteDetailDeleteButton.setOnClickListener {
+            binding.managementArtistDeleteDetailDeleteButton.visibility = View.GONE
+            binding.managementArtistDeleteDetailReminderConstraint.visibility = View.VISIBLE
+        }
+
+        // setting second submitting button to really delete and update to cloud
+        binding.managementArtistDeleteDetailDeleteConfirmButton.setOnClickListener {
+            viewModel.deleteSelectedArtist()
+            findNavController().navigate(ManagementArtistDetailDeleteDialogDirections.actionManagementArtistDetailDeleteDialogToManagementArtistFragment())
+        }
 
 
         // setting navigation

@@ -264,4 +264,12 @@ class DefaultMusicChaserRepository @Inject constructor(private val musicChaserRe
     override fun editSelectedArtist(artist: ArtistData) {
         musicChaserRemoteDataSource.editSelectedArtist(artist)
     }
+
+    override fun postNewArtist(artist: ArtistData) {
+        musicChaserRemoteDataSource.postNewArtist(artist)
+    }
+
+    override fun deleteSelectedArtist(artistId: String) {
+        musicChaserRemoteDataSource.deleteSelectedArtist(artistId)
+    }
 }

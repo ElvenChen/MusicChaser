@@ -736,4 +736,32 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
         }
     }
 
+    override fun postNewArtist(artist: ArtistData) {
+        val docRef = db.collection(COLLECTION_ARTISTS).document()
+
+        val data = hashMapOf(
+            "artist_id" to docRef.id,
+            "artist_name" to artist.artistName,
+            "artist_desc" to artist.artistDesc,
+            "artist_type" to artist.artistType,
+            "artist_main_pic" to artist.artistMainPic
+        )
+
+        docRef.set(data).addOnSuccessListener {
+            Log.i("ArtistPost","Post Successfully")
+        }.addOnFailureListener {
+            Log.i("ArtistPost","Post fail")
+        }
+    }
+
+    override fun deleteSelectedArtist(artistId: String) {
+        val docRef = db.collection(COLLECTION_ARTISTS).document(artistId)
+
+        docRef.delete().addOnSuccessListener {
+            Log.i("ArtistDelete", "Delete Successfully")
+        }.addOnFailureListener { e ->
+            Log.i("ArtistDelete", "Delete fail")
+        }
+    }
+
 }
