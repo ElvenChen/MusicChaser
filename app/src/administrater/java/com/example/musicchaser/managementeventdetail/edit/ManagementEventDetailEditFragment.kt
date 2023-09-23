@@ -102,7 +102,6 @@ class ManagementEventDetailEditFragment : Fragment() {
             viewModel.eventDate.value!!.toFormattedTimeOfSettingInitDatePickerDay(),
             null
         )
-        Log.i("ElvenTest", "timestamp:${viewModel.eventDate.value!!.toFormattedTimeOfSettingInitDatePickerMonth()}")
 
         binding.timePicker.setIs24HourView(false)
         binding.timePicker.hour = viewModel.eventDate.value!!.toFormattedTimeOfSettingInitDatePickerHour()

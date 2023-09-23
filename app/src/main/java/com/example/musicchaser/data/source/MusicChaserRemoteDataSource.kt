@@ -765,6 +765,43 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
             }
     }
 
+    override fun postNewEvent(event: EventData) {
+        val docRef = db.collection(COLLECTION_EVENTS).document()
+
+        val data = hashMapOf(
+            "event_id" to docRef.id,
+            "event_name" to event.eventName,
+            "event_desc" to event.eventDesc,
+            "event_place" to event.eventPlace,
+            "event_longitude" to event.eventLongitude,
+            "event_latitude" to event.eventLatitude,
+            "event_address" to event.eventAddress,
+            "event_date" to event.eventDate,
+            "event_weather" to event.eventWeather,
+            "event_area" to event.eventArea,
+            "event_attendant" to event.eventAttendant,
+            "event_url" to event.eventUrl,
+            "event_main_pic" to event.eventMainPic,
+            "event_comments" to event.eventComments
+            )
+
+        docRef.set(data).addOnSuccessListener {
+            Log.i("EventPost","Post Successfully")
+        }.addOnFailureListener {
+            Log.i("EventPost","Post fail")
+        }
+    }
+
+    override fun deleteSelectedEvent(eventId: String) {
+        val docRef = db.collection(COLLECTION_EVENTS).document(eventId)
+
+        docRef.delete().addOnSuccessListener {
+            Log.i("EventDelete", "Delete Successfully")
+        }.addOnFailureListener { e ->
+            Log.i("EventDelete", "Delete fail")
+        }
+    }
+
 
     ////////// Management Artist API //////////
 

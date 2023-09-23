@@ -13,5 +13,12 @@ class ManagementEventDetailDeleteViewModel @Inject constructor(val repository: D
     var event: EventData? = null
 
 
+
+    fun deleteSelectedEvent(){
+        repository.deleteSelectedEvent(event!!.eventId)
+    }
+
+
+
     fun nothing() {}
 }

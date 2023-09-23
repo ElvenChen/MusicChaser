@@ -165,12 +165,23 @@
             app:argType="com.example.musicchaser.data.EventData"
             app:nullable="false">
         </argument>
+        <action
+            android:id="@+id/action_managementEventDetailDeleteDialog_to_managementEventFragment"
+            app:destination="@id/managementEventFragment"
+            app:popUpTo="@id/managementEventFragment"
+            app:popUpToInclusive="true"/>
     </dialog>
 
     <fragment
         android:id="@+id/managementEventDetailPostFragment"
         android:name="com.example.musicchaser.managementeventdetail.post.ManagementEventDetailPostFragment"
-        android:label="ManagementEventDetailPostFragment" />
+        android:label="ManagementEventDetailPostFragment" >
+        <action
+            android:id="@+id/action_managementEventDetailPostFragment_to_managementEventFragment"
+            app:destination="@id/managementEventFragment"
+            app:popUpTo="@id/managementEventFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
 
     <fragment
         android:id="@+id/managementEventDetailAddPerformerFragment"

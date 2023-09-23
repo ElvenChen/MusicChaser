@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.musicchaser.R
 import com.example.musicchaser.databinding.DialogManagementEventDetailDeleteBinding
 import com.example.musicchaser.managementartistdetail.delete.ManagementArtistDetailDeleteDialogArgs
+import com.example.musicchaser.managementartistdetail.delete.ManagementArtistDetailDeleteDialogDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -38,8 +40,27 @@ class ManagementEventDetailDeleteDialog : AppCompatDialogFragment() {
 
 
 
+        // setting first submitting button to pop up reminder dialog to check again
+        binding.managementEventDeleteDetailDeleteButton.setOnClickListener {
+            binding.managementEventDeleteDetailDeleteButton.visibility = View.GONE
+            binding.managementEventDeleteDetailCancelButton.visibility = View.GONE
+            binding.managementEventDeleteDetailReminderConstraint.visibility = View.VISIBLE
+        }
+
+        // setting second submitting button to really delete and update to cloud
+        binding.managementEventDeleteDetailDeleteConfirmButton.setOnClickListener {
+            viewModel.deleteSelectedEvent()
+            findNavController().navigate(ManagementEventDetailDeleteDialogDirections.actionManagementEventDetailDeleteDialogToManagementEventFragment())
+        }
+
+
+
         // setting navigation
         binding.outerConstraint.setOnClickListener {
+            dismiss()
+        }
+
+        binding.managementEventDeleteDetailCancelButton.setOnClickListener {
             dismiss()
         }
 

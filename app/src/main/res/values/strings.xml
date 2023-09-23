@@ -87,6 +87,8 @@
     <string name="management_event_detail_edit_event_url">活動網址</string>
     <string name="management_event_detail_edit_event_main_pic">活動主要圖片(圖片網址)</string>
     <string name="management_event_detail_edit_event_time_choosing_intro">選擇日期及時間：</string>
+    <string name="management_event_detail_delete_title">確認是否刪除下列活動?</string>
+
 
 
 
