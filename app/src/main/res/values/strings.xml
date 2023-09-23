@@ -63,8 +63,10 @@
     <string name="management_home_event_title">活動管理</string>
     <string name="management_home_artist_title">表演者管理</string>
     <string name="management_home_user_title">使用者管理</string>
+    <string name="management_edit_button">編輯</string>
     <string name="management_submit_edit">完成送出</string>
     <string name="management_submit_delete">刪除</string>
+    <string name="management_submit_cancel">取消</string>
     <string name="management_submit_confirm">確認</string>
     <string name="management_submit_reminder_text">確認編輯資料無誤後，送出即無法返回喔！</string>
     <string name="management_delete_reminder_text">確認刪除資料後，送出即無法返回喔！</string>
@@ -73,6 +75,18 @@
 
     // management event page
     <string name="management_event_search_bar_edit_placeholder">搜尋活動名稱</string>
+    <string name="management_event_tool_bar_post_new_event">新增活動</string>
+    <string name="management_event_detail_edit_event_name">活動名稱</string>
+    <string name="management_event_detail_edit_event_desc">活動簡介描述</string>
+    <string name="management_event_detail_edit_event_place">活動地點</string>
+    <string name="management_event_detail_edit_event_longitude">地理位置經度(請輸入至小數點以下6位)</string>
+    <string name="management_event_detail_edit_event_latitude">地理位置緯度(請輸入至小數點以下6位)</string>
+    <string name="management_event_detail_edit_event_address">活動地址</string>
+    <string name="management_event_detail_edit_event_date">活動完整日期：</string>
+    <string name="management_event_detail_edit_event_area">活動地區(請輸入：北部 、中部、南部、東部、離島)</string>
+    <string name="management_event_detail_edit_event_url">活動網址</string>
+    <string name="management_event_detail_edit_event_main_pic">活動主要圖片(圖片網址)</string>
+    <string name="management_event_detail_edit_event_time_choosing_intro">選擇日期及時間：</string>
 
 
 

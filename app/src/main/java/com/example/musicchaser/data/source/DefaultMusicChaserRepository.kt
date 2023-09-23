@@ -256,9 +256,16 @@ class DefaultMusicChaserRepository @Inject constructor(private val musicChaserRe
         )
     }
 
+
+
     ////////// Management API //////////
     ////////// Management API //////////
     ////////// Management API //////////
+
+    ////////// Management Event API //////////
+    override fun editSelectedEvent(event: EventData) {
+        musicChaserRemoteDataSource.editSelectedEvent(event)
+    }
 
     ////////// Management Artist API //////////
     override fun editSelectedArtist(artist: ArtistData) {

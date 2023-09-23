@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.musicchaser.ext.toCommentFormattedTime
+import com.example.musicchaser.ext.toDottedFormattedTime
 import com.example.musicchaser.ext.toFormattedDay
 import com.example.musicchaser.ext.toFormattedMonth
 import com.example.musicchaser.ext.toFormattedTime
@@ -67,4 +68,9 @@ fun getCommentDate(textView: TextView, eventDate: Long) {
 }
 
 
-////////// Artist Detail Page //////////
+////////// Management Event Detail Edit Page //////////
+@BindingAdapter("getManagementEventDate")
+fun getManagementEventDate(textView: TextView, eventDate: Long) {
+
+    textView.text = eventDate.toDottedFormattedTime()
+}

@@ -39,3 +39,51 @@ fun Long.toFormattedDay() : String {
 
     return dateFormat.format(date)
 }
+
+fun Long.toDottedFormattedTime() : String {
+
+    val dateFormat = SimpleDateFormat("yyyy.MM.dd HH:mm")
+    val date = Date(this*1000)
+
+    return dateFormat.format(date)
+}
+
+fun Long.toFormattedTimeOfSettingInitDatePickerYear() : Int {
+
+    val dateFormat = SimpleDateFormat("yyyy")
+    val date = Date(this*1000)
+
+    return dateFormat.format(date).toInt()
+}
+
+fun Long.toFormattedTimeOfSettingInitDatePickerMonth() : Int {
+
+    val dateFormat = SimpleDateFormat("M")
+    val date = Date(this*1000)
+
+    return dateFormat.format(date).toInt()
+}
+
+fun Long.toFormattedTimeOfSettingInitDatePickerDay() : Int {
+
+    val dateFormat = SimpleDateFormat("DD")
+    val date = Date(this*1000)
+
+    return dateFormat.format(date).toInt()
+}
+
+fun Long.toFormattedTimeOfSettingInitDatePickerHour() : Int {
+
+    val dateFormat = SimpleDateFormat("HH")
+    val date = Date(this*1000)
+
+    return dateFormat.format(date).toInt()
+}
+
+fun Long.toFormattedTimeOfSettingInitDatePickerMinute() : Int {
+
+    val dateFormat = SimpleDateFormat("mm")
+    val date = Date(this*1000)
+
+    return dateFormat.format(date).toInt()
+}

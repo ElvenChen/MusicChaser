@@ -2,12 +2,10 @@ package com.example.musicchaser.data.source
 
 import android.annotation.SuppressLint
 import android.util.Log
-import android.widget.Toast
 import com.example.musicchaser.data.ArtistData
 import com.example.musicchaser.data.EventCommentData
 import com.example.musicchaser.data.EventData
 import com.example.musicchaser.login.UserManager
-import com.example.musicchaser.login.UserManager.userId
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
@@ -30,7 +28,15 @@ private const val COLLECTION_EVENTS_SUB_COLLECTION_EVENT_PERFORMERS = "event_per
 
 private const val FIELD_EVENT_ID = "event_id"
 private const val FIELD_EVENT_NAME = "event_name"
+private const val FIELD_EVENT_DESC = "event_desc"
+private const val FIELD_EVENT_PLACE = "event_place"
+private const val FIELD_EVENT_LONGITUDE = "event_longitude"
+private const val FIELD_EVENT_LATITUDE = "event_latitude"
+private const val FIELD_EVENT_ADDRESS = "event_address"
 private const val FIELD_EVENT_DATE = "event_date"
+private const val FIELD_EVENT_AREA = "event_area"
+private const val FIELD_EVENT_URL = "event_url"
+private const val FIELD_EVENT_MAIN_PIC = "event_main_pic"
 private const val FIELD_EVENT_COMMENTS = "event_comments"
 private const val FIELD_EVENT_COMMENT_TIME = "comment_time"
 
@@ -712,9 +718,53 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
         }
     }
 
+
+
     ////////// Management API //////////
     ////////// Management API //////////
     ////////// Management API //////////
+
+    ////////// Management Event API //////////
+    override fun editSelectedEvent(event: EventData) {
+        val docRef = db.collection(COLLECTION_EVENTS).document(event.eventId)
+
+        docRef.get().addOnSuccessListener { documentSnapshot ->
+            if (documentSnapshot.exists()) {
+
+                if (documentSnapshot != null) {
+
+                    val updates = hashMapOf<String, Any>(
+                        FIELD_EVENT_NAME to event.eventName,
+                        FIELD_EVENT_DESC to event.eventDesc,
+                        FIELD_EVENT_PLACE to event.eventPlace,
+                        FIELD_EVENT_LONGITUDE to event.eventLongitude,
+                        FIELD_EVENT_LATITUDE to event.eventLatitude,
+                        FIELD_EVENT_ADDRESS to event.eventAddress,
+                        FIELD_EVENT_DATE to event.eventDate,
+                        FIELD_EVENT_AREA to event.eventArea,
+                        FIELD_EVENT_URL to event.eventUrl,
+                        FIELD_EVENT_MAIN_PIC to event.eventMainPic
+                    )
+
+                    docRef.update(updates)
+                        .addOnSuccessListener {
+                            Log.i("EventTest", "This field is updated successfully!!")
+                        }
+                        .addOnFailureListener { e ->
+                            Log.i("EventTest", "This field is fail to update")
+                        }
+                } else {
+                    Log.i("EventTest", "This field is null, can't be updated")
+                }
+            } else {
+                Log.i("EventTest", "This event is not exist")
+            }
+        }
+            .addOnFailureListener { e ->
+                Log.i("EventTest", "Something goes wrong")
+            }
+    }
+
 
     ////////// Management Artist API //////////
 

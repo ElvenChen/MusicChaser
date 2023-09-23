@@ -42,6 +42,7 @@ class ManagementArtistDetailDeleteDialog : AppCompatDialogFragment() {
         // setting first submitting button to pop up reminder dialog to check again
         binding.managementArtistDeleteDetailDeleteButton.setOnClickListener {
             binding.managementArtistDeleteDetailDeleteButton.visibility = View.GONE
+            binding.managementArtistDeleteDetailCancelButton.visibility = View.GONE
             binding.managementArtistDeleteDetailReminderConstraint.visibility = View.VISIBLE
         }
 
@@ -54,6 +55,10 @@ class ManagementArtistDetailDeleteDialog : AppCompatDialogFragment() {
 
         // setting navigation
         binding.outerConstraint.setOnClickListener {
+            dismiss()
+        }
+
+        binding.managementArtistDeleteDetailCancelButton.setOnClickListener {
             dismiss()
         }
 

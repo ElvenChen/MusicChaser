@@ -34,11 +34,11 @@ class ManagementArtistDetailEditViewModel @Inject constructor(val repository: De
 
     fun editSelectedArtist(){
         val editedItem = ArtistData(
-            artistId = artistId.value!!,
-            artistName = artistName.value!!,
-            artistDesc = artistDesc.value!!,
-            artistType = artistType.value!!,
-            artistMainPic = artistMainPic.value!!
+            artistId = artistId.value.toString(),
+            artistName = artistName.value.toString(),
+            artistDesc = artistDesc.value.toString(),
+            artistType = artistType.value.toString(),
+            artistMainPic = artistMainPic.value.toString()
         )
         Log.i("ArtistEdit","editedItem = $editedItem")
 

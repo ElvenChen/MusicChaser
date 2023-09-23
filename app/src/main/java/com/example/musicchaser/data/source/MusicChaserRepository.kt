@@ -152,6 +152,9 @@ interface MusicChaserRepository {
     ////////// Management API //////////
     ////////// Management API //////////
 
+    ////////// Management Event API //////////
+    fun editSelectedEvent(event: EventData)
+
     ////////// Management Artist API //////////
     fun editSelectedArtist(artist: ArtistData)
 

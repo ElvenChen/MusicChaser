@@ -149,6 +149,11 @@
             app:argType="com.example.musicchaser.data.EventData"
             app:nullable="false">
         </argument>
+        <action
+            android:id="@+id/action_managementEventDetailEditFragment_to_managementEventFragment"
+            app:destination="@id/managementEventFragment"
+            app:popUpTo="@id/managementEventFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 
     <dialog

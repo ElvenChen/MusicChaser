@@ -79,6 +79,7 @@ class ManagementArtistFragment : Fragment() {
         })
 
 
+
         // setting drop down refresh artist list
         val listener = SwipeRefreshLayout.OnRefreshListener {
             Log.i("ManagementArtistTest", "Call drop down refresh API")
@@ -87,6 +88,7 @@ class ManagementArtistFragment : Fragment() {
             Log.i("ManagementArtistTest", "drop down refresh API Call Done")
         }
         binding.layoutSwipeRefreshArtist.setOnRefreshListener(listener)
+
 
 
         // setting navigation
