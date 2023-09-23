@@ -50,15 +50,34 @@ class ManagementEventDetailEditViewModel @Inject constructor(val repository: Def
     }
 
     fun editSelectedEvent(){
+
+        val eventLongitudeValue = if(eventLongitude.value == null || eventLongitude.value == ""){
+            0.00F
+        } else {
+            eventLongitude.value.toString().toFloat()
+        }
+
+        val eventLatitudeValue = if(eventLatitude.value == null || eventLatitude.value == ""){
+            0.00F
+        } else {
+            eventLatitude.value.toString().toFloat()
+        }
+
+        val eventDateValue = if(eventDate.value != null){
+            eventDate.value.toString().toLong()
+        } else {
+            0L
+        }
+
         val editedItem = EventData(
             eventId = event!!.eventId,
             eventName = eventName.value.toString(),
             eventDesc = eventDesc.value.toString(),
             eventPlace = eventPlace.value.toString(),
-            eventLongitude = eventLongitude.value.toString().toFloat(),
-            eventLatitude = eventLatitude.value.toString().toFloat(),
+            eventLongitude = eventLongitudeValue,
+            eventLatitude = eventLatitudeValue,
             eventAddress = eventAddress.value.toString(),
-            eventDate = eventDate.value.toString().toLong(),
+            eventDate = eventDateValue,
             eventWeather = event!!.eventWeather,
             eventArea = eventArea.value.toString(),
             eventAttendant = event!!.eventAttendant,
