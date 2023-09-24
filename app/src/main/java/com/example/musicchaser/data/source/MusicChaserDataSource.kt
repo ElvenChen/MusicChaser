@@ -3,6 +3,7 @@ package com.example.musicchaser.data.source
 import com.example.musicchaser.data.ArtistData
 import com.example.musicchaser.data.EventCommentData
 import com.example.musicchaser.data.EventData
+import com.example.musicchaser.data.UserData
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
 
@@ -171,5 +172,9 @@ interface MusicChaserDataSource {
     fun postNewArtist(artist: ArtistData)
 
     fun deleteSelectedArtist(artistId: String)
+
+    ////////// Management User API //////////
+
+    fun changeSelectedUserBannedSituation(user: UserData)
 
 }

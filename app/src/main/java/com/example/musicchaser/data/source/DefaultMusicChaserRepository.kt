@@ -3,6 +3,7 @@ package com.example.musicchaser.data.source
 import com.example.musicchaser.data.ArtistData
 import com.example.musicchaser.data.EventCommentData
 import com.example.musicchaser.data.EventData
+import com.example.musicchaser.data.UserData
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
 import javax.inject.Inject
@@ -286,5 +287,11 @@ class DefaultMusicChaserRepository @Inject constructor(private val musicChaserRe
 
     override fun deleteSelectedArtist(artistId: String) {
         musicChaserRemoteDataSource.deleteSelectedArtist(artistId)
+    }
+
+    ////////// Management User API //////////
+
+    override fun changeSelectedUserBannedSituation(user: UserData) {
+        musicChaserRemoteDataSource.changeSelectedUserBannedSituation(user)
     }
 }

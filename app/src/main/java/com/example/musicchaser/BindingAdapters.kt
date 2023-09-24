@@ -2,6 +2,7 @@ package com.example.musicchaser
 
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat.getColor
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
@@ -66,6 +67,28 @@ fun getCommentDate(textView: TextView, eventDate: Long) {
 
     textView.text = eventDate.toCommentFormattedTime()
 }
+
+////////// Management User Page//////////
+@BindingAdapter("getUserBannedSituation")
+fun getUserBannedSituation(textView: TextView, bannedSituation: Int) {
+
+    val situation = if(bannedSituation == 0){
+        "(啟用)"
+    } else {
+        "(封鎖)"
+    }
+
+    val color = if(bannedSituation == 0){
+        R.color.glow_green
+    } else {
+        R.color.dark_red
+    }
+
+    textView.text = situation
+    textView.setTextColor(textView.context.getColor(color))
+
+}
+
 
 
 ////////// Management Event Detail Edit Page //////////

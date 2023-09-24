@@ -5,6 +5,7 @@ import android.util.Log
 import com.example.musicchaser.data.ArtistData
 import com.example.musicchaser.data.EventCommentData
 import com.example.musicchaser.data.EventData
+import com.example.musicchaser.data.UserData
 import com.example.musicchaser.login.UserManager
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.CollectionReference
@@ -848,6 +849,26 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
             Log.i("ArtistDelete", "Delete Successfully")
         }.addOnFailureListener { e ->
             Log.i("ArtistDelete", "Delete fail")
+        }
+    }
+
+    ////////// Management User API //////////
+
+    override fun changeSelectedUserBannedSituation(user: UserData) {
+        val docRef = db.collection(COLLECTION_USERS).document(user.userId)
+
+        val data = hashMapOf(
+            "user_id" to user.userId,
+            "user_email" to user.userEmail,
+            "user_name" to user.userName,
+            "user_nickname" to user.userNickname,
+            "user_banned" to user.userBanned
+        )
+
+        docRef.set(data).addOnSuccessListener {
+            Log.i("UserEdit","Edit Successfully")
+        }.addOnFailureListener {
+            Log.i("UserEdit","Edit fail")
         }
     }
 

@@ -106,6 +106,17 @@
 
     // management user page
     <string name="management_user_search_bar_edit_placeholder">搜尋使用者名稱</string>
+    <string name="management_user_detail_edit_user_id">使用者ID</string>
+    <string name="management_user_detail_edit_user_email">使用者Email</string>
+    <string name="management_user_detail_edit_user_name">使用者姓名</string>
+    <string name="management_user_detail_edit_user_nickname">使用者暱稱</string>
+    <string name="management_user_detail_edit_banned_text">封鎖</string>
+    <string name="management_user_detail_edit_unbanned_text">啟用</string>
+    <string name="management_user_detail_edit_user_banned_title">使用者權限</string>
+
+
+
+
 
 
 

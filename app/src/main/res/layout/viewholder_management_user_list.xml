@@ -38,10 +38,27 @@
             android:maxLines="1"
             android:text="@{property.userName}"
             android:textSize="@dimen/content_font_size"
-            app:layout_constraintEnd_toStartOf="@id/management_list_user_edit_button"
+            app:layout_constraintEnd_toStartOf="@id/management_list_user_banned_situation"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/management_list_title_background"
             tools:text="陳璵竹" />
+
+        <TextView
+            android:id="@+id/management_list_user_banned_situation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/noto_sans"
+            android:maxLines="1"
+            android:textSize="@dimen/content_font_size"
+            app:getUserBannedSituation="@{property.userBanned}"
+            app:layout_constraintEnd_toStartOf="@id/management_list_user_edit_button"
+            app:layout_constraintStart_toEndOf="@+id/management_list_user_name"
+            app:layout_constraintTop_toTopOf="@+id/management_list_title_background"
+            tools:text="(封鎖)" />
 
         <TextView
             android:id="@+id/management_list_user_email"

@@ -266,6 +266,11 @@
             app:argType="com.example.musicchaser.data.UserData"
             app:nullable="false">
         </argument>
+        <action
+            android:id="@+id/action_managementUserDetailEditFragment_to_managementUserFragment"
+            app:destination="@id/managementUserFragment"
+            app:popUpTo="@id/managementUserFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 
 
