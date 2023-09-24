@@ -164,6 +164,11 @@ interface MusicChaserDataSource {
 
     fun deleteSelectedEvent(eventId: String)
 
+    fun getEventPerformerArtist(eventId: String): CollectionReference
+
+    fun deleteEventPerformer(eventId: String, artistId:String)
+
+    fun deleteArtistAttendEvent(artistId:String, eventId: String)
 
     ////////// Management Artist API //////////
 

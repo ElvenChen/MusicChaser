@@ -64,6 +64,7 @@
     <string name="management_home_artist_title">表演者管理</string>
     <string name="management_home_user_title">使用者管理</string>
     <string name="management_edit_button">編輯</string>
+    <string name="management_add_button">新增</string>
     <string name="management_submit_edit">完成送出</string>
     <string name="management_submit_delete">刪除</string>
     <string name="management_submit_cancel">取消</string>
@@ -88,6 +89,13 @@
     <string name="management_event_detail_edit_event_main_pic">活動主要圖片(圖片網址)</string>
     <string name="management_event_detail_edit_event_time_choosing_intro">選擇日期及時間：</string>
     <string name="management_event_detail_delete_title">確認是否刪除下列活動?</string>
+    <string name="management_event_detail_add_performer_search_bar_edit_placeholder">搜尋欲加入的表演者名稱</string>
+    <string name="management_event_detail_add_performer_search_result_title">搜尋結果：</string>
+    <string name="management_event_detail_add_performer_list_title">參與表演者名單</string>
+    <string name="management_event_performer_detail_event_title">請確認是否從下列活動：</string>
+    <string name="management_event_performer_detail_artist_title">刪除下列參與表演者：</string>
+
+
 
 
 

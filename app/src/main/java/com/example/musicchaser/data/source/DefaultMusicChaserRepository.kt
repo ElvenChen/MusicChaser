@@ -258,7 +258,6 @@ class DefaultMusicChaserRepository @Inject constructor(private val musicChaserRe
     }
 
 
-
     ////////// Management API //////////
     ////////// Management API //////////
     ////////// Management API //////////
@@ -274,6 +273,18 @@ class DefaultMusicChaserRepository @Inject constructor(private val musicChaserRe
 
     override fun deleteSelectedEvent(eventId: String) {
         musicChaserRemoteDataSource.deleteSelectedEvent(eventId)
+    }
+
+    override fun getEventPerformerArtist(eventId: String): CollectionReference {
+        return musicChaserRemoteDataSource.getEventPerformerArtist(eventId)
+    }
+
+    override fun deleteEventPerformer(eventId: String, artistId: String) {
+        musicChaserRemoteDataSource.deleteEventPerformer(eventId, artistId)
+    }
+
+    override fun deleteArtistAttendEvent(artistId: String, eventId: String) {
+        musicChaserRemoteDataSource.deleteArtistAttendEvent(artistId, eventId)
     }
 
     ////////// Management Artist API //////////

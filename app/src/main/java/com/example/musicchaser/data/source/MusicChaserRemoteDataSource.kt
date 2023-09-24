@@ -7,12 +7,14 @@ import com.example.musicchaser.data.EventCommentData
 import com.example.musicchaser.data.EventData
 import com.example.musicchaser.data.UserData
 import com.example.musicchaser.login.UserManager
+import com.example.musicchaser.login.UserManager.userId
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import org.checkerframework.checker.units.qual.C
 
 
 private const val COLLECTION_USERS = "users"
@@ -800,6 +802,33 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
             Log.i("EventDelete", "Delete Successfully")
         }.addOnFailureListener { e ->
             Log.i("EventDelete", "Delete fail")
+        }
+    }
+
+    override fun getEventPerformerArtist(eventId: String): CollectionReference {
+        return db.collection(COLLECTION_EVENTS).document(eventId)
+            .collection(COLLECTION_EVENTS_SUB_COLLECTION_EVENT_PERFORMERS)
+    }
+
+    override fun deleteEventPerformer(eventId: String, artistId: String) {
+        val docRef = db.collection(COLLECTION_EVENTS).document(eventId).collection(
+            COLLECTION_EVENTS_SUB_COLLECTION_EVENT_PERFORMERS).document(artistId)
+
+        docRef.delete().addOnSuccessListener {
+            Log.i("PerformerDelete", "Delete Performer Successfully")
+        }.addOnFailureListener { e ->
+            Log.i("PerformerDelete", "Delete Performer fail")
+        }
+    }
+
+    override fun deleteArtistAttendEvent(artistId: String, eventId: String) {
+        val docRef = db.collection(COLLECTION_ARTISTS).document(artistId).collection(
+            COLLECTION_ARTISTS_SUB_COLLECTION_ATTEND_EVENTS).document(eventId)
+
+        docRef.delete().addOnSuccessListener {
+            Log.i("PerformerDelete", "Delete Artist attend event Successfully")
+        }.addOnFailureListener { e ->
+            Log.i("PerformerDelete", "Delete Artist attend event fail")
         }
     }
 
