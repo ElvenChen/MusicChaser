@@ -80,7 +80,7 @@ class ManagementEventDetailAddPerformerViewModel @Inject constructor(val reposit
             if (e != null) {
                 Log.i("UserFavoriteArtist", "Listen failed", e)
                 return@addSnapshotListener
-            } else if (querySnapshot != null && !querySnapshot.metadata.hasPendingWrites()) {
+            } else if (querySnapshot != null) {
                 Log.i("EventPerformerArtist", "Listener is triggered")
                 eventPerformerArtistIdList.clear()
 
@@ -112,6 +112,7 @@ class ManagementEventDetailAddPerformerViewModel @Inject constructor(val reposit
     override fun onCleared() {
         super.onCleared()
         stopEventPerformerArtistListening()
+        Log.i("Elven", "stopEventPerformerArtistListening() triggered")
     }
 
 }

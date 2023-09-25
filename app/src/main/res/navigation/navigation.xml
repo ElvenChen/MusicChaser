@@ -210,6 +210,17 @@
         </argument>
     </dialog>
 
+    <dialog
+        android:id="@+id/managementEventPerformerDetailPostDialog"
+        android:name="com.example.musicchaser.managementeventdetail.addperformer.post.ManagementEventPerformerDetailPostDialog"
+        android:label="ManagementEventPerformerDetailPostDialog">
+        <argument
+            android:name="selectedEditEvent"
+            app:argType="com.example.musicchaser.data.EventData"
+            app:nullable="false">
+        </argument>
+    </dialog>
+
 
 
 
@@ -313,6 +324,11 @@
     <action
         android:id="@+id/navigate_to_management_event_performer_detail_delete_dialog"
         app:destination="@id/managementEventPerformerDetailDeleteDialog" />
+
+    <action
+        android:id="@+id/navigate_to_management_event_performer_detail_post_dialog"
+        app:destination="@id/managementEventPerformerDetailPostDialog" />
+
 
 
     <action

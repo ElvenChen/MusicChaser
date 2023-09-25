@@ -71,7 +71,7 @@ class ArtistViewModel @Inject constructor(val repository: DefaultMusicChaserRepo
         repository.getArtistList(handleGetArtistListResult, handleSettingDataList)
     }
 
-    // get event list result of keyword-searching
+    // get artist list result of keyword-searching
     fun getSearchedArtistListResult(keyword: String) {
         dataList.clear()
         repository.getSearchedArtistList(keyword, handleGetArtistListResult, handleSettingDataList)

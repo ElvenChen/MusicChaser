@@ -79,6 +79,10 @@ class ManagementEventDetailAddPerformerFragment : Fragment() {
             findNavController().navigateUp()
         }
 
+        binding.managementEventAddPerformerDetailAddButton.setOnClickListener {
+            findNavController().navigate(ManagementEventDetailAddPerformerFragmentDirections.navigateToManagementEventPerformerDetailPostDialog(event))
+        }
+
         viewModel.navigateToDeletePerformer.observe(viewLifecycleOwner, Observer {
             Log.i("EventPerformerArtist", "PerformerArtist Data : $it")
             it?.let {

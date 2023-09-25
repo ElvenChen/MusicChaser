@@ -162,9 +162,20 @@ interface MusicChaserRepository {
 
     fun getEventPerformerArtist(eventId: String): CollectionReference
 
-    fun deleteEventPerformer(eventId: String, artistId:String)
+    fun getFilteredArtistList(
+        eventId : String,
+        artistIdList: List<ArtistData>,
+        handleFilteredArtistListResult: (ArtistData) -> Unit,
+        sendFilteredArtistListForAdapter: () -> Unit
+    )
 
-    fun deleteArtistAttendEvent(artistId:String, eventId: String)
+    fun deleteEventPerformer(eventId: String, artistId: String)
+
+    fun deleteArtistAttendEvent(artistId: String, eventId: String)
+
+    fun postEventPerformer(eventId: String, artistId: String)
+
+    fun postArtistAttendEvent(artistId: String, eventId: String)
 
     ////////// Management Artist API //////////
     fun editSelectedArtist(artist: ArtistData)
@@ -175,6 +186,6 @@ interface MusicChaserRepository {
 
     ////////// Management User API //////////
 
-    fun changeSelectedUserBannedSituation(user:UserData)
+    fun changeSelectedUserBannedSituation(user: UserData)
 
 }

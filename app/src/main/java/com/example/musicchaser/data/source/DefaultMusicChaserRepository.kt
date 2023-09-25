@@ -279,12 +279,34 @@ class DefaultMusicChaserRepository @Inject constructor(private val musicChaserRe
         return musicChaserRemoteDataSource.getEventPerformerArtist(eventId)
     }
 
+    override fun getFilteredArtistList(
+        eventId : String,
+        artistIdList: List<ArtistData>,
+        handleFilteredArtistListResult: (ArtistData) -> Unit,
+        sendFilteredArtistListForAdapter: () -> Unit
+    ) {
+        musicChaserRemoteDataSource.getFilteredArtistList(
+            eventId,
+            artistIdList,
+            handleFilteredArtistListResult,
+            sendFilteredArtistListForAdapter
+        )
+    }
+
     override fun deleteEventPerformer(eventId: String, artistId: String) {
         musicChaserRemoteDataSource.deleteEventPerformer(eventId, artistId)
     }
 
     override fun deleteArtistAttendEvent(artistId: String, eventId: String) {
         musicChaserRemoteDataSource.deleteArtistAttendEvent(artistId, eventId)
+    }
+
+    override fun postEventPerformer(eventId: String, artistId: String) {
+        musicChaserRemoteDataSource.postEventPerformer(eventId, artistId)
+    }
+
+    override fun postArtistAttendEvent(artistId: String, eventId: String) {
+        musicChaserRemoteDataSource.postArtistAttendEvent(artistId, eventId)
     }
 
     ////////// Management Artist API //////////

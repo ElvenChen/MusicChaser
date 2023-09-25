@@ -42,6 +42,7 @@ private const val FIELD_EVENT_URL = "event_url"
 private const val FIELD_EVENT_MAIN_PIC = "event_main_pic"
 private const val FIELD_EVENT_COMMENTS = "event_comments"
 private const val FIELD_EVENT_COMMENT_TIME = "comment_time"
+private const val FIELD_ATTEND_ARTIST_ID = "attend_artist_id"
 
 
 private const val COLLECTION_ARTISTS = "artists"
@@ -111,15 +112,15 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
 
         collectionRef.get().addOnSuccessListener { querySnapshot ->
 
-                for (document in querySnapshot.documents) {
-                    val data = document.data
+            for (document in querySnapshot.documents) {
+                val data = document.data
 
-                    Log.i("UserTest", "New User is here : $data")
-                    callback(document, null)
-                }
-
-                handleSettingDataList()
+                Log.i("UserTest", "New User is here : $data")
+                callback(document, null)
             }
+
+            handleSettingDataList()
+        }
             .addOnFailureListener { exception ->
                 Log.i("UserTest", "Something goes wrong")
                 callback(null, exception)
@@ -722,7 +723,6 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
     }
 
 
-
     ////////// Management API //////////
     ////////// Management API //////////
     ////////// Management API //////////
@@ -786,12 +786,12 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
             "event_url" to event.eventUrl,
             "event_main_pic" to event.eventMainPic,
             "event_comments" to event.eventComments
-            )
+        )
 
         docRef.set(data).addOnSuccessListener {
-            Log.i("EventPost","Post Successfully")
+            Log.i("EventPost", "Post Successfully")
         }.addOnFailureListener {
-            Log.i("EventPost","Post fail")
+            Log.i("EventPost", "Post fail")
         }
     }
 
@@ -810,9 +810,47 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
             .collection(COLLECTION_EVENTS_SUB_COLLECTION_EVENT_PERFORMERS)
     }
 
+    override fun getFilteredArtistList(
+        eventId: String,
+        artistIdList: List<ArtistData>,
+        handleFilteredArtistListResult: (ArtistData) -> Unit,
+        sendFilteredArtistListForAdapter: () -> Unit
+    ) {
+        if (artistIdList.isEmpty()) {
+            sendFilteredArtistListForAdapter()
+        } else {
+            artistIdList.forEach {
+                val docRef = db.collection(COLLECTION_EVENTS).document(eventId).collection(
+                    COLLECTION_EVENTS_SUB_COLLECTION_EVENT_PERFORMERS
+                ).document(it.artistId)
+
+                docRef.get().addOnSuccessListener { querySnapshot ->
+
+                    if (querySnapshot.data == null) {
+                        handleFilteredArtistListResult(it)
+                        Log.i(
+                            "AddPerformerTest",
+                            "Performer is not yet added to the event : ${it.artistName}"
+                        )
+                    } else {
+                        Log.i(
+                            "AddPerformerTest",
+                            "This performer has attend this event already : ${it.artistName}"
+                        )
+                    }
+                    sendFilteredArtistListForAdapter()
+                }
+                    .addOnFailureListener { exception ->
+                        Log.i("AddPerformerTest", "Something goes wrong")
+                    }
+            }
+        }
+    }
+
     override fun deleteEventPerformer(eventId: String, artistId: String) {
         val docRef = db.collection(COLLECTION_EVENTS).document(eventId).collection(
-            COLLECTION_EVENTS_SUB_COLLECTION_EVENT_PERFORMERS).document(artistId)
+            COLLECTION_EVENTS_SUB_COLLECTION_EVENT_PERFORMERS
+        ).document(artistId)
 
         docRef.delete().addOnSuccessListener {
             Log.i("PerformerDelete", "Delete Performer Successfully")
@@ -823,12 +861,43 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
 
     override fun deleteArtistAttendEvent(artistId: String, eventId: String) {
         val docRef = db.collection(COLLECTION_ARTISTS).document(artistId).collection(
-            COLLECTION_ARTISTS_SUB_COLLECTION_ATTEND_EVENTS).document(eventId)
+            COLLECTION_ARTISTS_SUB_COLLECTION_ATTEND_EVENTS
+        ).document(eventId)
 
         docRef.delete().addOnSuccessListener {
             Log.i("PerformerDelete", "Delete Artist attend event Successfully")
         }.addOnFailureListener { e ->
             Log.i("PerformerDelete", "Delete Artist attend event fail")
+        }
+    }
+
+    override fun postEventPerformer(eventId: String, artistId: String) {
+        val docRef = db.collection(COLLECTION_EVENTS).document(eventId).collection(
+            COLLECTION_EVENTS_SUB_COLLECTION_EVENT_PERFORMERS).document(artistId)
+
+        val data = hashMapOf(
+            "attend_artist_id" to artistId
+        )
+
+        docRef.set(data).addOnSuccessListener {
+            Log.i("PerformerPost", "Post Performer Successfully")
+        }.addOnFailureListener {
+            Log.i("PerformerPost", "Post Performer fail")
+        }
+    }
+
+    override fun postArtistAttendEvent(artistId: String, eventId: String) {
+        val docRef = db.collection(COLLECTION_ARTISTS).document(artistId).collection(
+            COLLECTION_ARTISTS_SUB_COLLECTION_ATTEND_EVENTS).document(eventId)
+
+        val data = hashMapOf(
+            "attend_event_id" to eventId
+        )
+
+        docRef.set(data).addOnSuccessListener {
+            Log.i("PerformerPost", "Post Artist attend event Successfully")
+        }.addOnFailureListener {
+            Log.i("PerformerPost", "Post Artist attend event fail")
         }
     }
 
@@ -847,9 +916,9 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
         )
 
         docRef.set(data).addOnSuccessListener {
-            Log.i("ArtistEdit","Edit Successfully")
+            Log.i("ArtistEdit", "Edit Successfully")
         }.addOnFailureListener {
-            Log.i("ArtistEdit","Edit fail")
+            Log.i("ArtistEdit", "Edit fail")
         }
     }
 
@@ -865,9 +934,9 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
         )
 
         docRef.set(data).addOnSuccessListener {
-            Log.i("ArtistPost","Post Successfully")
+            Log.i("ArtistPost", "Post Successfully")
         }.addOnFailureListener {
-            Log.i("ArtistPost","Post fail")
+            Log.i("ArtistPost", "Post fail")
         }
     }
 
@@ -895,9 +964,9 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
         )
 
         docRef.set(data).addOnSuccessListener {
-            Log.i("UserEdit","Edit Successfully")
+            Log.i("UserEdit", "Edit Successfully")
         }.addOnFailureListener {
-            Log.i("UserEdit","Edit fail")
+            Log.i("UserEdit", "Edit fail")
         }
     }
 

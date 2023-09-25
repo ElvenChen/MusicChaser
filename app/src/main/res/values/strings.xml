@@ -94,6 +94,9 @@
     <string name="management_event_detail_add_performer_list_title">參與表演者名單</string>
     <string name="management_event_performer_detail_event_title">請確認是否從下列活動：</string>
     <string name="management_event_performer_detail_artist_title">刪除下列參與表演者：</string>
+    <string name="management_event_performer_detail_post_title">請選擇欲新增的表演者：</string>
+    <string name="management_event_performer_detail_post_search_placeholder">搜尋尚未加入的表演者：</string>
+    <string name="management_event_performer_detail_post_recycler_view_default_message">無法搜尋到您輸入的表演者，或相關表演者已被加入至活動表演者名單中！</string>
 
 
 
