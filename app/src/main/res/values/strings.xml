@@ -11,6 +11,9 @@
 
     // home page
     <string name="home_title">熱門</string>
+    <string name="home_favorite_artist_relative_event">喜歡的表演者相關活動</string>
+    <string name="home_potential_favorite_artist">您可能感興趣的表演者</string>
+
 
     // profile page
     <string name="profile_title">個人</string>

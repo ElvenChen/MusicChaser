@@ -66,11 +66,6 @@ class EventFragment : Fragment() {
         })
 
 
-        // setting filter drop down menu
-//        val items = listOf("北部","中部","南部","東部","離島")
-//        val adapter =  ArrayAdapter(requireContext(),R.layout.event_filter_item,items)
-//
-//        binding.eventFilter.setAdapter(adapter)
 
         // setting navigation
         viewModel.navigateToSelectedEvent.observe(viewLifecycleOwner, Observer {
