@@ -29,12 +29,17 @@ android {
     productFlavors{
         enduser {
             dimension "client"
+            applicationId "com.example.musicchaser.enduser"
+            resValue "string" , "app_name" , "MusicChaser enduser"
         }
 
         administrater {
             dimension "client"
+            applicationId "com.example.musicchaser.administrator"
+            resValue "string" , "app_name" , "MusicChaser administrator"
         }
     }
+
 
     buildTypes {
         release {

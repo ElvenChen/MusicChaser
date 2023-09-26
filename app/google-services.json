@@ -23,6 +23,44 @@
           "other_platform_oauth_client": []
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:707740533962:android:aa1e2a192fbc1d662e2033",
+        "android_client_info": {
+          "package_name": "com.example.musicchaser.administrator"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOPDFHCE2K86UTl9Xa9WcSlYoyq3N1pto"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:707740533962:android:83046b3e8dd318ed2e2033",
+        "android_client_info": {
+          "package_name": "com.example.musicchaser.enduser"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOPDFHCE2K86UTl9Xa9WcSlYoyq3N1pto"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
     }
   ],
   "configuration_version": "1"
