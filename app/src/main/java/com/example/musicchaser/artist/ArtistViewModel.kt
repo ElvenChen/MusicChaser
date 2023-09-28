@@ -66,7 +66,7 @@ class ArtistViewModel @Inject constructor(val repository: DefaultMusicChaserRepo
     }
 
     // get artist list result
-    private fun getArtistListResult() {
+    fun getArtistListResult() {
         dataList.clear()
         repository.getArtistList(handleGetArtistListResult, handleSettingDataList)
     }

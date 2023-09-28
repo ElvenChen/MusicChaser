@@ -3,6 +3,7 @@ package com.example.musicchaser.data.source
 import com.example.musicchaser.data.ArtistData
 import com.example.musicchaser.data.EventCommentData
 import com.example.musicchaser.data.EventData
+import com.example.musicchaser.data.ThreadData
 import com.example.musicchaser.data.UserData
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
@@ -257,6 +258,38 @@ class DefaultMusicChaserRepository @Inject constructor(private val musicChaserRe
         )
     }
 
+    ////////// Society API //////////
+    override fun getThreadList(
+        callback: (DocumentSnapshot?, Exception?) -> Unit,
+        handleSettingDataListWithNoAuthorName: () -> Unit
+    ) {
+        musicChaserRemoteDataSource.getThreadList(callback, handleSettingDataListWithNoAuthorName)
+    }
+
+    override fun getThreadAuthor(
+        threadListWithNoAuthorName: List<ThreadData>,
+        handleCompletedThreadListResult: (ThreadData) -> Unit,
+        handleSettingDataList: () -> Unit
+    ) {
+        musicChaserRemoteDataSource.getThreadAuthor(
+            threadListWithNoAuthorName,
+            handleCompletedThreadListResult,
+            handleSettingDataList
+        )
+    }
+
+    override fun getSearchedThreadList(
+        keyword: String,
+        callback: (DocumentSnapshot?, Exception?) -> Unit,
+        handleSettingDataListWithNoAuthorName: () -> Unit
+    ) {
+        musicChaserRemoteDataSource.getSearchedThreadList(
+            keyword,
+            callback,
+            handleSettingDataListWithNoAuthorName
+        )
+    }
+
 
     ////////// Management API //////////
     ////////// Management API //////////
@@ -280,7 +313,7 @@ class DefaultMusicChaserRepository @Inject constructor(private val musicChaserRe
     }
 
     override fun getFilteredArtistList(
-        eventId : String,
+        eventId: String,
         artistIdList: List<ArtistData>,
         handleFilteredArtistListResult: (ArtistData) -> Unit,
         sendFilteredArtistListForAdapter: () -> Unit

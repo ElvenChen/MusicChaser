@@ -15,6 +15,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.musicchaser.R
 import com.example.musicchaser.databinding.FragmentEventBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,6 +45,7 @@ class EventFragment : Fragment() {
         viewModel.dataListForAdapter.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
             adapter.notifyDataSetChanged()
+            binding.layoutSwipeRefreshEvent.isRefreshing = false
         })
 
 
@@ -64,6 +66,15 @@ class EventFragment : Fragment() {
                 return true
             }
         })
+
+
+
+        // setting drop down refresh all event
+        val listener = SwipeRefreshLayout.OnRefreshListener {
+            viewModel.getEventListResult()
+            binding.layoutSwipeRefreshEvent.isRefreshing = true
+        }
+        binding.layoutSwipeRefreshEvent.setOnRefreshListener(listener)
 
 
 

@@ -79,7 +79,7 @@ class EventViewModel @Inject constructor(val repository: DefaultMusicChaserRepos
     }
 
     // get event list result
-    private fun getEventListResult() {
+    fun getEventListResult() {
         dataList.clear()
         repository.getEventList(handleGetEventListResult, handleSettingDataList)
     }

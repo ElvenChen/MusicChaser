@@ -45,6 +45,37 @@
         android:id="@+id/societyFragment"
         android:name="com.example.musicchaser.society.SocietyFragment"
         android:label="SocietyFragment" />
+
+    <fragment
+        android:id="@+id/societyDetailFragment"
+        android:name="com.example.musicchaser.societydetail.SocietyDetailFragment"
+        android:label="SocietyDetailFragment">
+        <argument
+            android:name="selectedThread"
+            app:argType="com.example.musicchaser.data.ThreadData"
+            app:nullable="false">
+        </argument>
+    </fragment>
+
+    <dialog
+        android:id="@+id/societyPostDialog"
+        android:name="com.example.musicchaser.society.post.SocietyPostDialog"
+        android:label="SocietyPostDialog" >
+        <action
+            android:id="@+id/action_societyPostDialog_to_societyFragment"
+            app:destination="@id/societyFragment"
+            app:popUpTo="@id/societyFragment"
+            app:popUpToInclusive="true"/>
+    </dialog>
+
+    <dialog
+        android:id="@+id/societySubmissionDialog"
+        android:name="com.example.musicchaser.society.submission.SocietySubmissionDialog"
+        android:label="SocietySubmissionDialog" />
+
+
+
+
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.musicchaser.profile.ProfileFragment"
@@ -75,6 +106,8 @@
             app:nullable="false">
         </argument>
     </dialog>
+
+
 
     <action
         android:id="@+id/navigate_to_home_fragment"
@@ -129,6 +162,18 @@
     <action
         android:id="@+id/navigate_to_artistdetail_dialog"
         app:destination="@id/artistDetailDialog" />
+
+    <action
+        android:id="@+id/navigate_to_societydetail_fragment"
+        app:destination="@id/societyDetailFragment" />
+
+    <action
+        android:id="@+id/navigate_to_society_post_dialog"
+        app:destination="@id/societyPostDialog" />
+
+    <action
+        android:id="@+id/navigate_to_society_submission_dialog"
+        app:destination="@id/societySubmissionDialog" />
 
 
     <!--Administration Flavor -->

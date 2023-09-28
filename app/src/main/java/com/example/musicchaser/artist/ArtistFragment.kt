@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.musicchaser.R
 import com.example.musicchaser.databinding.FragmentArtistBinding
 import com.example.musicchaser.databinding.FragmentEventBinding
@@ -45,6 +46,7 @@ class ArtistFragment : Fragment() {
         viewModel.dataListForAdapter.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
             adapter.notifyDataSetChanged()
+            binding.layoutSwipeRefreshArtist.isRefreshing = false
         })
 
         // setting search bar logic
@@ -64,6 +66,16 @@ class ArtistFragment : Fragment() {
                 return true
             }
         })
+
+
+
+        // setting drop down refresh all artist
+        val listener = SwipeRefreshLayout.OnRefreshListener {
+            viewModel.getArtistListResult()
+            binding.layoutSwipeRefreshArtist.isRefreshing = true
+        }
+        binding.layoutSwipeRefreshArtist.setOnRefreshListener(listener)
+
 
 
         // setting navigation

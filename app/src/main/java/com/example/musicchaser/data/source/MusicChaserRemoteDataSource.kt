@@ -5,6 +5,7 @@ import android.util.Log
 import com.example.musicchaser.data.ArtistData
 import com.example.musicchaser.data.EventCommentData
 import com.example.musicchaser.data.EventData
+import com.example.musicchaser.data.ThreadData
 import com.example.musicchaser.data.UserData
 import com.example.musicchaser.login.UserManager
 import com.example.musicchaser.login.UserManager.userId
@@ -50,6 +51,11 @@ private const val COLLECTION_ARTISTS_SUB_COLLECTION_ATTEND_EVENTS = "attend_even
 
 private const val FIELD_ARTIST_ID = "artist_id"
 private const val FIELD_ARTIST_NAME = "artist_name"
+
+
+private const val COLLECTION_THREADS = "threads"
+
+private const val FIELD_THREAD_DATE = "thread_date"
 
 
 @SuppressLint("StaticFieldLeak")
@@ -279,7 +285,7 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
     ) {
         val collectionRef = db.collection(COLLECTION_EVENTS)
 
-        collectionRef.orderBy(FIELD_EVENT_DATE, Query.Direction.DESCENDING)
+        collectionRef.orderBy(FIELD_EVENT_DATE, Query.Direction.ASCENDING)
             .get().addOnSuccessListener { querySnapshot ->
 
                 for (document in querySnapshot.documents) {
@@ -722,6 +728,92 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
         }
     }
 
+    ////////// Society API //////////
+    override fun getThreadList(
+        callback: (DocumentSnapshot?, Exception?) -> Unit,
+        handleSettingDataListWithNoAuthorName: () -> Unit
+    ) {
+        val collectionRef = db.collection(COLLECTION_THREADS)
+
+        collectionRef.orderBy(FIELD_THREAD_DATE, Query.Direction.DESCENDING)
+            .get().addOnSuccessListener { querySnapshot ->
+
+                for (document in querySnapshot.documents) {
+                    val data = document.data
+
+                    Log.i("ThreadTest", "New Thread is here : $data")
+                    callback(document, null)
+                }
+                handleSettingDataListWithNoAuthorName()
+            }
+            .addOnFailureListener { exception ->
+                Log.i("ThreadTest", "Something goes wrong")
+                callback(null, exception)
+            }
+    }
+
+    override fun getThreadAuthor(
+        threadListWithNoAuthorName: List<ThreadData>,
+        handleCompletedThreadListResult: (ThreadData) -> Unit,
+        handleSettingDataList: () -> Unit
+    ) {
+        threadListWithNoAuthorName.forEach {
+            val collectionRef = db.collection(COLLECTION_USERS)
+            val searchField = FIELD_USER_ID
+
+            collectionRef.whereEqualTo(searchField, it.threadAuthor)
+                .get().addOnSuccessListener { querySnapshot ->
+
+                    for (document in querySnapshot.documents) {
+                        val data = document.data
+
+                        Log.i("ThreadTest", "Author Content =  $data")
+
+                        val dataTobeAddToList = ThreadData(
+                            threadId = it.threadId,
+                            threadName = it.threadName,
+                            threadType = it.threadType,
+                            threadDate = it.threadDate,
+                            threadAuthor = (data!!["user_nickname"]).toString(),
+                            threadContent = it.threadContent,
+                            threadComments = it.threadComments
+                        )
+                        handleCompletedThreadListResult(dataTobeAddToList)
+                    }
+                    handleSettingDataList()
+                }
+                .addOnFailureListener { exception ->
+                    Log.i("ThreadTest", "Something goes wrong")
+                }
+        }
+    }
+
+    override fun getSearchedThreadList(
+        keyword: String,
+        callback: (DocumentSnapshot?, Exception?) -> Unit,
+        handleSettingDataListWithNoAuthorName: () -> Unit
+    ) {
+        val collectionRef = db.collection(COLLECTION_THREADS)
+        Log.i("ThreadTest", "keyword : $keyword")
+
+        collectionRef.get().addOnSuccessListener { querySnapshot ->
+
+            for (document in querySnapshot.documents) {
+                val data = document.data
+
+                if (((data!!["thread_name"]).toString()).contains(keyword)) {
+                    Log.i("ThreadTest", "New Thread is here : $data")
+                    callback(document, null)
+                }
+            }
+            handleSettingDataListWithNoAuthorName()
+        }
+            .addOnFailureListener { exception ->
+                Log.i("ThreadTest", "Something goes wrong")
+                callback(null, exception)
+            }
+    }
+
 
     ////////// Management API //////////
     ////////// Management API //////////
@@ -873,7 +965,8 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
 
     override fun postEventPerformer(eventId: String, artistId: String) {
         val docRef = db.collection(COLLECTION_EVENTS).document(eventId).collection(
-            COLLECTION_EVENTS_SUB_COLLECTION_EVENT_PERFORMERS).document(artistId)
+            COLLECTION_EVENTS_SUB_COLLECTION_EVENT_PERFORMERS
+        ).document(artistId)
 
         val data = hashMapOf(
             "attend_artist_id" to artistId
@@ -888,7 +981,8 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
 
     override fun postArtistAttendEvent(artistId: String, eventId: String) {
         val docRef = db.collection(COLLECTION_ARTISTS).document(artistId).collection(
-            COLLECTION_ARTISTS_SUB_COLLECTION_ATTEND_EVENTS).document(eventId)
+            COLLECTION_ARTISTS_SUB_COLLECTION_ATTEND_EVENTS
+        ).document(eventId)
 
         val data = hashMapOf(
             "attend_event_id" to eventId

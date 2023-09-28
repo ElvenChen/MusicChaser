@@ -3,6 +3,7 @@ package com.example.musicchaser.data.source
 import com.example.musicchaser.data.ArtistData
 import com.example.musicchaser.data.EventCommentData
 import com.example.musicchaser.data.EventData
+import com.example.musicchaser.data.ThreadData
 import com.example.musicchaser.data.UserData
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
@@ -149,6 +150,32 @@ interface MusicChaserRepository {
         handleSettingRecentEventData: () -> Unit
     )
 
+    ////////// Society API //////////
+    fun getThreadList(
+        callback: (DocumentSnapshot?, Exception?) -> Unit,
+        handleSettingDataListWithNoAuthorName: () -> Unit
+    )
+
+    fun getThreadAuthor(
+        threadListWithNoAuthorName: List<ThreadData>,
+        handleCompletedThreadListResult: (ThreadData) -> Unit,
+        handleSettingDataList: () -> Unit
+    )
+
+    fun getSearchedThreadList(
+        keyword: String,
+        callback: (DocumentSnapshot?, Exception?) -> Unit,
+        handleSettingDataListWithNoAuthorName: () -> Unit
+    )
+
+
+
+//    fun getThreadAuthor(
+//        eventCommentListWithNoAuthorName: List<ThreadData>,
+//        handleCompletedEventCommentListResult: (EventCommentData) -> Unit,
+//        handleSettingDataList: () -> Unit
+//    )
+
     ////////// Management API //////////
     ////////// Management API //////////
     ////////// Management API //////////
@@ -163,7 +190,7 @@ interface MusicChaserRepository {
     fun getEventPerformerArtist(eventId: String): CollectionReference
 
     fun getFilteredArtistList(
-        eventId : String,
+        eventId: String,
         artistIdList: List<ArtistData>,
         handleFilteredArtistListResult: (ArtistData) -> Unit,
         sendFilteredArtistListForAdapter: () -> Unit
