@@ -290,6 +290,15 @@ class DefaultMusicChaserRepository @Inject constructor(private val musicChaserRe
         )
     }
 
+    override fun postEventSubmission(
+        userId: String,
+        eventName: String,
+        eventUrl: String,
+        eventOtherNote: String
+    ) {
+        musicChaserRemoteDataSource.postEventSubmission(userId, eventName, eventUrl, eventOtherNote)
+    }
+
 
     ////////// Management API //////////
     ////////// Management API //////////

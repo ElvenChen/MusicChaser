@@ -54,6 +54,7 @@ private const val FIELD_ARTIST_NAME = "artist_name"
 
 
 private const val COLLECTION_THREADS = "threads"
+private const val COLLECTION_SUBMISSIONS = "submissions"
 
 private const val FIELD_THREAD_DATE = "thread_date"
 
@@ -812,6 +813,29 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
                 Log.i("ThreadTest", "Something goes wrong")
                 callback(null, exception)
             }
+    }
+
+    override fun postEventSubmission(
+        userId: String,
+        eventName: String,
+        eventUrl: String,
+        eventOtherNote: String
+    ) {
+        val docRef = db.collection(COLLECTION_SUBMISSIONS).document()
+
+        val data = hashMapOf(
+            "submission_id" to docRef.id,
+            "submission_name" to eventName,
+            "submission_url" to eventUrl,
+            "submission_other_note" to eventOtherNote,
+            "submission_author_id" to userId,
+        )
+
+        docRef.set(data).addOnSuccessListener {
+            Log.i("SocietySubmissionPost", "Post Successfully")
+        }.addOnFailureListener {
+            Log.i("SocietySubmissionPost", "Post fail")
+        }
     }
 
 

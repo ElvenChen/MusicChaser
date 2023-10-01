@@ -170,6 +170,13 @@ interface MusicChaserDataSource {
         handleSettingDataListWithNoAuthorName: () -> Unit
     )
 
+    fun postEventSubmission(
+        userId: String,
+        eventName: String,
+        eventUrl: String,
+        eventOtherNote: String
+    )
+
 
 
     ////////// Management API //////////

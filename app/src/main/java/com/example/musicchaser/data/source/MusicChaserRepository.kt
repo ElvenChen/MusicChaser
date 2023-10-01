@@ -168,6 +168,13 @@ interface MusicChaserRepository {
         handleSettingDataListWithNoAuthorName: () -> Unit
     )
 
+    fun postEventSubmission(
+        userId: String,
+        eventName: String,
+        eventUrl: String,
+        eventOtherNote: String
+    )
+
 
 
 //    fun getThreadAuthor(

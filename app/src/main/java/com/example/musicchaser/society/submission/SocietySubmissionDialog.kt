@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
@@ -33,6 +34,27 @@ class SocietySubmissionDialog : AppCompatDialogFragment() {
         val binding = DialogSocietySubmissionBinding.inflate(inflater)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+
+
+
+        // setting finish button
+        binding.societySubmissionSaveButton.setOnClickListener {
+            if ( binding.societySubmissionEventNameEditArea.text.toString() != "") {
+                viewModel.postEventSubmission()
+                Toast.makeText(context,"Your submission is submitted! Thank you for your sharing!", Toast.LENGTH_LONG).show()
+                dismiss()
+            } else {
+                Toast.makeText(context,"Please fill in the event's name!", Toast.LENGTH_LONG).show()
+            }
+        }
+
+
+
+        // setting navigation
+        binding.outerConstraint.setOnClickListener {
+            dismiss()
+        }
+
 
 
         return binding.root

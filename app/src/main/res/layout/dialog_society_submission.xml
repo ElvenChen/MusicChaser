@@ -30,10 +30,172 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/society_customer_submission_card_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                app:cardCornerRadius="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/society_submission_background"
+                        android:layout_width="0dp"
+                        android:layout_height="120dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/society_submission"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/society_submission_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/noto_sans"
+                        android:letterSpacing="@dimen/letter_spacing"
+                        android:text="@string/submission_card_text"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/title_font_size"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/society_submission_background"
+                        app:layout_constraintStart_toStartOf="@id/society_submission_background"
+                        app:layout_constraintTop_toTopOf="@+id/society_submission_background"
+                        tools:text="謝謝您的分享\n讓更多人聽到好音樂\n小編會儘快公布活動的" />
+
+                    <ImageView
+                        android:id="@+id/society_submission_button_layer"
+                        android:layout_width="0dp"
+                        android:layout_height="120dp"
+                        android:background="@drawable/background_shape_radius_16dp"
+                        android:backgroundTint="@android:color/transparent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="SUBMISSION POST DIALOG" />
+                android:id="@+id/society_submission_form_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/noto_sans"
+                android:letterSpacing="@dimen/letter_spacing"
+                android:text="@string/submission_event"
+                android:textSize="@dimen/sub_title_font_size"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/society_customer_submission_card_view" />
+
+            <Button
+                android:id="@+id/society_submission_save_button"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                android:layout_width="48dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/background_shape_radius_8dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="@string/submission"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:backgroundTint="@color/golden_yellow"
+                android:elevation="@dimen/shadow_elevation"
+                app:layout_constraintTop_toBottomOf="@+id/society_customer_submission_card_view"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/society_submission_event_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/society_submission_form_title">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/society_submission_event_name_edit_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/submission_event_name_edit_placeholder"
+                    android:fontFamily="@font/noto_sans"
+                    android:letterSpacing="@dimen/letter_spacing"
+                    android:textColor="@color/black"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="@={viewModel.eventName}"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/society_submission_event_url"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/society_submission_event_name">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/society_submission_event_url_edit_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/submission_event_url_edit_placeholder"
+                    android:fontFamily="@font/noto_sans"
+                    android:letterSpacing="@dimen/letter_spacing"
+                    android:textColor="@color/black"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="@={viewModel.eventUrl}"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/society_submission_event_other_note"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/society_submission_event_url"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/society_submission_event_other_note_edit_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/submission_event_other_note_edit_placeholder"
+                    android:fontFamily="@font/noto_sans"
+                    android:letterSpacing="@dimen/letter_spacing"
+                    android:textColor="@color/black"
+                    android:text="@={viewModel.eventOtherNote}"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
