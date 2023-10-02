@@ -76,12 +76,12 @@ class SocietyDetailViewModel @Inject constructor(val repository: DefaultMusicCha
             FIELD_THREAD_COMMENT_TIME,
             Query.Direction.DESCENDING
         )?.addSnapshotListener { querySnapshot, e ->
+            dataListWithNoAuthorName.clear()
             if (e != null) {
                 Log.i("ThreadCommentTest", "Listen failed", e)
                 return@addSnapshotListener
             } else if (querySnapshot != null && !querySnapshot.metadata.hasPendingWrites()) {
                 Log.i("ThreadCommentTest", "Listener is triggered")
-                dataListWithNoAuthorName.clear()
 
                 for (document in querySnapshot!!) {
                     val data = document.data

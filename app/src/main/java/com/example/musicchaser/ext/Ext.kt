@@ -5,7 +5,7 @@ import android.util.Log
 import java.sql.Date
 
 import java.text.SimpleDateFormat
-
+import java.util.TimeZone
 
 
 fun Long.toFormattedTime() : String {
@@ -19,6 +19,7 @@ fun Long.toFormattedTime() : String {
 fun Long.toCommentFormattedTime() : String {
 
     val dateFormat = SimpleDateFormat("yyyy.MM.dd")
+    dateFormat.timeZone = TimeZone.getTimeZone("GMT+8")
     val date = Date(this*1000)
 
     return dateFormat.format(date)
@@ -43,6 +44,15 @@ fun Long.toFormattedDay() : String {
 fun Long.toDottedFormattedTime() : String {
 
     val dateFormat = SimpleDateFormat("yyyy.MM.dd HH:mm")
+    val date = Date(this*1000)
+
+    return dateFormat.format(date)
+}
+
+fun Long.toDottedFormattedCommentTime() : String {
+
+    val dateFormat = SimpleDateFormat("yyyy.MM.dd HH:mm")
+    dateFormat.timeZone = TimeZone.getTimeZone("GMT+8")
     val date = Date(this*1000)
 
     return dateFormat.format(date)
