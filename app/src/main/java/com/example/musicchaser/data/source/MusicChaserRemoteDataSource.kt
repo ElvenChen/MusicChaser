@@ -5,6 +5,7 @@ import android.util.Log
 import com.example.musicchaser.data.ArtistData
 import com.example.musicchaser.data.EventCommentData
 import com.example.musicchaser.data.EventData
+import com.example.musicchaser.data.ThreadCommentData
 import com.example.musicchaser.data.ThreadData
 import com.example.musicchaser.data.UserData
 import com.example.musicchaser.login.UserManager
@@ -54,9 +55,11 @@ private const val FIELD_ARTIST_NAME = "artist_name"
 
 
 private const val COLLECTION_THREADS = "threads"
+private const val COLLECTION_THREADS_SUB_COLLECTION_THREAD_COMMENTS = "thread_comments"
 private const val COLLECTION_SUBMISSIONS = "submissions"
 
 private const val FIELD_THREAD_DATE = "thread_date"
+private const val FIELD_THREAD_COMMENTS = "thread_comments"
 
 
 @SuppressLint("StaticFieldLeak")
@@ -861,6 +864,90 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
         }.addOnFailureListener {
             Log.i("SocietySubmissionPost", "Post fail")
         }
+    }
+
+    override fun getThreadComment(threadId: String): CollectionReference {
+        return db.collection(COLLECTION_THREADS).document(threadId)
+            .collection(COLLECTION_THREADS_SUB_COLLECTION_THREAD_COMMENTS)
+    }
+
+    override fun getThreadCommentAuthor(
+        threadCommentListWithNoAuthorName: List<ThreadCommentData>,
+        handleCompletedThreadCommentListResult: (ThreadCommentData) -> Unit,
+        handleSettingDataList: () -> Unit
+    ) {
+        threadCommentListWithNoAuthorName.forEach {
+            val collectionRef = db.collection(COLLECTION_USERS)
+            val searchField = FIELD_USER_ID
+
+            collectionRef.whereEqualTo(searchField, it.threadCommentAuthorNickname)
+                .get().addOnSuccessListener { querySnapshot ->
+
+                    for (document in querySnapshot.documents) {
+                        val data = document.data
+
+                        Log.i("ThreadCommentTest", "Author Content =  $data")
+
+                        val dataTobeAddToList = ThreadCommentData(
+                            threadCommentAuthorNickname = (data!!["user_nickname"]).toString(),
+                            threadCommentTime = it.threadCommentTime,
+                            threadCommentContent = it.threadCommentContent
+                        )
+                        handleCompletedThreadCommentListResult(dataTobeAddToList)
+                    }
+                    handleSettingDataList()
+                }
+                .addOnFailureListener { exception ->
+                    Log.i("ThreadCommentTest", "Something goes wrong")
+                }
+        }
+    }
+
+    override fun postCommentForThread(userId: String, threadId: String, commentContent: String) {
+        val docRef = db.collection(COLLECTION_THREADS).document(threadId)
+            .collection(COLLECTION_THREADS_SUB_COLLECTION_THREAD_COMMENTS).document()
+
+        val data = hashMapOf(
+            "thread_comment_id" to docRef.id,
+            "thread_comment_author_id" to userId,
+            "thread_comment_time" to FieldValue.serverTimestamp(),
+            "thread_comment_content" to commentContent
+        )
+
+        docRef.set(data)
+    }
+
+    override fun addThreadCommentAmounts(threadId: String) {
+        val docRef = db.collection(COLLECTION_THREADS).document(threadId)
+
+        docRef.get().addOnSuccessListener { documentSnapshot ->
+            if (documentSnapshot.exists()) {
+                val currentThreadCommentsAmount = documentSnapshot.getLong(FIELD_THREAD_COMMENTS)
+
+                if (currentThreadCommentsAmount != null) {
+                    val updatedAmount = currentThreadCommentsAmount + 1
+
+                    val updates = hashMapOf<String, Any>(
+                        FIELD_THREAD_COMMENTS to updatedAmount
+                    )
+
+                    docRef.update(updates)
+                        .addOnSuccessListener {
+                            Log.i("ThreadCommentTest", "This field is updated successfully!!")
+                        }
+                        .addOnFailureListener { e ->
+                            Log.i("ThreadCommentTest", "This field is fail to update")
+                        }
+                } else {
+                    Log.i("ThreadCommentTest", "This field is null, can't be updated")
+                }
+            } else {
+                Log.i("ThreadCommentTest", "This thread is not exist")
+            }
+        }
+            .addOnFailureListener { e ->
+                Log.i("ThreadCommentTest", "Something goes wrong")
+            }
     }
 
 

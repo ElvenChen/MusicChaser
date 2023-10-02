@@ -15,10 +15,240 @@
         android:layout_height="match_parent"
         tools:context=".societydetail.SocietyDetailFragment">
 
-        <TextView
+        <Button
+            android:id="@+id/society_detail_comment_button"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/background_shape_radius_8dp"
+            android:elevation="@dimen/shadow_elevation"
+            android:paddingStart="11dp"
+            app:backgroundTint="@color/golden_yellow"
+            app:icon="@drawable/comment_24dp"
+            app:iconTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@{viewModel.thread.threadName}" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/society_detail_thread_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="80dp"
+                    android:layout_marginEnd="80dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/noto_sans"
+                    android:letterSpacing="@dimen/letter_spacing"
+                    android:maxLines="2"
+                    android:text="@{viewModel.thread.threadName}"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/content_font_size"
+                    app:layout_constraintBottom_toTopOf="@+id/view_separation"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="茄子蛋為什麼都不出新歌啊？已經等快兩年了欸！還是說他們早就解散了 QAQ" />
+
+                <ImageView
+                    android:id="@+id/society_detail_back_button"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:padding="20dp"
+                    android:src="@drawable/back_16dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/view_separation"
+                    app:layout_constraintDimensionRatio="h,1:1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </ImageView>
+
+                <View
+                    android:id="@+id/view_separation"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="56dp"
+                    android:background="@color/dark_grey"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/society_detail_thread_type_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/background_shape_radius_8dp"
+                    android:backgroundTint="@color/blue_grey"
+                    android:elevation="@dimen/card_content_elevation"
+                    android:fontFamily="@font/noto_sans"
+                    android:letterSpacing="@dimen/letter_spacing"
+                    android:paddingStart="10dp"
+                    android:paddingTop="4dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="4dp"
+                    android:text="@{viewModel.thread.threadType}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/log_out_font_size"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view_separation" />
+
+                <TextView
+                    android:id="@+id/society_detail_thread_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/noto_sans"
+                    android:textSize="@dimen/content_font_size"
+                    app:getManagementEventDate="@{viewModel.thread.threadDate}"
+                    app:layout_constraintBottom_toBottomOf="@+id/society_detail_thread_author_icon"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/society_detail_thread_author_icon"
+                    tools:text="2023.09.10" />
+
+
+                <ImageView
+                    android:id="@+id/society_detail_thread_author_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/user_12dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/society_detail_thread_type_tag" />
+
+                <TextView
+                    android:id="@+id/society_detail_thread_author_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/noto_sans"
+                    android:letterSpacing="@dimen/letter_spacing"
+                    android:text="@{viewModel.thread.threadAuthor}"
+                    android:textSize="@dimen/content_font_size"
+                    app:layout_constraintBottom_toBottomOf="@+id/society_detail_thread_author_icon"
+                    app:layout_constraintStart_toEndOf="@+id/society_detail_thread_author_icon"
+                    app:layout_constraintTop_toTopOf="@+id/society_detail_thread_author_icon"
+                    tools:text="留言者暱稱" />
+
+                <TextView
+                    android:id="@+id/society_detail_thread_full_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/noto_sans"
+                    android:letterSpacing="@dimen/letter_spacing"
+                    android:text="@{viewModel.thread.threadName}"
+                    android:textSize="@dimen/title_font_size"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/society_detail_thread_author_icon"
+                    tools:text="茄子蛋為什麼都不出新歌啊？已經等快兩..." />
+
+                <TextView
+                    android:id="@+id/society_detail_thread_content"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/noto_sans"
+                    android:letterSpacing="@dimen/letter_spacing"
+                    android:text="@{viewModel.thread.threadContent}"
+                    android:textSize="@dimen/content_font_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/society_detail_thread_full_title"
+                    tools:text="茄子蛋為什麼都不出新歌啊？已經等快兩年了欸！還是說他們早就解散了 QAQ" />
+
+                <View
+                    android:id="@+id/view_separation2"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/dark_grey"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/society_detail_thread_content" />
+
+                <TextView
+                    android:id="@+id/society_detail_comments_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/noto_sans"
+                    android:letterSpacing="@dimen/letter_spacing"
+                    android:text="@string/society_detail_comments_title"
+                    android:textSize="@dimen/sub_title_font_size"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view_separation2" />
+
+                <ImageView
+                    android:id="@+id/society_detail_comments_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:src="@drawable/comment_12dp"
+                    app:layout_constraintBottom_toBottomOf="@id/society_detail_comments_title"
+                    app:layout_constraintStart_toEndOf="@+id/society_detail_comments_title"
+                    app:layout_constraintTop_toTopOf="@+id/society_detail_comments_title" />
+
+                <TextView
+                    android:id="@+id/society_detail_comments_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/noto_sans"
+                    android:letterSpacing="@dimen/letter_spacing"
+                    android:text="@{String.valueOf(viewModel.dataListForAdapter.size)}"
+                    android:textSize="@dimen/content_font_size"
+                    app:layout_constraintBottom_toBottomOf="@+id/society_detail_comments_icon"
+                    app:layout_constraintStart_toEndOf="@+id/society_detail_comments_icon"
+                    app:layout_constraintTop_toTopOf="@+id/society_detail_comments_icon"
+                    tools:text="12" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/society_detail_comments_recycler_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:clipToPadding="false"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/society_detail_comments_title">
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -3,6 +3,7 @@ package com.example.musicchaser.data.source
 import com.example.musicchaser.data.ArtistData
 import com.example.musicchaser.data.EventCommentData
 import com.example.musicchaser.data.EventData
+import com.example.musicchaser.data.ThreadCommentData
 import com.example.musicchaser.data.ThreadData
 import com.example.musicchaser.data.UserData
 import com.google.firebase.firestore.CollectionReference
@@ -183,6 +184,18 @@ interface MusicChaserDataSource {
         threadType: String,
         threadContent: String
     )
+
+    fun getThreadComment(threadId: String): CollectionReference
+
+    fun getThreadCommentAuthor(
+        threadCommentListWithNoAuthorName: List<ThreadCommentData>,
+        handleCompletedThreadCommentListResult: (ThreadCommentData) -> Unit,
+        handleSettingDataList: () -> Unit
+    )
+
+    fun postCommentForThread(userId: String, threadId: String, commentContent: String)
+
+    fun addThreadCommentAmounts(threadId: String)
 
 
 

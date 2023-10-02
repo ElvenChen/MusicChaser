@@ -36,10 +36,12 @@ class SocietyPostDialog : AppCompatDialogFragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
 
+
         // setting drop down menu adapter
         val options = arrayOf("分享", "閒聊")
         val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_munu_society_post, options)
         binding.societyPostThreadTypeEditArea.setAdapter(adapter)
+
 
 
         // setting finish button
@@ -60,6 +62,7 @@ class SocietyPostDialog : AppCompatDialogFragment() {
                     .show()
             }
         }
+
 
 
         // setting navigation

@@ -58,6 +58,17 @@
     </fragment>
 
     <dialog
+        android:id="@+id/societyDetailCommentDialog"
+        android:name="com.example.musicchaser.societydetail.comment.SocietyDetailCommentDialog"
+        android:label="SocietyDetailCommentDialog">
+        <argument
+            android:name="selectedThread"
+            app:argType="com.example.musicchaser.data.ThreadData"
+            app:nullable="false">
+        </argument>
+    </dialog>
+
+    <dialog
         android:id="@+id/societyPostDialog"
         android:name="com.example.musicchaser.society.post.SocietyPostDialog"
         android:label="SocietyPostDialog" >
@@ -174,6 +185,10 @@
     <action
         android:id="@+id/navigate_to_society_submission_dialog"
         app:destination="@id/societySubmissionDialog" />
+
+    <action
+        android:id="@+id/navigate_to_societydetail_comment_dialog"
+        app:destination="@id/societyDetailCommentDialog" />
 
 
     <!--Administration Flavor -->

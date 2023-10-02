@@ -60,7 +60,7 @@
     // society page
     <string name="society_title">社群</string>
     <string name="society_search_bar_edit_placeholder">輸入感興趣的話題</string>
-    <string name="society_submission_title">居然只有您知道的活動？\n快投稿讓更多樂迷們知道\n[[ 點擊投稿 ]]</string>
+    <string name="society_submission_title">居然只有您知道的活動？\n快投稿讓更多樂迷們知道</string>
     <string name="society_thread">文章列表</string>
     <string name="submission">傳送</string>
     <string name="submission_event">提供活動</string>
@@ -72,9 +72,7 @@
     <string name="society_post_name">話題名稱</string>
     <string name="society_post_type">話題分類</string>
     <string name="society_post_content">話題內容</string>
-
-
-
+    <string name="society_detail_comments_title">留言</string>
 
 
     // management home page

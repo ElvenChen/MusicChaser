@@ -3,6 +3,7 @@ package com.example.musicchaser.data.source
 import com.example.musicchaser.data.ArtistData
 import com.example.musicchaser.data.EventCommentData
 import com.example.musicchaser.data.EventData
+import com.example.musicchaser.data.ThreadCommentData
 import com.example.musicchaser.data.ThreadData
 import com.example.musicchaser.data.UserData
 import com.google.firebase.firestore.CollectionReference
@@ -311,6 +312,30 @@ class DefaultMusicChaserRepository @Inject constructor(private val musicChaserRe
             threadType,
             threadContent
         )
+    }
+
+    override fun getThreadComment(threadId: String): CollectionReference {
+        return musicChaserRemoteDataSource.getThreadComment(threadId)
+    }
+
+    override fun getThreadCommentAuthor(
+        threadCommentListWithNoAuthorName: List<ThreadCommentData>,
+        handleCompletedThreadCommentListResult: (ThreadCommentData) -> Unit,
+        handleSettingDataList: () -> Unit
+    ) {
+        musicChaserRemoteDataSource.getThreadCommentAuthor(
+            threadCommentListWithNoAuthorName,
+            handleCompletedThreadCommentListResult,
+            handleSettingDataList
+        )
+    }
+
+    override fun postCommentForThread(userId: String, threadId: String, commentContent: String) {
+        musicChaserRemoteDataSource.postCommentForThread(userId, threadId, commentContent)
+    }
+
+    override fun addThreadCommentAmounts(threadId: String) {
+        musicChaserRemoteDataSource.addThreadCommentAmounts(threadId)
     }
 
 

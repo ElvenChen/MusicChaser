@@ -109,7 +109,9 @@
                     android:popupBackground="@color/golden_yellow"
                     android:text="@={viewModel.threadType}">
                 </AutoCompleteTextView>
+
 <!--                android:dropDownSelector="@drawable/dropdown_menu_society_post_selector"-->
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
