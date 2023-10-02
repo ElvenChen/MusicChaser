@@ -68,6 +68,12 @@
     <string name="submission_event_url_edit_placeholder">活動相關網址(可留空)</string>
     <string name="submission_event_other_note_edit_placeholder">其他內容(可留空)</string>
     <string name="submission_card_text">謝謝您的分享\n讓更多人聽到好音樂\n我們將儘快公布活動</string>
+    <string name="society_post">開話題</string>
+    <string name="society_post_name">話題名稱</string>
+    <string name="society_post_type">話題分類</string>
+    <string name="society_post_content">話題內容</string>
+
+
 
 
 

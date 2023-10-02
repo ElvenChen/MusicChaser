@@ -175,6 +175,12 @@ interface MusicChaserRepository {
         eventOtherNote: String
     )
 
+    fun postThread(
+        threadAuthorId: String,
+        threadName: String,
+        threadType: String,
+        threadContent: String
+    )
 
 
 //    fun getThreadAuthor(

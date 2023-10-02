@@ -838,6 +838,31 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
         }
     }
 
+    override fun postThread(
+        threadAuthorId: String,
+        threadName: String,
+        threadType: String,
+        threadContent: String
+    ) {
+        val docRef = db.collection(COLLECTION_THREADS).document()
+
+        val data = hashMapOf(
+            "thread_id" to docRef.id,
+            "thread_name" to threadName,
+            "thread_type" to threadType,
+            "thread_date" to FieldValue.serverTimestamp(),
+            "thread_author_id" to threadAuthorId,
+            "thread_content" to threadContent,
+            "thread_comments" to 0
+        )
+
+        docRef.set(data).addOnSuccessListener {
+            Log.i("SocietySubmissionPost", "Post Successfully")
+        }.addOnFailureListener {
+            Log.i("SocietySubmissionPost", "Post fail")
+        }
+    }
+
 
     ////////// Management API //////////
     ////////// Management API //////////

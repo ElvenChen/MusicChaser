@@ -299,6 +299,20 @@ class DefaultMusicChaserRepository @Inject constructor(private val musicChaserRe
         musicChaserRemoteDataSource.postEventSubmission(userId, eventName, eventUrl, eventOtherNote)
     }
 
+    override fun postThread(
+        threadAuthorId: String,
+        threadName: String,
+        threadType: String,
+        threadContent: String
+    ) {
+        musicChaserRemoteDataSource.postThread(
+            threadAuthorId,
+            threadName,
+            threadType,
+            threadContent
+        )
+    }
+
 
     ////////// Management API //////////
     ////////// Management API //////////
