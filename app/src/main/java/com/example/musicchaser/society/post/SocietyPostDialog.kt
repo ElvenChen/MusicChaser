@@ -10,8 +10,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.musicchaser.R
 import com.example.musicchaser.databinding.DialogSocietyPostBinding
+import com.example.musicchaser.eventdetail.comment.EventDetailCommentDialogDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -19,6 +21,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class SocietyPostDialog : AppCompatDialogFragment() {
 
     private val viewModel: SocietyPostViewModel by viewModels()
+
+    var popUpCommentSuccessDialog : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +43,7 @@ class SocietyPostDialog : AppCompatDialogFragment() {
 
         // setting drop down menu adapter
         val options = arrayOf("分享", "閒聊")
-        val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_munu_society_post, options)
+        val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_menu_society_post, options)
         binding.societyPostThreadTypeEditArea.setAdapter(adapter)
 
 
@@ -51,11 +55,7 @@ class SocietyPostDialog : AppCompatDialogFragment() {
                 binding.societyPostThreadContentEditArea.text.toString() != ""
             ) {
                 viewModel.postThread()
-                Toast.makeText(
-                    context,
-                    "Your Thread is post!",
-                    Toast.LENGTH_LONG
-                ).show()
+                popUpCommentSuccessDialog = true
                 dismiss()
             } else {
                 Toast.makeText(context, "Please fill in all fields :D", Toast.LENGTH_LONG)
@@ -73,5 +73,16 @@ class SocietyPostDialog : AppCompatDialogFragment() {
 
 
         return binding.root
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (popUpCommentSuccessDialog){
+            findNavController().navigate(
+                SocietyPostDialogDirections.navigateToPopUpMessageDialog(
+                    0, "發佈成功"
+                )
+            )
+        }
     }
 }

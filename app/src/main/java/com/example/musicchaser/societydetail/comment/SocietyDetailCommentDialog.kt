@@ -9,11 +9,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.musicchaser.R
 import com.example.musicchaser.databinding.DialogEventDetailCommentBinding
 import com.example.musicchaser.databinding.DialogSocietyDetailCommentBinding
 import com.example.musicchaser.eventdetail.EventDetailFragmentArgs
 import com.example.musicchaser.eventdetail.comment.EventDetailCommentViewModel
+import com.example.musicchaser.society.post.SocietyPostDialogDirections
 import com.example.musicchaser.societydetail.SocietyDetailFragmentArgs
 import com.facebook.appevents.codeless.internal.ViewHierarchy.setOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,6 +24,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class SocietyDetailCommentDialog : AppCompatDialogFragment() {
 
     private val viewModel: SocietyDetailCommentViewModel by viewModels()
+
+    var popUpCommentSuccessDialog : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +53,7 @@ class SocietyDetailCommentDialog : AppCompatDialogFragment() {
             if ( binding.societyDetailCommentEditArea.text.toString() != "") {
                 viewModel.postCommentForThread()
                 viewModel.addThreadCommentAmounts()
+                popUpCommentSuccessDialog = true
                 dismiss()
             } else {
                 Toast.makeText(context,"Please fill in your comment :D", Toast.LENGTH_LONG).show()
@@ -65,5 +70,16 @@ class SocietyDetailCommentDialog : AppCompatDialogFragment() {
 
 
         return binding.root
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (popUpCommentSuccessDialog){
+            findNavController().navigate(
+                SocietyDetailCommentDialogDirections.navigateToPopUpMessageDialog(
+                    0, "留言成功"
+                )
+            )
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.musicchaser.eventdetail.comment
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.musicchaser.data.EventData
@@ -16,6 +17,8 @@ class EventDetailCommentViewModel @Inject constructor(private val repository: De
     var event: EventData? = null
 
     val commentContent = MutableLiveData<String>()
+
+
 
     fun postCommentForEvent() {
         repository.postCommentForEvent(

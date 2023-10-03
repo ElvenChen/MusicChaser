@@ -113,11 +113,17 @@ class EventDetailFragment : Fragment() {
         // setting add to favorite event function
         binding.eventDetailAddFavoriteButton.setOnClickListener {
             viewModel.addFavoriteEvent()
+            findNavController().navigate(EventDetailFragmentDirections.navigateToPopUpMessageDialog(
+                0,"收藏成功"
+            ))
         }
 
         // setting delete favorite event function
         binding.eventDetailAddFavoriteButtonDone.setOnClickListener {
             viewModel.deleteFavoriteEvent()
+            findNavController().navigate(EventDetailFragmentDirections.navigateToPopUpMessageDialog(
+                1,"取消收藏"
+            ))
         }
 
         // observing event isFavorite

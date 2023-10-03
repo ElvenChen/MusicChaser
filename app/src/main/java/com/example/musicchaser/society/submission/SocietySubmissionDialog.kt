@@ -9,16 +9,20 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.musicchaser.R
 import com.example.musicchaser.artistdetail.ArtistDetailViewModel
 import com.example.musicchaser.databinding.DialogSocietyPostBinding
 import com.example.musicchaser.databinding.DialogSocietySubmissionBinding
+import com.example.musicchaser.society.post.SocietyPostDialogDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SocietySubmissionDialog : AppCompatDialogFragment() {
 
     private val viewModel: SocietySubmissionViewModel by viewModels()
+
+    var popUpCommentSuccessDialog : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +45,7 @@ class SocietySubmissionDialog : AppCompatDialogFragment() {
         binding.societySubmissionSaveButton.setOnClickListener {
             if ( binding.societySubmissionEventNameEditArea.text.toString() != "") {
                 viewModel.postEventSubmission()
-                Toast.makeText(context,"Your submission is submitted! Thank you for your sharing!", Toast.LENGTH_LONG).show()
+                popUpCommentSuccessDialog = true
                 dismiss()
             } else {
                 Toast.makeText(context,"Please fill in the event's name!", Toast.LENGTH_LONG).show()
@@ -58,5 +62,17 @@ class SocietySubmissionDialog : AppCompatDialogFragment() {
 
 
         return binding.root
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (popUpCommentSuccessDialog){
+            findNavController().navigate(
+                SocietySubmissionDialogDirections.navigateToPopUpMessageDialog(
+                    0, "投稿成功"
+                )
+            )
+        }
     }
 }

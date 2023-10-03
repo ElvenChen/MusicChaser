@@ -14,6 +14,7 @@ import com.example.musicchaser.R
 import com.example.musicchaser.databinding.DialogArtistDetailBinding
 import com.example.musicchaser.databinding.FragmentEventDetailBinding
 import com.example.musicchaser.eventdetail.EventDetailFragmentArgs
+import com.example.musicchaser.eventdetail.EventDetailFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -65,11 +66,19 @@ class ArtistDetailDialog : AppCompatDialogFragment() {
         // setting add to favorite artist function
         binding.artistDetailAddFavoriteButton.setOnClickListener {
             viewModel.addFavoriteArtist()
+            findNavController().navigate(
+                ArtistDetailDialogDirections.navigateToPopUpMessageDialog(
+                0,"收藏成功"
+            ))
         }
 
         // setting delete favorite artist function
         binding.artistDetailAddFavoriteButtonDone.setOnClickListener {
             viewModel.deleteFavoriteArtist()
+            findNavController().navigate(
+                ArtistDetailDialogDirections.navigateToPopUpMessageDialog(
+                    1,"取消收藏"
+                ))
         }
 
         // observing artist isFavorite

@@ -45,6 +45,10 @@ class MainActivity : AppCompatActivity() {
                 R.id.eventDetailCommentDialog -> {
                     binding.bottomNavView.visibility = View.GONE
                 }
+                R.id.popUpMessageDialog -> {
+                    binding.bottomNavView.visibility = View.GONE
+                }
+
                 else -> {
                     binding.bottomNavView.visibility = View.VISIBLE
                 }

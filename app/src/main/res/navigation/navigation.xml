@@ -120,6 +120,24 @@
 
 
 
+    <dialog
+        android:id="@+id/popUpMessageDialog"
+        android:name="com.example.musicchaser.popupmessage.PopUpMessageDialog"
+        android:label="PopUpMessageDialog">
+        <argument
+            android:name="messageIconType"
+            app:argType="integer"
+            app:nullable="false">
+        </argument>
+        <argument
+            android:name="messageContent"
+            app:argType="string"
+            app:nullable="false">
+        </argument>
+    </dialog>
+
+
+
     <action
         android:id="@+id/navigate_to_home_fragment"
         app:destination="@id/homeFragment"
@@ -189,6 +207,13 @@
     <action
         android:id="@+id/navigate_to_societydetail_comment_dialog"
         app:destination="@id/societyDetailCommentDialog" />
+
+    <action
+        android:id="@+id/navigate_to_pop_up_message_dialog"
+        app:destination="@id/popUpMessageDialog" />
+
+
+
 
 
     <!--Administration Flavor -->
@@ -415,6 +440,5 @@
     <action
         android:id="@+id/navigate_to_management_user_detail_edit_fragment"
         app:destination="@id/managementUserDetailEditFragment" />
-
 
 </navigation>
