@@ -1,6 +1,8 @@
 package com.example.musicchaser.eventdetail
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.CalendarContract
 import android.text.method.LinkMovementMethod
 import android.text.util.Linkify
 import android.util.Log
@@ -146,6 +148,27 @@ class EventDetailFragment : Fragment() {
         })
 
 
+        // setting calendar-adding intent
+        fun sendCalendarAddingIntent(){
+            val title = event.eventName
+            val description = event.eventAddress
+            val startTime = event.eventDate * 1000
+            val endTime = event.eventDate * 1000
+
+
+            val intent = Intent(Intent.ACTION_INSERT)
+            intent.data = CalendarContract.Events.CONTENT_URI
+            intent.putExtra(CalendarContract.Events.TITLE, title)
+            intent.putExtra(CalendarContract.Events.DESCRIPTION, description)
+            intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startTime)
+            intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime)
+
+            intent.putExtra(CalendarContract.Events.EVENT_TIMEZONE, "GMT")
+
+            startActivity(intent)
+        }
+
+
 
         // setting navigation
         binding.eventDetailBackButton.setOnClickListener {
@@ -164,6 +187,9 @@ class EventDetailFragment : Fragment() {
             findNavController().navigate(EventDetailFragmentDirections.navigateToGoogleMap(event))
         }
 
+        binding.eventDetailAddCalendarButton.setOnClickListener {
+            sendCalendarAddingIntent()
+        }
 
 
         return binding.root
