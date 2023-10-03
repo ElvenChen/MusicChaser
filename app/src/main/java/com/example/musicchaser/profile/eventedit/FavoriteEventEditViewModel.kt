@@ -96,6 +96,12 @@ class FavoriteEventEditViewModel @Inject constructor(private val repository: Def
         )
     }
 
+    val subtractEventAttendantAmounts = fun(eventId:String) {
+        repository.subtractEventAttendantAmounts(
+            eventId
+        )
+    }
+
 
 
     fun nothing() {}

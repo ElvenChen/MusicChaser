@@ -168,6 +168,14 @@ class EventDetailViewModel @Inject constructor(val repository: DefaultMusicChase
         )
     }
 
+    fun addEventAttendantAmounts() {
+        repository.addEventAttendantAmounts(event!!.eventId)
+    }
+
+    fun subtractEventAttendantAmounts() {
+        repository.subtractEventAttendantAmounts(event!!.eventId)
+    }
+
     fun getEventCommentListWithNoAuthorName() {
         dataListWithNoAuthorName.clear()
         repository.getEventCommentList(

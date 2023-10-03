@@ -113,6 +113,7 @@ class EventDetailFragment : Fragment() {
         // setting add to favorite event function
         binding.eventDetailAddFavoriteButton.setOnClickListener {
             viewModel.addFavoriteEvent()
+            viewModel.addEventAttendantAmounts()
             findNavController().navigate(EventDetailFragmentDirections.navigateToPopUpMessageDialog(
                 0,"收藏成功"
             ))
@@ -121,6 +122,7 @@ class EventDetailFragment : Fragment() {
         // setting delete favorite event function
         binding.eventDetailAddFavoriteButtonDone.setOnClickListener {
             viewModel.deleteFavoriteEvent()
+            viewModel.subtractEventAttendantAmounts()
             findNavController().navigate(EventDetailFragmentDirections.navigateToPopUpMessageDialog(
                 1,"取消收藏"
             ))

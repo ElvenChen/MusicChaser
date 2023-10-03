@@ -110,6 +110,12 @@ interface MusicChaserDataSource {
         handleSettingPerformerDataList: () -> Unit
     )
 
+    fun addEventAttendantAmounts(eventId: String)
+
+    fun subtractEventAttendantAmounts(eventId: String)
+
+
+
     ////////// Artist API //////////
     fun getArtistList(
         callback: (DocumentSnapshot?, Exception?) -> Unit,

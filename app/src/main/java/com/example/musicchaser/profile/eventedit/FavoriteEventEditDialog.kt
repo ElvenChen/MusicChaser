@@ -40,7 +40,7 @@ class FavoriteEventEditDialog : AppCompatDialogFragment() {
         // setting favorite event recyclerView adapter
         binding.profileFavoriteEventRecyclerView.layoutManager =
             LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
-        val favoriteEventEditAdapter = FavoriteEventEditListAdapter(viewModel.deleteUserFavoriteEvent)
+        val favoriteEventEditAdapter = FavoriteEventEditListAdapter(viewModel.deleteUserFavoriteEvent,viewModel.subtractEventAttendantAmounts)
         binding.profileFavoriteEventRecyclerView.adapter = favoriteEventEditAdapter
 
 

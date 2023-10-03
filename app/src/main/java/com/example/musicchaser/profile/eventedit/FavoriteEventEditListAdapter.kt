@@ -11,7 +11,10 @@ import com.example.musicchaser.databinding.ViewholderProfileFavoriteEventEditLis
 import com.example.musicchaser.databinding.ViewholderProfileFavoriteEventListBinding
 import com.example.musicchaser.profile.FavoriteEventListAdapter
 
-class FavoriteEventEditListAdapter(private val deleteUserFavoriteEvent: (String) -> Unit) :
+class FavoriteEventEditListAdapter(
+    private val deleteUserFavoriteEvent: (String) -> Unit,
+    private val subtractEventAttendantAmounts: (String) -> Unit
+) :
     ListAdapter<EventData, RecyclerView.ViewHolder>(EventEditListDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -22,19 +25,24 @@ class FavoriteEventEditListAdapter(private val deleteUserFavoriteEvent: (String)
         when (holder) {
             is FavoriteEventEditViewHolder -> {
                 val evenData = getItem(position) as EventData
-                holder.bind(evenData,deleteUserFavoriteEvent)
+                holder.bind(evenData, deleteUserFavoriteEvent, subtractEventAttendantAmounts)
             }
         }
     }
 
     class FavoriteEventEditViewHolder(private val binding: ViewholderProfileFavoriteEventEditListBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: EventData,deleteUserFavoriteEvent: (String) -> Unit) {
+        fun bind(
+            item: EventData,
+            deleteUserFavoriteEvent: (String) -> Unit,
+            subtractEventAttendantAmounts: (String) -> Unit
+        ) {
 
             // data binding
             binding.property = item
             binding.favoriteEventDeleteButton.setOnClickListener {
                 deleteUserFavoriteEvent(item.eventId)
+                subtractEventAttendantAmounts(item.eventId)
             }
             binding.executePendingBindings()
         }
@@ -42,7 +50,11 @@ class FavoriteEventEditListAdapter(private val deleteUserFavoriteEvent: (String)
         companion object {
             fun from(parent: ViewGroup): FavoriteEventEditViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ViewholderProfileFavoriteEventEditListBinding.inflate(layoutInflater, parent, false)
+                val binding = ViewholderProfileFavoriteEventEditListBinding.inflate(
+                    layoutInflater,
+                    parent,
+                    false
+                )
                 return FavoriteEventEditViewHolder(binding)
             }
         }

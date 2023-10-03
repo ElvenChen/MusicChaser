@@ -181,6 +181,14 @@ class DefaultMusicChaserRepository @Inject constructor(private val musicChaserRe
         )
     }
 
+    override fun addEventAttendantAmounts(eventId: String) {
+        musicChaserRemoteDataSource.addEventAttendantAmounts(eventId)
+    }
+
+    override fun subtractEventAttendantAmounts(eventId: String) {
+        musicChaserRemoteDataSource.subtractEventAttendantAmounts(eventId)
+    }
+
     ////////// Artist API //////////
     override fun getArtistList(
         callback: (DocumentSnapshot?, Exception?) -> Unit,

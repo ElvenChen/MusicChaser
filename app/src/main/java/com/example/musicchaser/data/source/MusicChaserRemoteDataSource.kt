@@ -40,6 +40,7 @@ private const val FIELD_EVENT_LATITUDE = "event_latitude"
 private const val FIELD_EVENT_ADDRESS = "event_address"
 private const val FIELD_EVENT_DATE = "event_date"
 private const val FIELD_EVENT_AREA = "event_area"
+private const val FIELD_EVENT_ATTENDANT = "event_attendant"
 private const val FIELD_EVENT_URL = "event_url"
 private const val FIELD_EVENT_MAIN_PIC = "event_main_pic"
 private const val FIELD_EVENT_COMMENTS = "event_comments"
@@ -550,6 +551,72 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
                     Log.i("EventPerformerTest", "Something goes wrong")
                 }
         }
+    }
+
+    override fun addEventAttendantAmounts(eventId: String) {
+        val docRef = db.collection(COLLECTION_EVENTS).document(eventId)
+
+        docRef.get().addOnSuccessListener { documentSnapshot ->
+            if (documentSnapshot.exists()) {
+                val currentEventAttendantAmount = documentSnapshot.getLong(FIELD_EVENT_ATTENDANT)
+
+                if (currentEventAttendantAmount != null) {
+                    val updatedAmount = currentEventAttendantAmount + 1
+
+                    val updates = hashMapOf<String, Any>(
+                        FIELD_EVENT_ATTENDANT to updatedAmount
+                    )
+
+                    docRef.update(updates)
+                        .addOnSuccessListener {
+                            Log.i("EventTest", "This field is updated successfully!!")
+                        }
+                        .addOnFailureListener { e ->
+                            Log.i("EventTest", "This field is fail to update")
+                        }
+                } else {
+                    Log.i("EventTest", "This field is null, can't be updated")
+                }
+            } else {
+                Log.i("EventTest", "This event is not exist")
+            }
+        }
+            .addOnFailureListener { e ->
+                Log.i("EventTest", "Something goes wrong")
+            }
+    }
+
+    override fun subtractEventAttendantAmounts(eventId: String) {
+        val docRef = db.collection(COLLECTION_EVENTS).document(eventId)
+
+        docRef.get().addOnSuccessListener { documentSnapshot ->
+            if (documentSnapshot.exists()) {
+                val currentEventAttendantAmount = documentSnapshot.getLong(FIELD_EVENT_ATTENDANT)
+
+                if (currentEventAttendantAmount != null) {
+                    val updatedAmount = currentEventAttendantAmount - 1
+
+                    val updates = hashMapOf<String, Any>(
+                        FIELD_EVENT_ATTENDANT to updatedAmount
+                    )
+
+                    docRef.update(updates)
+                        .addOnSuccessListener {
+                            Log.i("EventTest", "This field is updated successfully!!")
+                        }
+                        .addOnFailureListener { e ->
+                            Log.i("EventTest", "This field is fail to update")
+                        }
+                } else {
+                    Log.i("EventTest", "This field is null, can't be updated")
+                }
+            } else {
+                Log.i("EventTest", "This event is not exist")
+            }
+        }
+            .addOnFailureListener { e ->
+                Log.i("EventTest", "Something goes wrong")
+            }
     }
 
     ////////// Artist API //////////
