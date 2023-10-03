@@ -136,6 +136,18 @@
         </argument>
     </dialog>
 
+    <fragment
+        android:id="@+id/googleMapFragment"
+        android:name="com.example.musicchaser.eventdetail.googlemap.GoogleMapFragment"
+        android:label="fragment_google_map"
+        tools:layout="@layout/fragment_google_map">
+        <argument
+            android:name="selectedEvent"
+            app:argType="com.example.musicchaser.data.EventData"
+            app:nullable="false">
+        </argument>
+    </fragment>
+
 
 
     <action
@@ -211,6 +223,10 @@
     <action
         android:id="@+id/navigate_to_pop_up_message_dialog"
         app:destination="@id/popUpMessageDialog" />
+
+    <action
+        android:id="@+id/navigate_to_google_map"
+        app:destination="@id/googleMapFragment" />
 
 
 

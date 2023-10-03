@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MusicChaser"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAOPDFHCE2K86UTl9Xa9WcSlYoyq3N1pto" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

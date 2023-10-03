@@ -21,6 +21,10 @@ import com.example.musicchaser.databinding.FragmentEventBinding
 import com.example.musicchaser.databinding.FragmentEventDetailBinding
 import com.example.musicchaser.event.EventListAdapter
 import com.example.musicchaser.event.EventViewModel
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.MarkerOptions
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -154,6 +158,10 @@ class EventDetailFragment : Fragment() {
                     event
                 )
             )
+        }
+
+        binding.eventDetailAddressButton.setOnClickListener {
+            findNavController().navigate(EventDetailFragmentDirections.navigateToGoogleMap(event))
         }
 
 
