@@ -8,4 +8,9 @@
 
     <style name="Theme.MusicChaser" parent="Base.Theme.MusicChaser" />
 
+    <style name="SplashTheme" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@color/blue_grey</item>
+        <item name="android:windowBackground">@drawable/windows_background</item>
+    </style>
+
 </resources>
