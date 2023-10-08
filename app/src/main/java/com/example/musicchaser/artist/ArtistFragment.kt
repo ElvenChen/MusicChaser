@@ -63,6 +63,9 @@ class ArtistFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText.isNullOrEmpty()) {
+                    viewModel.getArtistListResult()
+                }
                 return true
             }
         })

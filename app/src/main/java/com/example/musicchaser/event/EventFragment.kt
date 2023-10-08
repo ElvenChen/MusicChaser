@@ -52,6 +52,8 @@ class EventFragment : Fragment() {
         // setting search bar logic
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
+                Log.i("EventTest", "Search triggered")
+
                 if (query != null) {
                     viewModel.getSearchedEventListResult(query)
 
@@ -63,6 +65,9 @@ class EventFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText.isNullOrEmpty()) {
+                    viewModel.getEventListResult()
+                }
                 return true
             }
         })
@@ -77,12 +82,15 @@ class EventFragment : Fragment() {
         binding.layoutSwipeRefreshEvent.setOnRefreshListener(listener)
 
 
-
         // setting navigation
         viewModel.navigateToSelectedEvent.observe(viewLifecycleOwner, Observer {
             Log.i("EventTest", "Event Data : $it")
-            it?.let{
-                findNavController().navigate(EventFragmentDirections.navigateToEventdetailFragment(it))
+            it?.let {
+                findNavController().navigate(
+                    EventFragmentDirections.navigateToEventdetailFragment(
+                        it
+                    )
+                )
                 viewModel.displayEventDetailsCompleted()
             }
         })
