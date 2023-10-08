@@ -39,6 +39,9 @@ class SocietySubmissionDialog : AppCompatDialogFragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+        // setting loading fade in animation
+        binding.root.alpha = 0f
+        binding.root.animate().alpha(1f).setDuration(500).start()
 
 
         // setting finish button

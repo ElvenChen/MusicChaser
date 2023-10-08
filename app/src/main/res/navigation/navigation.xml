@@ -76,7 +76,7 @@
             android:id="@+id/action_societyPostDialog_to_societyFragment"
             app:destination="@id/societyFragment"
             app:popUpTo="@id/societyFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </dialog>
 
     <dialog
@@ -194,7 +194,11 @@
 
     <action
         android:id="@+id/navigate_to_eventdetail_fragment"
-        app:destination="@id/eventDetailFragment" />
+        app:destination="@id/eventDetailFragment"
+        app:enterAnim="@anim/slide_in_from_right"
+        app:exitAnim="@anim/slide_out_to_left"
+        app:popEnterAnim="@anim/slide_in_from_left"
+        app:popExitAnim="@anim/slide_out_to_right"/>
 
     <action
         android:id="@+id/navigate_to_eventdetail_comment_dialog"
@@ -206,7 +210,11 @@
 
     <action
         android:id="@+id/navigate_to_societydetail_fragment"
-        app:destination="@id/societyDetailFragment" />
+        app:destination="@id/societyDetailFragment"
+        app:enterAnim="@anim/slide_in_from_right"
+        app:exitAnim="@anim/slide_out_to_left"
+        app:popEnterAnim="@anim/slide_in_from_left"
+        app:popExitAnim="@anim/slide_out_to_right"/>
 
     <action
         android:id="@+id/navigate_to_society_post_dialog"
@@ -226,7 +234,11 @@
 
     <action
         android:id="@+id/navigate_to_google_map"
-        app:destination="@id/googleMapFragment" />
+        app:destination="@id/googleMapFragment"
+        app:enterAnim="@anim/slide_in_from_right"
+        app:exitAnim="@anim/slide_out_to_left"
+        app:popEnterAnim="@anim/slide_in_from_left"
+        app:popExitAnim="@anim/slide_out_to_right"/>
 
 
 
@@ -404,11 +416,19 @@
 
     <action
         android:id="@+id/navigate_to_management_event_fragment"
-        app:destination="@id/managementEventFragment" />
+        app:destination="@id/managementEventFragment"
+        app:enterAnim="@anim/slide_in_from_right"
+        app:exitAnim="@anim/slide_out_to_left"
+        app:popEnterAnim="@anim/slide_in_from_left"
+        app:popExitAnim="@anim/slide_out_to_right"/>
 
     <action
         android:id="@+id/navigate_to_management_event_detail_edit_fragment"
-        app:destination="@id/managementEventDetailEditFragment" />
+        app:destination="@id/managementEventDetailEditFragment"
+        app:enterAnim="@anim/slide_in_from_right"
+        app:exitAnim="@anim/slide_out_to_left"
+        app:popEnterAnim="@anim/slide_in_from_left"
+        app:popExitAnim="@anim/slide_out_to_right"/>
 
     <action
         android:id="@+id/navigate_to_management_event_detail_delete_dialog"
@@ -416,11 +436,19 @@
 
     <action
         android:id="@+id/navigate_to_management_event_detail_post_fragment"
-        app:destination="@id/managementEventDetailPostFragment" />
+        app:destination="@id/managementEventDetailPostFragment"
+        app:enterAnim="@anim/slide_in_from_right"
+        app:exitAnim="@anim/slide_out_to_left"
+        app:popEnterAnim="@anim/slide_in_from_left"
+        app:popExitAnim="@anim/slide_out_to_right"/>
 
     <action
         android:id="@+id/navigate_to_management_event_detail_add_performer_fragment"
-        app:destination="@id/managementEventDetailAddPerformerFragment" />
+        app:destination="@id/managementEventDetailAddPerformerFragment"
+        app:enterAnim="@anim/slide_in_from_right"
+        app:exitAnim="@anim/slide_out_to_left"
+        app:popEnterAnim="@anim/slide_in_from_left"
+        app:popExitAnim="@anim/slide_out_to_right"/>
 
     <action
         android:id="@+id/navigate_to_management_event_performer_detail_delete_dialog"
@@ -434,11 +462,19 @@
 
     <action
         android:id="@+id/navigate_to_management_artist_fragment"
-        app:destination="@id/managementArtistFragment" />
+        app:destination="@id/managementArtistFragment"
+        app:enterAnim="@anim/slide_in_from_right"
+        app:exitAnim="@anim/slide_out_to_left"
+        app:popEnterAnim="@anim/slide_in_from_left"
+        app:popExitAnim="@anim/slide_out_to_right"/>
 
     <action
         android:id="@+id/navigate_to_management_artist_detail_edit_fragment"
-        app:destination="@id/managementArtistDetailEditFragment" />
+        app:destination="@id/managementArtistDetailEditFragment"
+        app:enterAnim="@anim/slide_in_from_right"
+        app:exitAnim="@anim/slide_out_to_left"
+        app:popEnterAnim="@anim/slide_in_from_left"
+        app:popExitAnim="@anim/slide_out_to_right"/>
 
     <action
         android:id="@+id/navigate_to_management_artist_detail_delete_dialog"
@@ -446,15 +482,28 @@
 
     <action
         android:id="@+id/navigate_to_management_artist_detail_post_fragment"
-        app:destination="@id/managementArtistDetailPostFragment" />
+        app:destination="@id/managementArtistDetailPostFragment"
+        app:enterAnim="@anim/slide_in_from_right"
+        app:exitAnim="@anim/slide_out_to_left"
+        app:popEnterAnim="@anim/slide_in_from_left"
+        app:popExitAnim="@anim/slide_out_to_right"/>
+
 
 
     <action
         android:id="@+id/navigate_to_management_user_fragment"
-        app:destination="@id/managementUserFragment" />
+        app:destination="@id/managementUserFragment"
+        app:enterAnim="@anim/slide_in_from_right"
+        app:exitAnim="@anim/slide_out_to_left"
+        app:popEnterAnim="@anim/slide_in_from_left"
+        app:popExitAnim="@anim/slide_out_to_right"/>
 
     <action
         android:id="@+id/navigate_to_management_user_detail_edit_fragment"
-        app:destination="@id/managementUserDetailEditFragment" />
+        app:destination="@id/managementUserDetailEditFragment"
+        app:enterAnim="@anim/slide_in_from_right"
+        app:exitAnim="@anim/slide_out_to_left"
+        app:popEnterAnim="@anim/slide_in_from_left"
+        app:popExitAnim="@anim/slide_out_to_right"/>
 
 </navigation>

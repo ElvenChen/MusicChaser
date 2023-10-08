@@ -48,6 +48,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.popUpMessageDialog -> {
                     binding.bottomNavView.visibility = View.GONE
                 }
+                R.id.googleMapFragment -> {
+                    binding.bottomNavView.visibility = View.GONE
+                }
 
                 else -> {
                     binding.bottomNavView.visibility = View.VISIBLE

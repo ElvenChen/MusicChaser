@@ -35,6 +35,10 @@ class PopUpMessageDialog : AppCompatDialogFragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+        // setting loading fade in animation
+        binding.root.alpha = 0f
+        binding.root.animate().alpha(1f).setDuration(500).start()
+
         // grab navigation sage-arg
         val messageIconType = PopUpMessageDialogArgs.fromBundle(requireArguments()).messageIconType
         val messageContent = PopUpMessageDialogArgs.fromBundle(requireArguments()).messageContent
