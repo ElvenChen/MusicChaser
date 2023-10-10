@@ -45,6 +45,7 @@ class EventFragment : Fragment() {
         viewModel.dataListForAdapter.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
             adapter.notifyDataSetChanged()
+            binding.eventProgressBar.visibility = View.GONE
             binding.layoutSwipeRefreshEvent.isRefreshing = false
         })
 
@@ -56,6 +57,7 @@ class EventFragment : Fragment() {
 
                 if (query != null) {
                     viewModel.getSearchedEventListResult(query)
+                    binding.eventProgressBar.visibility = View.VISIBLE
 
                     val inputMethodManager =
                         context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -67,6 +69,7 @@ class EventFragment : Fragment() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText.isNullOrEmpty()) {
                     viewModel.getEventListResult()
+                    binding.eventProgressBar.visibility = View.VISIBLE
                 }
                 return true
             }
@@ -77,6 +80,7 @@ class EventFragment : Fragment() {
         // setting drop down refresh all event
         val listener = SwipeRefreshLayout.OnRefreshListener {
             viewModel.getEventListResult()
+            binding.eventProgressBar.visibility = View.VISIBLE
             binding.layoutSwipeRefreshEvent.isRefreshing = true
         }
         binding.layoutSwipeRefreshEvent.setOnRefreshListener(listener)

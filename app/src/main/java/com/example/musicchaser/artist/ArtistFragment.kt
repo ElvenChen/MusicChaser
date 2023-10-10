@@ -46,6 +46,7 @@ class ArtistFragment : Fragment() {
         viewModel.dataListForAdapter.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
             adapter.notifyDataSetChanged()
+            binding.artistProgressBar.visibility = View.GONE
             binding.layoutSwipeRefreshArtist.isRefreshing = false
         })
 
@@ -54,6 +55,7 @@ class ArtistFragment : Fragment() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
                     viewModel.getSearchedArtistListResult(query)
+                    binding.artistProgressBar.visibility = View.VISIBLE
 
                     val inputMethodManager =
                         context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -65,6 +67,7 @@ class ArtistFragment : Fragment() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText.isNullOrEmpty()) {
                     viewModel.getArtistListResult()
+                    binding.artistProgressBar.visibility = View.VISIBLE
                 }
                 return true
             }
@@ -75,6 +78,7 @@ class ArtistFragment : Fragment() {
         // setting drop down refresh all artist
         val listener = SwipeRefreshLayout.OnRefreshListener {
             viewModel.getArtistListResult()
+            binding.artistProgressBar.visibility = View.VISIBLE
             binding.layoutSwipeRefreshArtist.isRefreshing = true
         }
         binding.layoutSwipeRefreshArtist.setOnRefreshListener(listener)

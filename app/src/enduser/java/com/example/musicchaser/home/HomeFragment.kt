@@ -73,6 +73,7 @@ class HomeFragment : Fragment() {
         viewModel.hotEventDataListForAdapter.observe(viewLifecycleOwner, Observer { hotEventList ->
             hotEventAdapter.submitList(hotEventList)
             hotEventAdapter.notifyDataSetChanged()
+            binding.homeHotEventProgressBar.visibility = View.GONE
             binding.homeHotEventRecyclerView.scrollToPosition(hotEventList.size * 1000)
 
             viewModel.galleryDotAmount = hotEventList.size
@@ -108,6 +109,7 @@ class HomeFragment : Fragment() {
         viewModel.relativeEventDataListForAdapter.observe(viewLifecycleOwner, Observer {
             favoriteArtistRelativeEventAdapter.submitList(it)
             favoriteArtistRelativeEventAdapter.notifyDataSetChanged()
+            binding.homeFavoriteArtistRelativeEventProgressBar.visibility = View.GONE
         })
 
 
@@ -116,6 +118,7 @@ class HomeFragment : Fragment() {
         viewModel.potentialArtistDataListForAdapter.observe(viewLifecycleOwner, Observer {
             potentialFavoriteArtistAdapter.submitList(it)
             potentialFavoriteArtistAdapter.notifyDataSetChanged()
+            binding.homePotentialFavoriteArtistProgressBar.visibility = View.GONE
         })
 
 

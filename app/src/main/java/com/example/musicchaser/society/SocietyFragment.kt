@@ -58,6 +58,7 @@ class SocietyFragment : Fragment() {
             Log.i("ThreadTest", "Observe Completed thread list from Fragment = $it")
             adapter.submitList(it)
             adapter.notifyDataSetChanged()
+            binding.societyProgressBar.visibility = View.GONE
             binding.layoutSwipeRefreshThread.isRefreshing = false
         })
 
@@ -68,6 +69,7 @@ class SocietyFragment : Fragment() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
                     viewModel.getSearchedThreadListResult(query)
+                    binding.societyProgressBar.visibility = View.VISIBLE
 
                     val inputMethodManager =
                         context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -77,6 +79,10 @@ class SocietyFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText.isNullOrEmpty()) {
+                    viewModel.getThreadListWithNoAuthorName()
+                    binding.societyProgressBar.visibility = View.VISIBLE
+                }
                 return true
             }
         })
@@ -86,6 +92,7 @@ class SocietyFragment : Fragment() {
         // setting drop down refresh all thread
         val listener = SwipeRefreshLayout.OnRefreshListener {
             viewModel.getThreadListWithNoAuthorName()
+            binding.societyProgressBar.visibility = View.VISIBLE
             binding.layoutSwipeRefreshThread.isRefreshing = true
         }
         binding.layoutSwipeRefreshThread.setOnRefreshListener(listener)
