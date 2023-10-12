@@ -47,6 +47,11 @@ class ArtistFragment : Fragment() {
             adapter.submitList(it)
             adapter.notifyDataSetChanged()
             binding.artistProgressBar.visibility = View.GONE
+            if (it.isNotEmpty()){
+                binding.artistSearchNoResultMessage.visibility = View.GONE
+            } else {
+                binding.artistSearchNoResultMessage.visibility = View.VISIBLE
+            }
             binding.layoutSwipeRefreshArtist.isRefreshing = false
         })
 

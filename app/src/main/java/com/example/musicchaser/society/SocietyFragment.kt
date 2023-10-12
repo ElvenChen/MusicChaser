@@ -59,6 +59,11 @@ class SocietyFragment : Fragment() {
             adapter.submitList(it)
             adapter.notifyDataSetChanged()
             binding.societyProgressBar.visibility = View.GONE
+            if (it.isNotEmpty()){
+                binding.societySearchNoResultMessage.visibility = View.GONE
+            } else {
+                binding.societySearchNoResultMessage.visibility = View.VISIBLE
+            }
             binding.layoutSwipeRefreshThread.isRefreshing = false
         })
 

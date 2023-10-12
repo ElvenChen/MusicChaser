@@ -828,34 +828,38 @@ object MusicChaserRemoteDataSource : MusicChaserDataSource {
         handleCompletedThreadListResult: (ThreadData) -> Unit,
         handleSettingDataList: () -> Unit
     ) {
-        threadListWithNoAuthorName.forEach {
-            val collectionRef = db.collection(COLLECTION_USERS)
-            val searchField = FIELD_USER_ID
+        if (threadListWithNoAuthorName.isEmpty()) {
+            handleSettingDataList()
+        } else {
+            threadListWithNoAuthorName.forEach {
+                val collectionRef = db.collection(COLLECTION_USERS)
+                val searchField = FIELD_USER_ID
 
-            collectionRef.whereEqualTo(searchField, it.threadAuthor)
-                .get().addOnSuccessListener { querySnapshot ->
+                collectionRef.whereEqualTo(searchField, it.threadAuthor)
+                    .get().addOnSuccessListener { querySnapshot ->
 
-                    for (document in querySnapshot.documents) {
-                        val data = document.data
+                        for (document in querySnapshot.documents) {
+                            val data = document.data
 
-                        Log.i("ThreadTest", "Author Content =  $data")
+                            Log.i("ThreadTest", "Author Content =  $data")
 
-                        val dataTobeAddToList = ThreadData(
-                            threadId = it.threadId,
-                            threadName = it.threadName,
-                            threadType = it.threadType,
-                            threadDate = it.threadDate,
-                            threadAuthor = (data!!["user_nickname"]).toString(),
-                            threadContent = it.threadContent,
-                            threadComments = it.threadComments
-                        )
-                        handleCompletedThreadListResult(dataTobeAddToList)
+                            val dataTobeAddToList = ThreadData(
+                                threadId = it.threadId,
+                                threadName = it.threadName,
+                                threadType = it.threadType,
+                                threadDate = it.threadDate,
+                                threadAuthor = (data!!["user_nickname"]).toString(),
+                                threadContent = it.threadContent,
+                                threadComments = it.threadComments
+                            )
+                            handleCompletedThreadListResult(dataTobeAddToList)
+                        }
+                        handleSettingDataList()
                     }
-                    handleSettingDataList()
-                }
-                .addOnFailureListener { exception ->
-                    Log.i("ThreadTest", "Something goes wrong")
-                }
+                    .addOnFailureListener { exception ->
+                        Log.i("ThreadTest", "Something goes wrong")
+                    }
+            }
         }
     }
 

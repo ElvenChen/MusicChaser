@@ -46,6 +46,11 @@ class EventFragment : Fragment() {
             adapter.submitList(it)
             adapter.notifyDataSetChanged()
             binding.eventProgressBar.visibility = View.GONE
+            if (it.isNotEmpty()){
+                binding.eventSearchNoResultMessage.visibility = View.GONE
+            } else {
+                binding.eventSearchNoResultMessage.visibility = View.VISIBLE
+            }
             binding.layoutSwipeRefreshEvent.isRefreshing = false
         })
 
