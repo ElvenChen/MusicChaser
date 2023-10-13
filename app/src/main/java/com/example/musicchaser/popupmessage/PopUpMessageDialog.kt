@@ -1,6 +1,7 @@
 package com.example.musicchaser.popupmessage
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,10 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import com.example.musicchaser.NavigationDirections
 import com.example.musicchaser.R
 import com.example.musicchaser.databinding.DialogPopUpMessageBinding
 import com.example.musicchaser.databinding.DialogSocietyDetailCommentBinding
@@ -66,5 +71,19 @@ class PopUpMessageDialog : AppCompatDialogFragment() {
 
 
         return binding.root
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        val destinationId = NavHostFragment.findNavController(this).currentDestination?.id
+
+        val navBackStackEntry = NavHostFragment.findNavController(this).getBackStackEntry(destinationId ?: 0)
+        val sourceFragment = navBackStackEntry.destination
+
+        // reloading profile fragment page
+        if (sourceFragment.label == "ProfileFragment"){
+            findNavController().navigate(NavigationDirections.navigateToProfileFragment())
+        }
+
     }
 }
