@@ -156,6 +156,18 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/profile_basic_info_background" />
 
+                <TextView
+                    android:id="@+id/profile_favorite_event_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/noto_sans"
+                    android:letterSpacing="@dimen/letter_spacing"
+                    android:textSize="@dimen/content_font_size"
+                    app:getFavoriteCount="@{viewModel.eventDataListForAdapter.size()}"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/profile_favorite_event_title"
+                    app:layout_constraintStart_toEndOf="@+id/profile_favorite_event_title" />
+
                 <Button
                     android:id="@+id/profile_favorite_event_edit_button"
                     style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
@@ -209,6 +221,18 @@
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/profile_favorite_event_recycler_view" />
+
+                <TextView
+                    android:id="@+id/profile_favorite_artist_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/noto_sans"
+                    android:letterSpacing="@dimen/letter_spacing"
+                    android:textSize="@dimen/content_font_size"
+                    app:getFavoriteCount="@{viewModel.artistDataListForAdapter.size()}"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/profile_favorite_artist_title"
+                    app:layout_constraintStart_toEndOf="@+id/profile_favorite_artist_title" />
 
                 <Button
                     android:id="@+id/profile_favorite_artist_edit_button"

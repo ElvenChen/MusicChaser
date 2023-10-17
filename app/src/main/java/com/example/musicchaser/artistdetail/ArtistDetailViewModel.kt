@@ -79,7 +79,9 @@ class ArtistDetailViewModel  @Inject constructor(private val repository: Default
         recentEventDataList.sortBy { it.eventDate }
         Log.i("ArtistRecentEventTest", "**Recent Event list Completed Data = $recentEventDataList")
 
-        _recentEventDataForView.value = recentEventDataList[0]
+        if(recentEventDataList.isNotEmpty()){
+            _recentEventDataForView.value = recentEventDataList[0]
+        }
         Log.i("ArtistRecentEventTest", "Recent Event Completed Data = ${_recentEventDataForView.value}")
     }
 

@@ -176,6 +176,8 @@
                             android:text="@{viewModel.event.eventUrl}"
                             android:textColor="@color/blue_grey"
                             android:textSize="@dimen/content_font_size"
+                            android:maxLines="2"
+                            android:ellipsize="end"
                             app:layout_constraintBottom_toBottomOf="@+id/event_detail_web_title"
                             app:layout_constraintStart_toEndOf="@id/event_detail_web_title"
                             app:layout_constraintTop_toTopOf="@+id/event_detail_web_title"

@@ -50,6 +50,12 @@ fun getEventDay(textView: TextView, eventDate: Long) {
     textView.text = eventDate.toFormattedDay()
 }
 
+@BindingAdapter("getFavoriteCount")
+fun getFavoriteCount(textView: TextView, favoriteCount: Int) {
+
+    textView.text = "共${favoriteCount}項"
+}
+
 
 ////////// Event Detail Page //////////
 @BindingAdapter("getEventAttendant")
