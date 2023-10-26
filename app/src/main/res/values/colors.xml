@@ -2,4 +2,17 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="bottom_nav_bar_background">#F5F5F5</color>
+    <color name="light_grey">#F5F5F5</color>
+    <color name="dark_grey">#CCCCCC</color>
+    <color name="golden_yellow">#E5C570</color>
+    <color name="dark_golden_yellow">#655223</color>
+    <color name="blue_grey">#9CB3BE</color>
+    <color name="glow_green">#42BCB6</color>
+    <color name="dark_red">#A71D1D</color>
+    <color name="transparent_standard">#66000000</color>
+    <color name="transparent_standard_dark">#CC000000</color>
+    <color name="transparent_standard_white">#BEFFFFFF</color>
+
+
 </resources>

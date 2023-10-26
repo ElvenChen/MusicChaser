@@ -5,6 +5,8 @@ plugins {
     id "androidx.navigation.safeargs.kotlin"
     id 'kotlin-parcelize'
     id 'com.google.gms.google-services'
+    id 'com.google.dagger.hilt.android'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
 apply plugin: 'kotlin-android'
@@ -28,18 +30,27 @@ android {
     productFlavors{
         enduser {
             dimension "client"
+            applicationId "com.example.musicchaser.enduser"
+            resValue "string" , "app_name" , "MusicChaser enduser"
         }
 
         administrater {
             dimension "client"
+            applicationId "com.example.musicchaser.administrator"
+            resValue "string" , "app_name" , "MusicChaser administrator"
         }
     }
+
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    buildFeatures {
+        dataBinding true
     }
 
     compileOptions {
@@ -104,6 +115,12 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.2.2"))
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.firebase:firebase-firestore-ktx")
+
+    implementation("com.google.dagger:hilt-android:2.44")
+    kapt("com.google.dagger:hilt-android-compiler:2.44")
+
+    implementation ("com.google.android.gms:play-services-maps:18.1.0")
+
 }
 
 kapt {

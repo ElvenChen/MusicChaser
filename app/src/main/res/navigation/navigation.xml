@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.musicchaser.home.HomeFragment"
+        android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/eventFragment"
+        android:name="com.example.musicchaser.event.EventFragment"
+        android:label="EventFragment" />
+
+    <fragment
+        android:id="@+id/eventDetailFragment"
+        android:name="com.example.musicchaser.eventdetail.EventDetailFragment"
+        android:label="EventDetailFragment">
+        <argument
+            android:name="selectedEvent"
+            app:argType="com.example.musicchaser.data.EventData"
+            app:nullable="false">
+        </argument>
+    </fragment>
+
+    <fragment
+        android:id="@+id/artistFragment"
+        android:name="com.example.musicchaser.artist.ArtistFragment"
+        android:label="ArtistFragment" />
+
+    <dialog
+        android:id="@+id/artistDetailDialog"
+        android:name="com.example.musicchaser.artistdetail.ArtistDetailDialog"
+        android:label="ArtistDetailDialog">
+        <argument
+            android:name="selectedArtist"
+            app:argType="com.example.musicchaser.data.ArtistData"
+            app:nullable="false">
+        </argument>
+    </dialog>
+
+    <fragment
+        android:id="@+id/societyFragment"
+        android:name="com.example.musicchaser.society.SocietyFragment"
+        android:label="SocietyFragment" />
+
+    <fragment
+        android:id="@+id/societyDetailFragment"
+        android:name="com.example.musicchaser.societydetail.SocietyDetailFragment"
+        android:label="SocietyDetailFragment">
+        <argument
+            android:name="selectedThread"
+            app:argType="com.example.musicchaser.data.ThreadData"
+            app:nullable="false">
+        </argument>
+    </fragment>
+
+    <dialog
+        android:id="@+id/societyDetailCommentDialog"
+        android:name="com.example.musicchaser.societydetail.comment.SocietyDetailCommentDialog"
+        android:label="SocietyDetailCommentDialog">
+        <argument
+            android:name="selectedThread"
+            app:argType="com.example.musicchaser.data.ThreadData"
+            app:nullable="false">
+        </argument>
+    </dialog>
+
+    <dialog
+        android:id="@+id/societyPostDialog"
+        android:name="com.example.musicchaser.society.post.SocietyPostDialog"
+        android:label="SocietyPostDialog" >
+        <action
+            android:id="@+id/action_societyPostDialog_to_societyFragment"
+            app:destination="@id/societyFragment"
+            app:popUpTo="@id/societyFragment"
+            app:popUpToInclusive="true" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/societySubmissionDialog"
+        android:name="com.example.musicchaser.society.submission.SocietySubmissionDialog"
+        android:label="SocietySubmissionDialog" />
+
+
+
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.musicchaser.profile.ProfileFragment"
+        android:label="ProfileFragment" />
+
+    <dialog
+        android:id="@+id/basicInfoEditDialog"
+        android:name="com.example.musicchaser.profile.basicinfoedit.BasicInfoEditDialog"
+        android:label="BasicInfoEditDialog" />
+
+    <dialog
+        android:id="@+id/favoriteEventEditDialog"
+        android:name="com.example.musicchaser.profile.eventedit.FavoriteEventEditDialog"
+        android:label="FavoriteEventEditDialog" />
+
+    <dialog
+        android:id="@+id/favoriteArtistEditDialog"
+        android:name="com.example.musicchaser.profile.artistedit.FavoriteArtistEditDialog"
+        android:label="FavoriteArtistEditDialog" />
+
+    <dialog
+        android:id="@+id/eventDetailCommentDialog"
+        android:name="com.example.musicchaser.eventdetail.comment.EventDetailCommentDialog"
+        android:label="EventDetailCommentDialog">
+        <argument
+            android:name="selectedEvent"
+            app:argType="com.example.musicchaser.data.EventData"
+            app:nullable="false">
+        </argument>
+    </dialog>
+
+
+
+    <dialog
+        android:id="@+id/popUpMessageDialog"
+        android:name="com.example.musicchaser.popupmessage.PopUpMessageDialog"
+        android:label="PopUpMessageDialog">
+        <argument
+            android:name="messageIconType"
+            app:argType="integer"
+            app:nullable="false">
+        </argument>
+        <argument
+            android:name="messageContent"
+            app:argType="string"
+            app:nullable="false">
+        </argument>
+    </dialog>
+
+    <fragment
+        android:id="@+id/googleMapFragment"
+        android:name="com.example.musicchaser.eventdetail.googlemap.GoogleMapFragment"
+        android:label="fragment_google_map"
+        tools:layout="@layout/fragment_google_map">
+        <argument
+            android:name="selectedEvent"
+            app:argType="com.example.musicchaser.data.EventData"
+            app:nullable="false">
+        </argument>
+    </fragment>
+
+
+
+    <action
+        android:id="@+id/navigate_to_home_fragment"
+        app:destination="@id/homeFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
+    <action
+        android:id="@+id/navigate_to_event_fragment"
+        app:destination="@id/eventFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
+    <action
+        android:id="@+id/navigate_to_artist_fragment"
+        app:destination="@id/artistFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
+    <action
+        android:id="@+id/navigate_to_society_fragment"
+        app:destination="@id/societyFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
+    <action
+        android:id="@+id/navigate_to_profile_fragment"
+        app:destination="@id/profileFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
+    <action
+        android:id="@+id/navigate_to_basic_info_dialog"
+        app:destination="@id/basicInfoEditDialog" />
+
+    <action
+        android:id="@+id/navigate_to_favorite_event_edit_dialog"
+        app:destination="@id/favoriteEventEditDialog" />
+
+    <action
+        android:id="@+id/navigate_to_favorite_artist_edit_dialog"
+        app:destination="@id/favoriteArtistEditDialog" />
+
+    <action
+        android:id="@+id/navigate_to_eventdetail_fragment"
+        app:destination="@id/eventDetailFragment"
+        app:enterAnim="@anim/slide_in_from_right"
+        app:exitAnim="@anim/slide_out_to_left"
+        app:popEnterAnim="@anim/slide_in_from_left"
+        app:popExitAnim="@anim/slide_out_to_right"/>
+
+    <action
+        android:id="@+id/navigate_to_eventdetail_comment_dialog"
+        app:destination="@id/eventDetailCommentDialog" />
+
+    <action
+        android:id="@+id/navigate_to_artistdetail_dialog"
+        app:destination="@id/artistDetailDialog" />
+
+    <action
+        android:id="@+id/navigate_to_societydetail_fragment"
+        app:destination="@id/societyDetailFragment"
+        app:enterAnim="@anim/slide_in_from_right"
+        app:exitAnim="@anim/slide_out_to_left"
+        app:popEnterAnim="@anim/slide_in_from_left"
+        app:popExitAnim="@anim/slide_out_to_right"/>
+
+    <action
+        android:id="@+id/navigate_to_society_post_dialog"
+        app:destination="@id/societyPostDialog" />
+
+    <action
+        android:id="@+id/navigate_to_society_submission_dialog"
+        app:destination="@id/societySubmissionDialog" />
+
+    <action
+        android:id="@+id/navigate_to_societydetail_comment_dialog"
+        app:destination="@id/societyDetailCommentDialog" />
+
+    <action
+        android:id="@+id/navigate_to_pop_up_message_dialog"
+        app:destination="@id/popUpMessageDialog" />
+
+    <action
+        android:id="@+id/navigate_to_google_map"
+        app:destination="@id/googleMapFragment"
+        app:enterAnim="@anim/slide_in_from_right"
+        app:exitAnim="@anim/slide_out_to_left"
+        app:popEnterAnim="@anim/slide_in_from_left"
+        app:popExitAnim="@anim/slide_out_to_right"/>
+
+
+
+    <!--Administration Flavor -->
+
+
+
+    <fragment
+        android:id="@+id/managementEventFragment"
+        android:name="com.example.musicchaser.managementevent.ManagementEventFragment"
+        android:label="fragment_management_event"
+        tools:layout="@layout/fragment_management_event" />
+
+    <fragment
+        android:id="@+id/managementEventDetailEditFragment"
+        android:name="com.example.musicchaser.managementeventdetail.edit.ManagementEventDetailEditFragment"
+        android:label="ManagementEventDetailEditFragment">
+        <argument
+            android:name="selectedEditEvent"
+            app:argType="com.example.musicchaser.data.EventData"
+            app:nullable="false">
+        </argument>
+        <action
+            android:id="@+id/action_managementEventDetailEditFragment_to_managementEventFragment"
+            app:destination="@id/managementEventFragment"
+            app:popUpTo="@id/managementEventFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+
+    <dialog
+        android:id="@+id/managementEventDetailDeleteDialog"
+        android:name="com.example.musicchaser.managementeventdetail.delete.ManagementEventDetailDeleteDialog"
+        android:label="ManagementEventDetailDeleteDialog">
+        <argument
+            android:name="selectedEditEvent"
+            app:argType="com.example.musicchaser.data.EventData"
+            app:nullable="false">
+        </argument>
+        <action
+            android:id="@+id/action_managementEventDetailDeleteDialog_to_managementEventFragment"
+            app:destination="@id/managementEventFragment"
+            app:popUpTo="@id/managementEventFragment"
+            app:popUpToInclusive="true"/>
+    </dialog>
+
+    <fragment
+        android:id="@+id/managementEventDetailPostFragment"
+        android:name="com.example.musicchaser.managementeventdetail.post.ManagementEventDetailPostFragment"
+        android:label="ManagementEventDetailPostFragment" >
+        <action
+            android:id="@+id/action_managementEventDetailPostFragment_to_managementEventFragment"
+            app:destination="@id/managementEventFragment"
+            app:popUpTo="@id/managementEventFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/managementEventDetailAddPerformerFragment"
+        android:name="com.example.musicchaser.managementeventdetail.addperformer.ManagementEventDetailAddPerformerFragment"
+        android:label="ManagementEventDetailAddPerformerFragment">
+        <argument
+            android:name="selectedEditEvent"
+            app:argType="com.example.musicchaser.data.EventData"
+            app:nullable="false">
+        </argument>
+    </fragment>
+
+    <dialog
+        android:id="@+id/managementEventPerformerDetailDeleteDialog"
+        android:name="com.example.musicchaser.managementeventdetail.addperformer.delete.ManagementEventPerformerDetailDeleteDialog"
+        android:label="ManagementEventPerformerDetailDeleteDialog">
+        <argument
+            android:name="selectedEditEvent"
+            app:argType="com.example.musicchaser.data.EventData"
+            app:nullable="false">
+        </argument>
+        <argument
+            android:name="selectedEditPerformer"
+            app:argType="com.example.musicchaser.data.ArtistData"
+            app:nullable="false">
+        </argument>
+    </dialog>
+
+    <dialog
+        android:id="@+id/managementEventPerformerDetailPostDialog"
+        android:name="com.example.musicchaser.managementeventdetail.addperformer.post.ManagementEventPerformerDetailPostDialog"
+        android:label="ManagementEventPerformerDetailPostDialog">
+        <argument
+            android:name="selectedEditEvent"
+            app:argType="com.example.musicchaser.data.EventData"
+            app:nullable="false">
+        </argument>
+    </dialog>
+
+
+
+
+
+    <fragment
+        android:id="@+id/managementArtistFragment"
+        android:name="com.example.musicchaser.managementartist.ManagementArtistFragment"
+        android:label="ManagementArtistFragment" />
+
+    <fragment
+        android:id="@+id/managementArtistDetailEditFragment"
+        android:name="com.example.musicchaser.managementartistdetail.edit.ManagementArtistDetailEditFragment"
+        android:label="ManagementArtistDetailEditFragment">
+        <argument
+            android:name="selectedEditArtist"
+            app:argType="com.example.musicchaser.data.ArtistData"
+            app:nullable="false">
+        </argument>
+        <action
+            android:id="@+id/action_managementArtistDetailEditFragment_to_managementArtistFragment"
+            app:destination="@id/managementArtistFragment"
+            app:popUpTo="@id/managementArtistFragment"
+            app:popUpToInclusive="true">
+        </action>
+    </fragment>
+
+    <dialog
+        android:id="@+id/managementArtistDetailDeleteDialog"
+        android:name="com.example.musicchaser.managementartistdetail.delete.ManagementArtistDetailDeleteDialog"
+        android:label="ManagementArtistDetailDeleteDialog">
+        <argument
+            android:name="selectedEditArtist"
+            app:argType="com.example.musicchaser.data.ArtistData"
+            app:nullable="false">
+        </argument>
+        <action
+            android:id="@+id/action_managementArtistDetailDeleteDialog_to_managementArtistFragment"
+            app:destination="@id/managementArtistFragment"
+            app:popUpTo="@id/managementArtistFragment"
+            app:popUpToInclusive="true">
+        </action>
+    </dialog>
+
+    <fragment
+        android:id="@+id/managementArtistDetailPostFragment"
+        android:name="com.example.musicchaser.managementartistdetail.post.ManagementArtistDetailPostFragment"
+        android:label="ManagementArtistDetailPostFragment">
+        <action
+            android:id="@+id/action_managementArtistDetailPostFragment_to_managementArtistFragment"
+            app:destination="@id/managementArtistFragment"
+            app:popUpTo="@id/managementArtistFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+
+
+
+
+    <fragment
+        android:id="@+id/managementUserFragment"
+        android:name="com.example.musicchaser.managementuser.ManagementUserFragment"
+        android:label="ManagementUserFragment" />
+
+    <fragment
+        android:id="@+id/managementUserDetailEditFragment"
+        android:name="com.example.musicchaser.managementuserdetail.edit.ManagementUserDetailEditFragment"
+        android:label="ManagementUserDetailEditFragment">
+        <argument
+            android:name="selectedEditUser"
+            app:argType="com.example.musicchaser.data.UserData"
+            app:nullable="false">
+        </argument>
+        <action
+            android:id="@+id/action_managementUserDetailEditFragment_to_managementUserFragment"
+            app:destination="@id/managementUserFragment"
+            app:popUpTo="@id/managementUserFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+
+
+    <action
+        android:id="@+id/navigate_to_management_event_fragment"
+        app:destination="@id/managementEventFragment"
+        app:enterAnim="@anim/slide_in_from_right"
+        app:exitAnim="@anim/slide_out_to_left"
+        app:popEnterAnim="@anim/slide_in_from_left"
+        app:popExitAnim="@anim/slide_out_to_right"/>
+
+    <action
+        android:id="@+id/navigate_to_management_event_detail_edit_fragment"
+        app:destination="@id/managementEventDetailEditFragment"
+        app:enterAnim="@anim/slide_in_from_right"
+        app:exitAnim="@anim/slide_out_to_left"
+        app:popEnterAnim="@anim/slide_in_from_left"
+        app:popExitAnim="@anim/slide_out_to_right"/>
+
+    <action
+        android:id="@+id/navigate_to_management_event_detail_delete_dialog"
+        app:destination="@id/managementEventDetailDeleteDialog" />
+
+    <action
+        android:id="@+id/navigate_to_management_event_detail_post_fragment"
+        app:destination="@id/managementEventDetailPostFragment"
+        app:enterAnim="@anim/slide_in_from_right"
+        app:exitAnim="@anim/slide_out_to_left"
+        app:popEnterAnim="@anim/slide_in_from_left"
+        app:popExitAnim="@anim/slide_out_to_right"/>
+
+    <action
+        android:id="@+id/navigate_to_management_event_detail_add_performer_fragment"
+        app:destination="@id/managementEventDetailAddPerformerFragment"
+        app:enterAnim="@anim/slide_in_from_right"
+        app:exitAnim="@anim/slide_out_to_left"
+        app:popEnterAnim="@anim/slide_in_from_left"
+        app:popExitAnim="@anim/slide_out_to_right"/>
+
+    <action
+        android:id="@+id/navigate_to_management_event_performer_detail_delete_dialog"
+        app:destination="@id/managementEventPerformerDetailDeleteDialog" />
+
+    <action
+        android:id="@+id/navigate_to_management_event_performer_detail_post_dialog"
+        app:destination="@id/managementEventPerformerDetailPostDialog" />
+
+
+
+    <action
+        android:id="@+id/navigate_to_management_artist_fragment"
+        app:destination="@id/managementArtistFragment"
+        app:enterAnim="@anim/slide_in_from_right"
+        app:exitAnim="@anim/slide_out_to_left"
+        app:popEnterAnim="@anim/slide_in_from_left"
+        app:popExitAnim="@anim/slide_out_to_right"/>
+
+    <action
+        android:id="@+id/navigate_to_management_artist_detail_edit_fragment"
+        app:destination="@id/managementArtistDetailEditFragment"
+        app:enterAnim="@anim/slide_in_from_right"
+        app:exitAnim="@anim/slide_out_to_left"
+        app:popEnterAnim="@anim/slide_in_from_left"
+        app:popExitAnim="@anim/slide_out_to_right"/>
+
+    <action
+        android:id="@+id/navigate_to_management_artist_detail_delete_dialog"
+        app:destination="@id/managementArtistDetailDeleteDialog" />
+
+    <action
+        android:id="@+id/navigate_to_management_artist_detail_post_fragment"
+        app:destination="@id/managementArtistDetailPostFragment"
+        app:enterAnim="@anim/slide_in_from_right"
+        app:exitAnim="@anim/slide_out_to_left"
+        app:popEnterAnim="@anim/slide_in_from_left"
+        app:popExitAnim="@anim/slide_out_to_right"/>
+
+
+
+    <action
+        android:id="@+id/navigate_to_management_user_fragment"
+        app:destination="@id/managementUserFragment"
+        app:enterAnim="@anim/slide_in_from_right"
+        app:exitAnim="@anim/slide_out_to_left"
+        app:popEnterAnim="@anim/slide_in_from_left"
+        app:popExitAnim="@anim/slide_out_to_right"/>
+
+    <action
+        android:id="@+id/navigate_to_management_user_detail_edit_fragment"
+        app:destination="@id/managementUserDetailEditFragment"
+        app:enterAnim="@anim/slide_in_from_right"
+        app:exitAnim="@anim/slide_out_to_left"
+        app:popEnterAnim="@anim/slide_in_from_left"
+        app:popExitAnim="@anim/slide_out_to_right"/>
+
+</navigation>

@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.musicchaser.managementeventdetail.edit.ManagementEventDetailEditViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".managementeventdetail.edit.ManagementEventDetailEditFragment">
+
+        <TextView
+            android:id="@+id/management_event_edit_detail_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginEnd="80dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/noto_sans"
+            android:letterSpacing="@dimen/letter_spacing"
+            android:maxLines="2"
+            android:text="@{viewModel.event.eventName}"
+            android:textAlignment="center"
+            android:textSize="@dimen/title_font_size"
+            app:layout_constraintBottom_toTopOf="@+id/view_separation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Megaport Festival 大港開唱" />
+
+        <ImageView
+            android:id="@+id/management_event_edit_detail_back_button"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:padding="20dp"
+            android:src="@drawable/back_16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/view_separation"
+            app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </ImageView>
+
+        <View
+            android:id="@+id/view_separation"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="56dp"
+            android:background="@color/dark_grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_separation">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/scroll_view_constraint"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:paddingBottom="96dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/event_name_content_area"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/scroll_view_constraint">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/event_name_edit_area"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/noto_sans"
+                        android:hint="@string/management_event_detail_edit_event_name"
+                        android:letterSpacing="@dimen/letter_spacing"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="@={viewModel.eventName}"
+                        android:textColor="@color/black" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/event_desc_content_area"
+                    android:layout_width="0dp"
+                    android:layout_height="200dp"
+                    android:layout_margin="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/event_name_content_area">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/event_desc_pic_edit_area"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/noto_sans"
+                        android:hint="@string/management_event_detail_edit_event_desc"
+                        android:letterSpacing="@dimen/letter_spacing"
+                        android:text="@={viewModel.eventDesc}"
+                        android:textColor="@color/black" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/event_place_content_area"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/event_desc_content_area">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/event_place_edit_area"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/noto_sans"
+                        android:hint="@string/management_event_detail_edit_event_place"
+                        android:letterSpacing="@dimen/letter_spacing"
+                        android:text="@={viewModel.eventPlace}"
+                        android:textColor="@color/black" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/event_longitude_content_area"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/event_place_content_area">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/event_longitude_edit_area"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/noto_sans"
+                        android:hint="@string/management_event_detail_edit_event_longitude"
+                        android:letterSpacing="@dimen/letter_spacing"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="@={viewModel.eventLongitude}"
+                        android:textColor="@color/black" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/event_latitude_content_area"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/event_longitude_content_area">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/event_latitude_edit_area"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/noto_sans"
+                        android:hint="@string/management_event_detail_edit_event_latitude"
+                        android:letterSpacing="@dimen/letter_spacing"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="@={viewModel.eventLatitude}"
+                        android:textColor="@color/black" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/event_address_content_area"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/event_latitude_content_area">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/event_address_edit_area"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/noto_sans"
+                        android:hint="@string/management_event_detail_edit_event_address"
+                        android:letterSpacing="@dimen/letter_spacing"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="@={viewModel.eventAddress}"
+                        android:textColor="@color/black" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/event_date_content_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/noto_sans"
+                    android:letterSpacing="@dimen/letter_spacing"
+                    android:maxLines="2"
+                    android:text="@string/management_event_detail_edit_event_date"
+                    android:textSize="@dimen/title_font_size"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/event_date_edit_button"
+                    app:layout_constraintBottom_toBottomOf="@+id/event_date_edit_button" />
+
+                <TextView
+                    android:id="@+id/event_date_content_area"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/noto_sans"
+                    android:letterSpacing="@dimen/letter_spacing"
+                    android:maxLines="2"
+                    android:textSize="@dimen/content_font_size"
+                    app:getManagementEventDate="@{viewModel.eventDate}"
+                    app:layout_constraintStart_toEndOf="@+id/event_date_content_title"
+                    app:layout_constraintEnd_toStartOf="@+id/event_date_edit_button"
+                    app:layout_constraintTop_toTopOf="@+id/event_date_edit_button"
+                    app:layout_constraintBottom_toBottomOf="@+id/event_date_edit_button"
+                    tools:text="2023.04.06 08:00" />
+
+                <Button
+                    android:id="@+id/event_date_edit_button"
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                    android:layout_width="68dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/background_shape_radius_16dp"
+                    android:elevation="@dimen/shadow_elevation"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="@string/management_edit_button"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/title_font_size"
+                    android:textStyle="bold"
+                    app:backgroundTint="@color/golden_yellow"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/event_address_content_area" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/event_area_content_area"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/event_date_edit_button">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/event_area_edit_area"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/noto_sans"
+                        android:hint="@string/management_event_detail_edit_event_area"
+                        android:letterSpacing="@dimen/letter_spacing"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="@={viewModel.eventArea}"
+                        android:textColor="@color/black" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/event_url_content_area"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/event_area_content_area">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/event_url_edit_area"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/noto_sans"
+                        android:hint="@string/management_event_detail_edit_event_url"
+                        android:letterSpacing="@dimen/letter_spacing"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="@={viewModel.eventUrl}"
+                        android:textColor="@color/black" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/event_main_pic_content_area"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/event_url_content_area">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/event_main_pic_edit_area"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/noto_sans"
+                        android:hint="@string/management_event_detail_edit_event_main_pic"
+                        android:letterSpacing="@dimen/letter_spacing"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="@={viewModel.eventMainPic}"
+                        android:textColor="@color/black" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/management_event_edit_detail_edit_button"
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/background_shape_radius_16dp"
+                    android:elevation="@dimen/shadow_elevation"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="@string/management_submit_edit"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/title_font_size"
+                    android:textStyle="bold"
+                    app:backgroundTint="@color/golden_yellow"
+                    app:layout_constraintTop_toBottomOf="@+id/event_main_pic_content_area"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/management_event_edit_detail_reminder_constraint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:elevation="@dimen/shadow_elevation"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/management_event_edit_detail_reminder_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="@font/noto_sans"
+                android:letterSpacing="@dimen/letter_spacing"
+                android:maxLines="2"
+                android:text="@string/management_submit_reminder_text"
+                android:textColor="@color/dark_red"
+                android:textSize="@dimen/title_font_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/management_event_edit_detail_edit_confirm_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/management_event_edit_detail_edit_confirm_button"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                android:layout_width="68dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/background_shape_radius_16dp"
+                android:elevation="@dimen/shadow_elevation"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="@string/management_submit_confirm"
+                android:textColor="@color/white"
+                android:textSize="@dimen/title_font_size"
+                android:textStyle="bold"
+                app:backgroundTint="@color/golden_yellow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

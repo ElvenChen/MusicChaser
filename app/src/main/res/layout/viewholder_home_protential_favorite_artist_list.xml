@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="property"
+            type="com.example.musicchaser.data.ArtistData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="232dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/home_protential_favorite_artist_main_pic_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:elevation="@dimen/shadow_elevation"
+                    android:scaleType="centerCrop"
+                    app:bindImage="@{property.artistMainPic}"
+                    app:layout_constraintBottom_toTopOf="@+id/home_protential_favorite_artist_detail_area"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_percent="0.75"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="spread" />
+
+
+                <ImageView
+                    android:id="@+id/home_protential_favorite_artist_detail_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="@drawable/background_shape_bottom_radius_16dp"
+                    android:backgroundTint="@color/light_grey"
+                    android:elevation="@dimen/shadow_elevation"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/home_protential_favorite_artist_main_pic_area" />
+
+                <TextView
+                    android:id="@+id/home_protential_favorite_artist_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:elevation="@dimen/card_content_elevation"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/noto_sans"
+                    android:letterSpacing="@dimen/letter_spacing"
+                    android:maxLines="2"
+                    android:text="@{property.artistName}"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/title_font_size"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@id/home_protential_favorite_artist_detail_area"
+                    app:layout_constraintStart_toStartOf="@id/home_protential_favorite_artist_detail_area"
+                    app:layout_constraintTop_toTopOf="@+id/home_protential_favorite_artist_detail_area"
+                    tools:text="溫蒂漫步" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.musicchaser.profile.ProfileViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".profile.ProfileFragment">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/profile_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/noto_sans"
+                    android:letterSpacing="@dimen/letter_spacing"
+                    android:text="@string/profile_title"
+                    android:textSize="@dimen/main_subject_font_size"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/profile_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/background_shape_radius_8dp"
+                    android:backgroundTint="@color/blue_grey"
+                    android:fontFamily="@font/noto_sans"
+                    android:letterSpacing="@dimen/letter_spacing"
+                    android:paddingStart="10dp"
+                    android:paddingTop="4dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="4dp"
+                    android:text="@string/profile_logout"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/log_out_font_size"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/profile_basic_info_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/noto_sans"
+                    android:letterSpacing="@dimen/letter_spacing"
+                    android:text="@string/profile_basic_info"
+                    android:textSize="@dimen/sub_title_font_size"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_title" />
+
+                <Button
+                    android:id="@+id/profile_basic_info_edit_button"
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                    android:layout_width="72dp"
+                    android:layout_height="36dp"
+                    android:layout_marginBottom="6dp"
+                    android:background="@drawable/background_shape_radius_8dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="@string/profile_edit"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:backgroundTint="@color/golden_yellow"
+                    app:icon="@drawable/edit_button_12dp"
+                    app:iconPadding="0dp"
+                    app:iconTint="@color/white"
+                    android:elevation="@dimen/shadow_elevation"
+                    app:layout_constraintBottom_toTopOf="@id/profile_basic_info_background"
+                    app:layout_constraintEnd_toEndOf="@id/profile_basic_info_background"/>
+
+                <ImageView
+                    android:id="@+id/profile_basic_info_background"
+                    android:layout_width="0dp"
+                    android:layout_height="78dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/background_shape_radius_16dp"
+                    android:backgroundTint="@color/light_grey"
+                    android:elevation="@dimen/shadow_elevation"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_basic_info_title" />
+
+                <TextView
+                    android:id="@+id/profile_basic_info_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:elevation="@dimen/card_content_elevation"
+                    android:fontFamily="@font/noto_sans"
+                    android:letterSpacing="@dimen/letter_spacing"
+                    app:getUserNickname="@{viewModel.userNickname}"
+                    android:textSize="@dimen/content_font_size"
+                    app:layout_constraintStart_toStartOf="@+id/profile_basic_info_background"
+                    app:layout_constraintTop_toTopOf="@+id/profile_basic_info_background" />
+
+                <TextView
+                    android:id="@+id/profile_basic_info_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="@dimen/card_content_elevation"
+                    android:fontFamily="@font/noto_sans"
+                    android:letterSpacing="@dimen/letter_spacing"
+                    app:getUserAccount="@{viewModel.userAccount}"
+                    android:textSize="@dimen/content_font_size"
+                    app:layout_constraintBottom_toBottomOf="@+id/profile_basic_info_background"
+                    app:layout_constraintStart_toStartOf="@+id/profile_basic_info_background" />
+
+                <TextView
+                    android:id="@+id/profile_favorite_event_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/noto_sans"
+                    android:letterSpacing="@dimen/letter_spacing"
+                    android:text="@string/profile_favorite_event"
+                    android:textSize="@dimen/sub_title_font_size"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_basic_info_background" />
+
+                <TextView
+                    android:id="@+id/profile_favorite_event_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/noto_sans"
+                    android:letterSpacing="@dimen/letter_spacing"
+                    android:textSize="@dimen/content_font_size"
+                    app:getFavoriteCount="@{viewModel.eventDataListForAdapter.size()}"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/profile_favorite_event_title"
+                    app:layout_constraintStart_toEndOf="@+id/profile_favorite_event_title" />
+
+                <Button
+                    android:id="@+id/profile_favorite_event_edit_button"
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                    android:layout_width="72dp"
+                    android:layout_height="36dp"
+                    android:layout_marginBottom="6dp"
+                    android:background="@drawable/background_shape_radius_8dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="@string/profile_edit"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:backgroundTint="@color/golden_yellow"
+                    app:icon="@drawable/edit_button_12dp"
+                    app:iconPadding="0dp"
+                    app:iconTint="@color/white"
+                    android:elevation="@dimen/shadow_elevation"
+                    app:layout_constraintBottom_toTopOf="@id/profile_favorite_event_recycler_view"
+                    app:layout_constraintEnd_toEndOf="@id/profile_basic_info_background"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/profile_favorite_event_recycler_view"
+                    android:layout_width="0dp"
+                    android:layout_height="180dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/background_shape_radius_16dp"
+                    android:backgroundTint="@color/light_grey"
+                    android:clipToPadding="false"
+                    android:elevation="@dimen/shadow_elevation"
+                    android:paddingStart="16dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="16dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_favorite_event_title">
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <TextView
+                    android:id="@+id/profile_favorite_artist_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/noto_sans"
+                    android:letterSpacing="@dimen/letter_spacing"
+                    android:text="@string/profile_favorite_artist"
+                    android:textSize="@dimen/sub_title_font_size"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_favorite_event_recycler_view" />
+
+                <TextView
+                    android:id="@+id/profile_favorite_artist_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/noto_sans"
+                    android:letterSpacing="@dimen/letter_spacing"
+                    android:textSize="@dimen/content_font_size"
+                    app:getFavoriteCount="@{viewModel.artistDataListForAdapter.size()}"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/profile_favorite_artist_title"
+                    app:layout_constraintStart_toEndOf="@+id/profile_favorite_artist_title" />
+
+                <Button
+                    android:id="@+id/profile_favorite_artist_edit_button"
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                    android:layout_width="72dp"
+                    android:layout_height="36dp"
+                    android:layout_marginBottom="6dp"
+                    android:background="@drawable/background_shape_radius_8dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="@string/profile_edit"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:backgroundTint="@color/golden_yellow"
+                    app:icon="@drawable/edit_button_12dp"
+                    app:iconPadding="0dp"
+                    app:iconTint="@color/white"
+                    android:elevation="@dimen/shadow_elevation"
+                    app:layout_constraintBottom_toTopOf="@id/profile_favorite_artist_recycler_view"
+                    app:layout_constraintEnd_toEndOf="@id/profile_basic_info_background"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/profile_favorite_artist_recycler_view"
+                    android:layout_width="0dp"
+                    android:layout_height="180dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="30dp"
+                    android:background="@drawable/background_shape_radius_16dp"
+                    android:backgroundTint="@color/light_grey"
+                    android:clipToPadding="false"
+                    android:elevation="@dimen/shadow_elevation"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="0dp"
+                    android:paddingTop="16dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_favorite_artist_title"
+                    app:layout_constraintBottom_toBottomOf="parent">
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

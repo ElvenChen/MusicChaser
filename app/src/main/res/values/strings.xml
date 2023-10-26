@@ -1,3 +1,143 @@
 <resources>
     <string name="app_name">MusicChaser</string>
+
+    // bottom navigation
+    <string name="bottom_nav_hot">熱門</string>
+    <string name="bottom_nav_event">活動</string>
+    <string name="bottom_nav_artist">表演者</string>
+    <string name="bottom_nav_society">社群</string>
+    <string name="bottom_nav_profile">個人</string>
+
+
+    // home page
+    <string name="home_title">熱門</string>
+    <string name="home_favorite_artist_relative_event">喜歡的表演者相關活動</string>
+    <string name="home_potential_favorite_artist">您可能感興趣的表演者</string>
+
+
+    // profile page
+    <string name="profile_title">個人</string>
+    <string name="profile_logout">登出</string>
+    <string name="profile_edit">編輯</string>
+    <string name="profile_basic_info">基本資料</string>
+    <string name="profile_favorite_event">已收藏的活動</string>
+    <string name="profile_favorite_artist">已收藏的表演者</string>
+
+    // profile basic info dialog
+    <string name="basic_info_edit_placeholder">暱稱</string>
+    <string name="basic_info_save_button">完成</string>
+
+
+    // event page
+    <string name="event_title">活動</string>
+    <string name="event_search_bar_edit_placeholder">輸入感興趣的活動名稱</string>
+    <string name="event_filter_default">選擇地區</string>
+    <string name="event_search_bar_no_result_message">無法搜尋到您輸入的活動\n請嘗試其他關鍵字</string>
+
+    // event detail page
+    <string name="event_detail_title">活動內容</string>
+    <string name="event_detail_website_title">活動網址：</string>
+    <string name="event_detail_address_button">活動地點</string>
+    <string name="event_detail_add_calendar">加入日曆</string>
+    <string name="event_detail_add_favorite">加入收藏</string>
+    <string name="event_detail_intro_title">活動簡介</string>
+    <string name="event_detail_attendant_title">參與表演者</string>
+    <string name="event_detail_comments_title">留言</string>
+
+    // event detail comment page
+    <string name="event_detail_comment_post">傳送</string>
+    <string name="event_detail_comment_edit_placeholder">請留下您的評論</string>
+
+
+    // artist page
+    <string name="artist_title">表演者</string>
+    <string name="artist_search_bar_edit_placeholder">輸入感興趣的表演者</string>
+    <string name="artist_search_bar_no_result_message">無法搜尋到您輸入的表演者\n請嘗試其他關鍵字</string>
+
+    // artist detail page
+    <string name="artist_detail_artist_recent_event_title">近期參與活動</string>
+    <string name="artist_detail_add_favorite">收藏</string>
+
+
+    // society page
+    <string name="society_title">社群</string>
+    <string name="society_search_bar_edit_placeholder">輸入感興趣的話題</string>
+    <string name="society_submission_title">居然只有您知道的活動？\n快投稿讓更多樂迷們知道</string>
+    <string name="society_thread">文章列表</string>
+    <string name="submission">傳送</string>
+    <string name="submission_event">提供活動</string>
+    <string name="submission_event_name_edit_placeholder">活動名稱</string>
+    <string name="submission_event_url_edit_placeholder">活動相關網址(可留空)</string>
+    <string name="submission_event_other_note_edit_placeholder">其他內容(可留空)</string>
+    <string name="submission_card_text">謝謝您的分享\n讓更多人聽到好音樂\n我們將儘快公布活動</string>
+    <string name="society_post">開話題</string>
+    <string name="society_post_name">話題名稱</string>
+    <string name="society_post_type">話題分類</string>
+    <string name="society_post_content">話題內容</string>
+    <string name="society_detail_comments_title">留言</string>
+    <string name="society_search_bar_no_result_message">無法搜尋到您輸入的話題\n請嘗試其他關鍵字</string>
+
+
+    // management home page
+    <string name="management_title">管理</string>
+    <string name="management_home_event_title">活動管理</string>
+    <string name="management_home_artist_title">表演者管理</string>
+    <string name="management_home_user_title">使用者管理</string>
+    <string name="management_edit_button">編輯</string>
+    <string name="management_add_button">新增</string>
+    <string name="management_submit_edit">完成送出</string>
+    <string name="management_submit_delete">刪除</string>
+    <string name="management_submit_cancel">取消</string>
+    <string name="management_submit_confirm">確認</string>
+    <string name="management_submit_reminder_text">確認編輯資料無誤後，送出即無法返回喔！</string>
+    <string name="management_delete_reminder_text">確認刪除資料後，送出即無法返回喔！</string>
+
+
+    // management event page
+    <string name="management_event_search_bar_edit_placeholder">搜尋活動名稱</string>
+    <string name="management_event_tool_bar_post_new_event">新增活動</string>
+    <string name="management_event_detail_edit_event_name">活動名稱</string>
+    <string name="management_event_detail_edit_event_desc">活動簡介描述</string>
+    <string name="management_event_detail_edit_event_place">活動地點</string>
+    <string name="management_event_detail_edit_event_longitude">地理位置經度(請輸入至小數點以下6位)</string>
+    <string name="management_event_detail_edit_event_latitude">地理位置緯度(請輸入至小數點以下6位)</string>
+    <string name="management_event_detail_edit_event_address">活動地址</string>
+    <string name="management_event_detail_edit_event_date">活動完整日期：</string>
+    <string name="management_event_detail_edit_event_area">活動地區(請輸入：北部 、中部、南部、東部、離島)</string>
+    <string name="management_event_detail_edit_event_url">活動網址</string>
+    <string name="management_event_detail_edit_event_main_pic">活動主要圖片(圖片網址)</string>
+    <string name="management_event_detail_edit_event_time_choosing_intro">選擇日期及時間：</string>
+    <string name="management_event_detail_delete_title">確認是否刪除下列活動?</string>
+    <string name="management_event_detail_add_performer_search_bar_edit_placeholder">搜尋欲加入的表演者名稱</string>
+    <string name="management_event_detail_add_performer_search_result_title">搜尋結果：</string>
+    <string name="management_event_detail_add_performer_list_title">參與表演者名單</string>
+    <string name="management_event_performer_detail_event_title">請確認是否從下列活動：</string>
+    <string name="management_event_performer_detail_artist_title">刪除下列參與表演者：</string>
+    <string name="management_event_performer_detail_post_title">請選擇欲新增的表演者：</string>
+    <string name="management_event_performer_detail_post_search_placeholder">搜尋尚未加入的表演者：</string>
+    <string name="management_event_performer_detail_post_recycler_view_default_message">無法搜尋到您輸入的表演者，或相關表演者已被加入至活動表演者名單中！</string>
+
+
+    // management artist page
+    <string name="management_artist_search_bar_edit_placeholder">搜尋表演者名稱</string>
+    <string name="management_artist_tool_bar_post_new_artist">新增表演者</string>
+    <string name="management_artist_detail_edit_artist_name">表演者名稱</string>
+    <string name="management_artist_detail_edit_artist_desc">表演者簡介描述</string>
+    <string name="management_artist_detail_edit_artist_type">表演者類別(請輸入：個人、團體)</string>
+    <string name="management_artist_detail_edit_artist_main_pic">表演者主要圖片(圖片網址)</string>
+    <string name="management_artist_detail_delete_title">確認是否刪除下列表演者?</string>
+
+
+    // management user page
+    <string name="management_user_search_bar_edit_placeholder">搜尋使用者名稱</string>
+    <string name="management_user_detail_edit_user_id">使用者ID</string>
+    <string name="management_user_detail_edit_user_email">使用者Email</string>
+    <string name="management_user_detail_edit_user_name">使用者姓名</string>
+    <string name="management_user_detail_edit_user_nickname">使用者暱稱</string>
+    <string name="management_user_detail_edit_banned_text">封鎖</string>
+    <string name="management_user_detail_edit_unbanned_text">啟用</string>
+    <string name="management_user_detail_edit_user_banned_title">使用者權限</string>
+
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

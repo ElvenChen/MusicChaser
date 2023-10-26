@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="popUpDialog">
+        <item name="android:windowEnterAnimation">@null</item>
+        <item name="android:windowExitAnimation">@null</item>
+        <item name="android:windowBackground">@color/transparent_standard</item>
+        <item name="android:animation">@null</item>
+    </style>
+
+    <style name="popUpDialogForArtistDetailDialog">
+        <item name="android:windowEnterAnimation">@null</item>
+        <item name="android:windowExitAnimation">@null</item>
+        <item name="android:windowBackground">@color/transparent_standard_dark</item>
+        <item name="android:animation">@null</item>
+    </style>
+
+    <style name="SearchView" parent="Widget.AppCompat.SearchView" >
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColorHint">@color/black</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:paddingTop">-20dp</item>
+    </style>
+
+</resources>

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="property"
+            type="com.example.musicchaser.data.EventData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/event_main_pic_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="144dp"
+                    android:elevation="@dimen/shadow_elevation"
+                    android:scaleType="centerCrop"
+                    app:bindImage="@{property.eventMainPic}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/event_attendant_area"
+                    android:layout_width="0dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="-4dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/background_shape_radius_8dp"
+                    android:backgroundTint="@color/light_grey"
+                    android:elevation="6dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/event_main_pic_area"
+                    app:layout_constraintEnd_toEndOf="@+id/event_attendant_number"
+                    app:layout_constraintStart_toStartOf="@+id/event_main_pic_area" />
+
+
+                <ImageView
+                    android:id="@+id/event_attendant_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:elevation="6dp"
+                    android:src="@drawable/group_black_16dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/event_attendant_area"
+                    app:layout_constraintStart_toStartOf="@+id/event_attendant_area"
+                    app:layout_constraintTop_toTopOf="@+id/event_attendant_area" />
+
+                <TextView
+                    android:id="@+id/event_attendant_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:elevation="@dimen/card_content_elevation"
+                    android:fontFamily="@font/noto_sans"
+                    android:text="@{String.valueOf(property.eventAttendant)}"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/content_font_size"
+                    app:layout_constraintBottom_toBottomOf="@+id/event_attendant_icon"
+                    app:layout_constraintStart_toEndOf="@id/event_attendant_icon"
+                    app:layout_constraintTop_toTopOf="@+id/event_attendant_icon"
+                    tools:text="123" />
+
+                <ImageView
+                    android:id="@+id/event_month"
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/background_shape_top_radius_8dp"
+                    android:backgroundTint="@color/dark_golden_yellow"
+                    android:elevation="@dimen/shadow_elevation"
+                    app:layout_constraintBottom_toTopOf="@+id/event_day"
+                    app:layout_constraintEnd_toEndOf="@+id/event_main_pic_area" />
+
+                <TextView
+                    android:id="@+id/event_month_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="@dimen/card_content_elevation"
+                    android:fontFamily="@font/noto_sans"
+                    android:letterSpacing="@dimen/letter_spacing"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/content_font_size"
+                    app:getEventMonth="@{property.eventDate}"
+                    app:layout_constraintBottom_toBottomOf="@id/event_month"
+                    app:layout_constraintEnd_toEndOf="@id/event_month"
+                    app:layout_constraintStart_toStartOf="@id/event_month"
+                    app:layout_constraintTop_toTopOf="@id/event_month"
+                    tools:text="9月" />
+
+                <ImageView
+                    android:id="@+id/event_day"
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/background_shape_bottom_radius_8dp"
+                    android:elevation="@dimen/shadow_elevation"
+                    app:layout_constraintBottom_toBottomOf="@+id/event_main_pic_area"
+                    app:layout_constraintEnd_toEndOf="@+id/event_main_pic_area" />
+
+                <TextView
+                    android:id="@+id/event_day_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="@dimen/card_content_elevation"
+                    android:fontFamily="@font/noto_sans"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/content_font_size"
+                    android:textStyle="bold"
+                    app:getEventDay="@{property.eventDate}"
+                    app:layout_constraintBottom_toBottomOf="@id/event_day"
+                    app:layout_constraintEnd_toEndOf="@id/event_day"
+                    app:layout_constraintStart_toStartOf="@id/event_day"
+                    app:layout_constraintTop_toTopOf="@id/event_day"
+                    tools:text="16" />
+
+                <ImageView
+                    android:id="@+id/event_detail_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="72dp"
+                    android:background="@drawable/background_shape_bottom_radius_16dp"
+                    android:backgroundTint="@color/light_grey"
+                    android:elevation="@dimen/shadow_elevation"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/event_main_pic_area" />
+
+                <TextView
+                    android:id="@+id/event_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:elevation="@dimen/card_content_elevation"
+                    android:fontFamily="@font/noto_sans"
+                    android:letterSpacing="@dimen/letter_spacing"
+                    android:text="@{property.eventName}"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/event_detail_area"
+                    app:layout_constraintTop_toTopOf="@+id/event_detail_area"
+                    tools:text="新北貢寮國際海洋音樂祭" />
+
+                <TextView
+                    android:id="@+id/event_place"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:elevation="@dimen/card_content_elevation"
+                    android:fontFamily="@font/noto_sans"
+                    android:letterSpacing="@dimen/letter_spacing"
+                    android:text="@{property.eventPlace}"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/content_font_size"
+                    app:layout_constraintStart_toStartOf="@id/event_detail_area"
+                    app:layout_constraintTop_toBottomOf="@+id/event_name"
+                    tools:text="新北市福隆海水浴場" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

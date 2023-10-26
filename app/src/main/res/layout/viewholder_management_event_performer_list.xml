@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="property"
+            type="com.example.musicchaser.data.ArtistData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/management_list_title_background"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/background_shape_radius_8dp"
+            android:backgroundTint="@color/light_grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/management_list_performer_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:fontFamily="@font/noto_sans"
+            android:textSize="@dimen/content_font_size"
+            android:text="@{property.artistName}"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintTop_toTopOf="@+id/management_list_title_background"
+            app:layout_constraintBottom_toBottomOf="@+id/management_list_title_background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/management_list_performer_delete_button"
+            tools:text="告五人"/>
+
+        <Button
+            android:id="@+id/management_list_performer_delete_button"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/background_shape_radius_8dp"
+            android:elevation="@dimen/shadow_elevation"
+            android:paddingStart="10dp"
+            app:backgroundTint="@color/dark_red"
+            app:icon="@drawable/delete_24dp"
+            app:iconTint="@color/white"
+            app:layout_constraintTop_toTopOf="@+id/management_list_title_background"
+            app:layout_constraintBottom_toBottomOf="@+id/management_list_title_background"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="property"
+            type="com.example.musicchaser.data.ThreadData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp">
+
+        <ImageView
+            android:id="@+id/thread_background"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/background_shape_radius_16dp"
+            android:backgroundTint="@color/light_grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/thread_type_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/background_shape_radius_8dp"
+            android:backgroundTint="@color/blue_grey"
+            android:fontFamily="@font/noto_sans"
+            android:letterSpacing="@dimen/letter_spacing"
+            android:paddingStart="10dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="4dp"
+            android:text="@{property.threadType}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/log_out_font_size"
+            android:elevation="@dimen/card_content_elevation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/thread_background" />
+
+        <TextView
+            android:id="@+id/thread_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/noto_sans"
+            android:textSize="@dimen/content_font_size"
+            app:getCommentDate="@{property.threadDate}"
+            app:layout_constraintTop_toTopOf="@+id/thread_type_tag"
+            app:layout_constraintBottom_toBottomOf="@+id/thread_type_tag"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="2023.09.10"/>
+
+        <TextView
+            android:id="@+id/thread_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/noto_sans"
+            android:maxLines="1"
+            android:text="@{property.threadName}"
+            android:textSize="@dimen/title_font_size"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/thread_type_tag"
+            tools:text="茄子蛋為什麼都不出新歌啊？已經等快兩..." />
+
+        <ImageView
+            android:id="@+id/thread_author_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/user_12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/thread_name"
+            app:layout_constraintBottom_toBottomOf="@id/thread_background"/>
+
+        <TextView
+            android:id="@+id/thread_author_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:fontFamily="@font/noto_sans"
+            android:letterSpacing="@dimen/letter_spacing"
+            android:textSize="@dimen/content_font_size"
+            android:text="@{property.threadAuthor}"
+            app:layout_constraintStart_toEndOf="@+id/thread_author_icon"
+            app:layout_constraintTop_toTopOf="@+id/thread_author_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/thread_author_icon"
+            tools:text="留言者暱稱"/>
+
+        <ImageView
+            android:id="@+id/thread_comments_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/comment_12dp"
+            app:layout_constraintStart_toEndOf="@+id/thread_author_nickname"
+            app:layout_constraintTop_toBottomOf="@+id/thread_name"
+            app:layout_constraintBottom_toBottomOf="@id/thread_background"/>
+
+        <TextView
+            android:id="@+id/thread_comments_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:fontFamily="@font/noto_sans"
+            android:letterSpacing="@dimen/letter_spacing"
+            android:textSize="@dimen/content_font_size"
+            android:text="@{String.valueOf(property.threadComments)}"
+            app:layout_constraintStart_toEndOf="@+id/thread_comments_icon"
+            app:layout_constraintTop_toTopOf="@+id/thread_author_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/thread_author_icon"
+            tools:text="12"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
